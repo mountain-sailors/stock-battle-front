@@ -47,9 +47,11 @@ interface StyledButtonProps {
   variant: Ivariant;
   theme: DefaultTheme;
 }
+
 const StyledButton = styled.TouchableOpacity<StyledButtonProps>`
   border-radius: 10px;
   padding: 13px;
+  height: 45px;
   ${({ variant, theme }) => handleBackground(variant, theme)}
 `
 interface StyledTextProps {

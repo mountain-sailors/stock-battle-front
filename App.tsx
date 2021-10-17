@@ -4,7 +4,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import { ThemeProvider } from 'styled-components/native';
 import HomeScreen from './app/screens/HomeScreen';
+import InitScreen from './app/screens/InitScreen';
+import SignupScreen from './app/screens/SignupScreen';
+import LoginScreen from './app/screens/LoginScreen';
 import MypageScreen from './app/screens/MypageScreen';
+
 import theme from './app/config/theme';
 
 const Tab = createBottomTabNavigator();
