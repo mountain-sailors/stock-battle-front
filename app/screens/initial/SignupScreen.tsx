@@ -1,16 +1,8 @@
 import React from 'react';
 import { StyleSheet, StatusBar, Text, View, Image } from 'react-native';
-import Button from '../components/Button';
-import Input from '../components/Input';
-import Layout from '../components/Layout';
-
-const avatar = [
-	'../../assets/avatar/avatar_1.png',
-	'../../assets/avatar/avatar_2.png',
-	'../../assets/avatar/avatar_3.png',
-	'../../assets/avatar/avatar_4.png',
-	'../../assets/avatar/avatar_5.png'] as const;
-
+import Button from '../../components/Button';
+import Input from '../../components/Input';
+import Layout from '../../components/Layout';
 
 const SignupScreen: React.FC = () => {
   const [value, setValue] = React.useState('');
@@ -33,23 +25,23 @@ const SignupScreen: React.FC = () => {
 		<View style={styles.appleBoxL}></View>
 		<View style={styles.avatarContainer}>
 			<Image
-			source={require('../../assets/avatar/avatar_1.png')}
+			source={require('../../../assets/avatar/avatar_1.png')}
 			style={{width: 48, height: 48, borderRadius: 48/ 2}}
 			/>
 			<Image
-			source={require('../../assets/avatar/avatar_2.png')}
+			source={require('../../../assets/avatar/avatar_2.png')}
 			style={{width: 48, height: 48, borderRadius: 48/ 2}}
 			/>
 			<Image
-			source={require('../../assets/avatar/avatar_3.png')}
+			source={require('../../../assets/avatar/avatar_3.png')}
 			style={{width: 48, height: 48, borderRadius: 48/ 2}}
 			/>
 			<Image
-			source={require('../../assets/avatar/avatar_4.png')}
+			source={require('../../../assets/avatar/avatar_4.png')}
 			style={{width: 48, height: 48, borderRadius: 48/ 2}}
 			/>
 			<Image
-			source={require('../../assets/avatar/avatar_5.png')}
+			source={require('../../../assets/avatar/avatar_5.png')}
 			style={{width: 48, height: 48, borderRadius: 48/ 2}}
 			/>
 		</View>

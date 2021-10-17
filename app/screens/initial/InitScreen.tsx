@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, StatusBar, Text, View } from 'react-native';
-import Button from '../components/Button';
-import Layout from '../components/Layout';
+import Button from '../../components/Button';
+import Layout from '../../components/Layout';
 
 const InitScreen: React.FC = () => {
   const [value, setValue] = React.useState('');

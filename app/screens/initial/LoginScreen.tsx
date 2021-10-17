@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, StatusBar, Text, View } from 'react-native';
-import Button from '../components/Button';
-import Input from '../components/Input';
-import Layout from '../components/Layout';
+import Button from '../../components/Button';
+import Input from '../../components/Input';
+import Layout from '../../components/Layout';
 import { DefaultTheme } from 'styled-components/native'
 
 const LoginScreen: React.FC = () => {
