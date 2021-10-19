@@ -9,8 +9,11 @@ const Layout: React.FC = ({ children }) => {
   );
 }
 const StyledLayout = styled.View`
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
   padding: 20px;
+  padding-bottom: 30px;
   backgroundColor: ${({ theme }) => theme.colors.white};
 `
 

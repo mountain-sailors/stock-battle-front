@@ -2,7 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import theme from '../config/theme';
-import { HomeScreen, MypageScreen, MainScreen } from '../screens';
+import { HomeScreen, MypageScreen, MainScreen, AddRoomTitleScreen } from '../screens';
 import { MainBottomParams } from './MainBottomParams';
 
 const Tab = createBottomTabNavigator<MainBottomParams>();
@@ -15,6 +15,7 @@ interface RouteInfo {
 }
 const routes: RouteInfo[] = [
   { name: 'Home', component: MainScreen, title: '홈', icon: 'home' },
+  { name: 'CrateRoom', component: AddRoomTitleScreen, title: '방 등록', icon: 'plussquareo' },
   { name: 'Mypage', component: MypageScreen, title: '내 정보', icon: 'user' },
 ]
 
