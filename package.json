@@ -1,5 +1,6 @@
 {
   "main": "node_modules/expo/AppEntry.js",
+  "private": true,
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -7,7 +8,9 @@
     "web": "expo start --web",
     "eject": "expo eject",
     "lint": "eslint --ext .ts,.tsx app/",
-    "prettier": "prettier --write app/"
+    "lint:fix": "npm run lint -- --fix app/",
+    "prettify": "prettier --write 'app/**/*.{ts,tsx}'",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^6.0.7",
@@ -54,8 +57,19 @@
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.3",
     "prettier": "^2.4.1",
     "typescript": "~4.0.0"
   },
-  "private": true
+  "lint-staged": {
+    "app/**/*.{ts,tsx}": [
+      "npm run lint:fix"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  }
 }
