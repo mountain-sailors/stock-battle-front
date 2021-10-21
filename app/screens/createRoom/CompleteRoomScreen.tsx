@@ -1,26 +1,21 @@
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
-import {
-  Center,
-  Flex,
-  Text,
-  VStack,
-  Image,
-  Spacer,
-} from "native-base"
+import { Center, Flex, Text, VStack, Image, Spacer } from 'native-base';
 import { Button, Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
-export const imgPartypopper = require("./img-partypopper.png");
 
 type CompleteRoomScreenProp = StackScreenProps<RootStackParams, 'CompleteRoom'>;
-const CompleteRoomScreen: React.FC<CompleteRoomScreenProp> = ({ navigation, route }) => {
+const CompleteRoomScreen: React.FC<CompleteRoomScreenProp> = ({
+  navigation,
+  route,
+}) => {
   const { roomCode } = route.params;
   return (
     <Layout>
       <Flex align="center" mt="20">
         <Image
           size="80px"
-          source={imgPartypopper}
+          source={require('./img-partypopper.png')}
           alt="party popper icon"
         />
         <Text mt={4} textAlign="center" fontSize="md">
@@ -37,16 +32,20 @@ const CompleteRoomScreen: React.FC<CompleteRoomScreenProp> = ({ navigation, rout
         <Button
           title="초대코드 복사"
           variant="outlined"
-          onClick={() => {navigation.navigate('Main')}}
+          onClick={() => {
+            navigation.navigate('Main');
+          }}
         />
         <Button
           title="메인으로 이동"
           variant="filled"
-          onClick={() => {navigation.navigate('Main')}}
+          onClick={() => {
+            navigation.navigate('Main');
+          }}
         />
       </VStack>
     </Layout>
   );
-}
+};
 
 export default CompleteRoomScreen;

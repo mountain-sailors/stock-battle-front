@@ -1,13 +1,15 @@
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
-import { Box, Input, Spacer, Text } from "native-base"
+import { Box, Input, Spacer, Text } from 'native-base';
 import { Button, Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 
 type AddRoomTitleScreenProp = StackScreenProps<RootStackParams>;
-const AddRoomTitleScreen: React.FC<AddRoomTitleScreenProp> = ({ navigation }) => {
+const AddRoomTitleScreen: React.FC<AddRoomTitleScreenProp> = ({
+  navigation,
+}) => {
   const [value, setValue] = React.useState('');
-  const handleChange = (event: any) => setValue(event.target.value)
+  const handleChange = (event: any) => setValue(event.target.value);
   return (
     <Layout>
       <Box mt="32">
@@ -25,16 +27,20 @@ const AddRoomTitleScreen: React.FC<AddRoomTitleScreenProp> = ({ navigation }) =>
           placeholder="방 제목을 입력해주세요"
           onChange={handleChange}
         />
-        <Text fontSize="xs" color="gray.500" mt="2">예시) 다음주 회식 내기 주식으로 정하자!, 주식으로 고기 사먹자</Text>
+        <Text fontSize="xs" color="gray.500" mt="2">
+          예시) 다음주 회식 내기 주식으로 정하자!, 주식으로 고기 사먹자
+        </Text>
       </Box>
       <Spacer />
       <Button
         title="다음"
         variant="filled"
-        onClick={() => {navigation.navigate('AddRoomInfo', { roomName: value })}}
+        onClick={() => {
+          navigation.navigate('AddRoomInfo', { roomName: value });
+        }}
       />
     </Layout>
   );
-}
+};
 
 export default AddRoomTitleScreen;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
-import { format, addDays } from 'date-fns'
+import { format, addDays } from 'date-fns';
 import ko from 'date-fns/locale/ko';
 import {
   Box,
@@ -12,42 +12,46 @@ import {
   Image,
   Select,
   Spacer,
-} from "native-base"
+} from 'native-base';
 import { Button, Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
-export const iconRate = require("./icon-rate.png");
-export const iconWave = require("./icon-wave.png");
-export const iconMoneyBag = require("./icon-moneybag.png");
 
 const WIN_CONDITIONS = [
   {
     typeNumber: 0,
-    iconName: iconRate,
+    iconName: require('./icon-rate.png'),
     title: '주당 수익률',
-    description: '기간 내 주식 한 주당 가장 많은 수익률을 내었을 때 우승합니다.',
-  }, {
+    description:
+      '기간 내 주식 한 주당 가장 많은 수익률을 내었을 때 우승합니다.',
+  },
+  {
     typeNumber: 1,
-    iconName: iconWave,
+    iconName: require('./icon-wave.png'),
     title: '변동률',
     description: '제일 변동이 큰 사람이 우승합니다.',
-  }, {
+  },
+  {
     typeNumber: 2,
-    iconName: iconMoneyBag,
+    iconName: require('./icon-moneybag.png'),
     title: '최다 수익',
     description: '제일 수익률이 큰 사람이 우승합니다.',
-  }
-]
+  },
+];
 
 type RoomField = {
-  roomName: string,
-  winCondition: number,
-  maxCapacity: number,
-  startDate: string,
-}
+  roomName: string;
+  winCondition: number;
+  maxCapacity: number;
+  startDate: string;
+};
 type AddRoomInfoScreenProp = StackScreenProps<RootStackParams, 'AddRoomInfo'>;
-const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({ navigation, route }) => {
+const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({
+  navigation,
+  route,
+}) => {
   const { roomName } = route.params;
-  const formattedDate = (date: Date) => format(date, 'yyyy. MM. dd (EEE)', { locale: ko });
+  const formattedDate = (date: Date) =>
+    format(date, 'yyyy. MM. dd (EEE)', { locale: ko });
   const today = new Date();
   const [formField, setFormField] = React.useState<RoomField>({
     roomName,
@@ -59,12 +63,16 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({ navigation, route 
     <Layout>
       <VStack space="4">
         <Box>
-          <Text fontSize="md" fontWeight="bold">우승 조건</Text>
+          <Text fontSize="md" fontWeight="bold">
+            우승 조건
+          </Text>
           <Flex direction="row" justify="space-between" mt="4">
             {WIN_CONDITIONS.map((v) => (
               <Pressable
                 key={v.title}
-                onPress={() => setFormField({ ...formField, winCondition: v.typeNumber })}
+                onPress={() =>
+                  setFormField({ ...formField, winCondition: v.typeNumber })
+                }
                 flex="1"
               >
                 <Center>
@@ -75,7 +83,11 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({ navigation, route 
                     alt={v.title}
                   />
                   <Text
-                    color={formField.winCondition === v.typeNumber ? 'black' : 'gray.400'}
+                    color={
+                      formField.winCondition === v.typeNumber
+                        ? 'black'
+                        : 'gray.400'
+                    }
                     mt="1"
                     fontSize="sm"
                   >
@@ -90,7 +102,9 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({ navigation, route 
           </Text>
         </Box>
         <Flex direction="row" justify="space-between" align="center">
-          <Text fontSize="md" fontWeight="bold">최대 인원</Text>
+          <Text fontSize="md" fontWeight="bold">
+            최대 인원
+          </Text>
           <Select
             minWidth="80px"
             h="35px"
@@ -99,19 +113,28 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({ navigation, route 
             fontSize="sm"
             textAlign="center"
             selectedValue={formField.maxCapacity.toString()}
-            onValueChange={(value) => setFormField({
-              ...formField, maxCapacity: Number(value) || 0
-            })}
+            onValueChange={(value) =>
+              setFormField({
+                ...formField,
+                maxCapacity: Number(value) || 0,
+              })
+            }
             variant="filled"
           >
             {new Array(5).fill(null).map((_, i) => (
-              <Select.Item key={i} label={`${i + 1}명`} value={(i + 1).toString()} />
-              ))}
+              <Select.Item
+                key={i}
+                label={`${i + 1}명`}
+                value={(i + 1).toString()}
+              />
+            ))}
           </Select>
         </Flex>
         <Box>
           <Flex direction="row" justify="space-between" align="center">
-            <Text fontSize="md" fontWeight="bold">시작일</Text>
+            <Text fontSize="md" fontWeight="bold">
+              시작일
+            </Text>
             <Select
               minWidth="160"
               h="35px"
@@ -120,9 +143,12 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({ navigation, route 
               fontSize="sm"
               textAlign="center"
               selectedValue={formField.startDate}
-              onValueChange={(value) => setFormField({
-                ...formField, startDate: value
-              })}
+              onValueChange={(value) =>
+                setFormField({
+                  ...formField,
+                  startDate: value,
+                })
+              }
               variant="filled"
             >
               {new Array(5).fill(null).map((_, i) => (
@@ -139,9 +165,13 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({ navigation, route 
           </Text>
         </Box>
         <Flex direction="row" justify="space-between" align="center">
-          <Text fontSize="md" fontWeight="bold">기간</Text>
+          <Text fontSize="md" fontWeight="bold">
+            기간
+          </Text>
           <Center h="35px" paddingX="4" bgColor="gray.100" borderRadius="lg">
-            <Text fontSize="sm" color="gray.400">7일</Text>
+            <Text fontSize="sm" color="gray.400">
+              7일
+            </Text>
           </Center>
         </Flex>
         <Flex direction="row" justify="space-between" align="center">
@@ -162,10 +192,12 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({ navigation, route 
       <Button
         title="다음"
         variant="filled"
-        onClick={() => {navigation.navigate('CompleteRoom', { roomCode: '123456' })}}
+        onClick={() => {
+          navigation.navigate('CompleteRoom', { roomCode: '123456' });
+        }}
       />
     </Layout>
   );
-}
+};
 
 export default AddRoomInfoScreen;

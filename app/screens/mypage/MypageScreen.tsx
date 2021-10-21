@@ -8,6 +8,6 @@ const MypageScreen: React.FC = () => {
       <Text>Mypage screen!</Text>
     </Layout>
   );
-}
+};
 
 export default MypageScreen;

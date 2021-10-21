@@ -12,10 +12,12 @@ const SampleScreen: React.FC<SampleScreenProp> = ({ navigation }) => {
       <Button
         title="뒤로가기"
         variant="outlined"
-        onClick={() => {navigation.goBack()}}
+        onClick={() => {
+          navigation.goBack();
+        }}
       />
     </Layout>
   );
-}
+};
 
 export default SampleScreen;
