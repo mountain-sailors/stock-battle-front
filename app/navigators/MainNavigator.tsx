@@ -2,22 +2,27 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import theme from '../config/theme';
-import { HomeScreen, MypageScreen, MainScreen, AddRoomTitleScreen } from '../screens';
+import { MypageScreen, MainScreen, AddRoomTitleScreen } from '../screens';
 import { MainBottomParams } from './MainBottomParams';
 
 const Tab = createBottomTabNavigator<MainBottomParams>();
 
 interface RouteInfo {
-  name: keyof MainBottomParams,
-  component: React.ComponentType<any>,
-  title: string,
-  icon: string,
+  name: keyof MainBottomParams;
+  component: React.ComponentType<any>;
+  title: string;
+  icon: string;
 }
 const routes: RouteInfo[] = [
   { name: 'Home', component: MainScreen, title: '홈', icon: 'home' },
-  { name: 'CrateRoom', component: AddRoomTitleScreen, title: '방 등록', icon: 'plussquareo' },
+  {
+    name: 'CrateRoom',
+    component: AddRoomTitleScreen,
+    title: '방 등록',
+    icon: 'plussquareo',
+  },
   { name: 'Mypage', component: MypageScreen, title: '내 정보', icon: 'user' },
-]
+];
 
 const MainNavigator = () => {
   return (
@@ -25,11 +30,13 @@ const MainNavigator = () => {
       initialRouteName="Home"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
-          return <AntDesignIcon
-            name={routes.find((v) => v.name === route.name)?.icon ?? ''}
-            size={size}
-            color={color}
-          />;
+          return (
+            <AntDesignIcon
+              name={routes.find((v) => v.name === route.name)?.icon ?? ''}
+              size={size}
+              color={color}
+            />
+          );
         },
         tabBarActiveTintColor: theme.colors.gray[200],
         tabBarInactiveTintColor: theme.colors.gray[400],
@@ -45,6 +52,6 @@ const MainNavigator = () => {
       ))}
     </Tab.Navigator>
   );
-}
+};
 
 export default MainNavigator;

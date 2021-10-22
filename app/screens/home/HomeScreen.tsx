@@ -20,11 +20,17 @@ const HomeScreen: React.FC<HomeScreenProp> = ({ navigation }) => {
       <Button
         title="Sample 바로가기"
         variant="outlined"
-        onClick={() => {navigation.navigate('Sample')}}
+        onClick={() => {
+          navigation.navigate('Sample');
+        }}
       />
-      <Input value={value} placeholder="내용을 입력해주세요" onChangeText={setValue} />
+      <Input
+        value={value}
+        placeholder="내용을 입력해주세요"
+        onChangeText={setValue}
+      />
     </Layout>
   );
-}
+};
 
 export default HomeScreen;
