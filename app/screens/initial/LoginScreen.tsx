@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Button from '../../components/Button';
-import Input from '../../components/Input';
-import Layout from '../../components/Layout';
+import { Button, Input } from 'native-base';
+import { Layout } from '../../components';
 
 const styles = StyleSheet.create({
   loginContainer: {
@@ -42,6 +41,7 @@ const LoginScreen: React.FC = () => {
         <View style={styles.appleBoxL} />
         <Input
           value={value}
+          variant="filled"
           placeholder="이메일을 입력해주세요"
           onChangeText={setValue}
         />
@@ -50,12 +50,15 @@ const LoginScreen: React.FC = () => {
         <View style={styles.appleBoxL} />
         <Input
           value={value}
+          variant="filled"
           placeholder="비밀번호를 입력해주세요"
           onChangeText={setValue}
         />
       </View>
       <View>
-        <Button title="로그인" variant="disabled" onClick={() => null} />
+        <Button variant="disabled" disabled>
+          로그인
+        </Button>
       </View>
     </Layout>
   );

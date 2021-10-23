@@ -1,17 +1,23 @@
 import React from 'react';
-import styled from 'styled-components/native';
+import { ScrollView } from 'native-base';
 
-const StyledLayout = styled.View`
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  padding: 20px;
-  padding-bottom: 30px;
-  background-color: ${({ theme }) => theme.colors.white};
-`;
-
-const Layout: React.FC = ({ children }) => {
-  return <StyledLayout>{children}</StyledLayout>;
+type LayoutProps = {
+  color?: string;
+};
+const Layout: React.FC<LayoutProps> = ({ children, color }) => {
+  return (
+    <ScrollView
+      _contentContainerStyle={{
+        flex: 1,
+        position: 'relative',
+        p: 6,
+        pb: 10,
+        bgColor: color ?? 'white',
+      }}
+    >
+      {children}
+    </ScrollView>
+  );
 };
 
 export default Layout;

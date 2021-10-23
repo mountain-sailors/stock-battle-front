@@ -1,7 +1,7 @@
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
-import { Center, Flex, Text, VStack, Image, Spacer } from 'native-base';
-import { Button, Layout } from '../../components';
+import { Button, Center, Flex, Text, VStack, Image, Spacer } from 'native-base';
+import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 
 type CompleteRoomScreenProp = StackScreenProps<RootStackParams, 'CompleteRoom'>;
@@ -29,20 +29,12 @@ const CompleteRoomScreen: React.FC<CompleteRoomScreenProp> = ({
       </Flex>
       <Spacer />
       <VStack space="2">
-        <Button
-          title="초대코드 복사"
-          variant="outlined"
-          onClick={() => {
-            navigation.navigate('Main');
-          }}
-        />
-        <Button
-          title="메인으로 이동"
-          variant="filled"
-          onClick={() => {
-            navigation.navigate('Main');
-          }}
-        />
+        <Button variant="outline" onPress={() => navigation.navigate('Main')}>
+          초대코드 복사
+        </Button>
+        <Button variant="solid" onPress={() => navigation.navigate('Main')}>
+          메인으로 이동
+        </Button>
       </VStack>
     </Layout>
   );

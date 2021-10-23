@@ -1,7 +1,7 @@
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
-import { Box, Input, Spacer, Text } from 'native-base';
-import { Button, Layout } from '../../components';
+import { Box, Button, Input, Spacer, Text } from 'native-base';
+import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 
 type AddRoomTitleScreenProp = StackScreenProps<RootStackParams>;
@@ -18,11 +18,7 @@ const AddRoomTitleScreen: React.FC<AddRoomTitleScreenProp> = ({
         </Text>
         <Input
           mt="5"
-          p="3"
-          size="lg"
           variant="filled"
-          borderRadius="lg"
-          bgColor="gray.100"
           value={value}
           placeholder="방 제목을 입력해주세요"
           onChange={handleChange}
@@ -33,12 +29,11 @@ const AddRoomTitleScreen: React.FC<AddRoomTitleScreenProp> = ({
       </Box>
       <Spacer />
       <Button
-        title="다음"
-        variant="filled"
-        onClick={() => {
-          navigation.navigate('AddRoomInfo', { roomName: value });
-        }}
-      />
+        variant="solid"
+        onPress={() => navigation.navigate('AddRoomInfo', { roomName: value })}
+      >
+        다음
+      </Button>
     </Layout>
   );
 };

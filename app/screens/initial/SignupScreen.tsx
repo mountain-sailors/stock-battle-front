@@ -1,8 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import Button from '../../components/Button';
-import Input from '../../components/Input';
-import Layout from '../../components/Layout';
+import { Button, Input } from 'native-base';
+import { Layout } from '../../components';
 
 const styles = StyleSheet.create({
   loginContainer: {
@@ -48,24 +47,27 @@ const SignupScreen: React.FC = () => {
         <View style={styles.appleBoxL} />
         <Input
           value={value}
+          variant="filled"
           placeholder="이메일을 입력해주세요"
-          onChangeText={setValue}
+          onChange={(event: any) => setValue(event.target.value)}
         />
         <View style={styles.appleBoxXL} />
         <Text style={styles.titleSmall}>비밀번호</Text>
         <View style={styles.appleBoxL} />
         <Input
           value={value}
+          variant="filled"
           placeholder="비밀번호를 입력해주세요"
-          onChangeText={setValue}
+          onChange={(event: any) => setValue(event.target.value)}
         />
         <View style={styles.appleBoxXL} />
         <Text style={styles.titleSmall}>닉네임</Text>
         <View style={styles.appleBoxL} />
         <Input
           value={value}
+          variant="filled"
           placeholder="닉네임을 입력해주세요"
-          onChangeText={setValue}
+          onChange={(event: any) => setValue(event.target.value)}
         />
         <View style={styles.appleBoxXL} />
         <Text style={styles.titleSmall}>아바타</Text>
@@ -94,7 +96,7 @@ const SignupScreen: React.FC = () => {
         </View>
       </View>
       <View>
-        <Button title="회원가입" variant="disabled" onClick={() => null} />
+        <Button variant="solid">회원가입</Button>
       </View>
     </Layout>
   );
