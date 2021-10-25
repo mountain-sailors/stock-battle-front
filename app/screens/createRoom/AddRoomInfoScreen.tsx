@@ -4,6 +4,7 @@ import { format, addDays } from 'date-fns';
 import ko from 'date-fns/locale/ko';
 import {
   Box,
+  Button,
   Center,
   Flex,
   Text,
@@ -13,7 +14,7 @@ import {
   Select,
   Spacer,
 } from 'native-base';
-import { Button, Layout } from '../../components';
+import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 
 const WIN_CONDITIONS = [
@@ -105,60 +106,54 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({
           <Text fontSize="md" fontWeight="bold">
             최대 인원
           </Text>
-          <Select
-            minWidth="80px"
-            h="35px"
-            borderWidth="0"
-            borderRadius="lg"
-            fontSize="sm"
-            textAlign="center"
-            selectedValue={formField.maxCapacity.toString()}
-            onValueChange={(value) =>
-              setFormField({
-                ...formField,
-                maxCapacity: Number(value) || 0,
-              })
-            }
-            variant="filled"
-          >
-            {new Array(5).fill(null).map((_, i) => (
-              <Select.Item
-                key={i}
-                label={`${i + 1}명`}
-                value={(i + 1).toString()}
-              />
-            ))}
-          </Select>
+          <Box rounded="lg" bgColor="gray.100">
+            <Select
+              variant="filled"
+              minW="80px"
+              selectedValue={formField.maxCapacity.toString()}
+              onValueChange={(value) =>
+                setFormField({
+                  ...formField,
+                  maxCapacity: Number(value) || 0,
+                })
+              }
+            >
+              {new Array(5).fill(null).map((_, i) => (
+                <Select.Item
+                  key={i}
+                  label={`${i + 1}명`}
+                  value={(i + 1).toString()}
+                />
+              ))}
+            </Select>
+          </Box>
         </Flex>
         <Box>
           <Flex direction="row" justify="space-between" align="center">
             <Text fontSize="md" fontWeight="bold">
               시작일
             </Text>
-            <Select
-              minWidth="160"
-              h="35px"
-              borderWidth="0"
-              borderRadius="lg"
-              fontSize="sm"
-              textAlign="center"
-              selectedValue={formField.startDate}
-              onValueChange={(value) =>
-                setFormField({
-                  ...formField,
-                  startDate: value,
-                })
-              }
-              variant="filled"
-            >
-              {new Array(5).fill(null).map((_, i) => (
-                <Select.Item
-                  key={i}
-                  label={formattedDate(addDays(today, i))}
-                  value={format(addDays(today, i), 'yyyy-MM-dd')}
-                />
-              ))}
-            </Select>
+            <Box rounded="lg" bgColor="gray.100">
+              <Select
+                variant="filled"
+                minW="160px"
+                selectedValue={formField.startDate}
+                onValueChange={(value) =>
+                  setFormField({
+                    ...formField,
+                    startDate: value,
+                  })
+                }
+              >
+                {new Array(5).fill(null).map((_, i) => (
+                  <Select.Item
+                    key={i}
+                    label={formattedDate(addDays(today, i))}
+                    value={format(addDays(today, i), 'yyyy-MM-dd')}
+                  />
+                ))}
+              </Select>
+            </Box>
           </Flex>
           <Text mt="4" textAlign="center" color="gray.500" fontSize="xs">
             종목 가격은 시작일 기준 시가(당일 최초로 체결된 거래가격)입니다.
@@ -168,21 +163,21 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({
           <Text fontSize="md" fontWeight="bold">
             기간
           </Text>
-          <Center h="35px" paddingX="4" bgColor="gray.100" borderRadius="lg">
-            <Text fontSize="sm" color="gray.400">
+          <Center p="3" bgColor="gray.100" rounded="lg">
+            <Text px={2} fontSize="sm" color="gray.400">
               7일
             </Text>
           </Center>
         </Flex>
         <Flex direction="row" justify="space-between" align="center">
-          <Center h="35px" paddingX="4" bgColor="gray.100" borderRadius="lg">
-            <Text fontSize="sm" color="gray.400">
+          <Center p="3" bgColor="gray.100" rounded="lg">
+            <Text px={2} fontSize="sm" color="gray.400">
               {formattedDate(new Date(formField.startDate))}
             </Text>
           </Center>
           <Text>~</Text>
-          <Center h="35px" paddingX="4" bgColor="gray.100" borderRadius="lg">
-            <Text fontSize="sm" color="gray.400">
+          <Center p="3" bgColor="gray.100" rounded="lg">
+            <Text px={2} fontSize="sm" color="gray.400">
               {formattedDate(addDays(new Date(formField.startDate), 6))}
             </Text>
           </Center>
@@ -190,12 +185,13 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({
       </VStack>
       <Spacer />
       <Button
-        title="다음"
-        variant="filled"
-        onClick={() => {
-          navigation.navigate('CompleteRoom', { roomCode: '123456' });
-        }}
-      />
+        variant="solid"
+        onPress={() =>
+          navigation.navigate('CompleteRoom', { roomCode: '123456' })
+        }
+      >
+        다음
+      </Button>
     </Layout>
   );
 };
