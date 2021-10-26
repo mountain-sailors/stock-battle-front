@@ -7,3 +7,4 @@ export { default as AddRoomTitleScreen } from './createRoom/AddRoomTitleScreen';
 export { default as AddRoomInfoScreen } from './createRoom/AddRoomInfoScreen';
 export { default as CompleteCreateRoom } from './createRoom/CompleteRoomScreen';
 export { default as WaitingRoomScreen } from './room/WaitingRoomScreen';
+export { default as ResultRoomScreen } from './room/ResultRoomScreen';
