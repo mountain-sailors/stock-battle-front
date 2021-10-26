@@ -20,20 +20,20 @@ import { RootStackParams } from '../../navigators/RootStackParams';
 const WIN_CONDITIONS = [
   {
     typeNumber: 0,
-    iconName: require('./icon-rate.png'),
+    iconName: require('./images/icon-rate.png'),
     title: '주당 수익률',
     description:
       '기간 내 주식 한 주당 가장 많은 수익률을 내었을 때 우승합니다.',
   },
   {
     typeNumber: 1,
-    iconName: require('./icon-wave.png'),
+    iconName: require('./images/icon-wave.png'),
     title: '변동률',
     description: '제일 변동이 큰 사람이 우승합니다.',
   },
   {
     typeNumber: 2,
-    iconName: require('./icon-moneybag.png'),
+    iconName: require('./images/icon-moneybag.png'),
     title: '최다 수익',
     description: '제일 수익률이 큰 사람이 우승합니다.',
   },

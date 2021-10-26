@@ -36,13 +36,18 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = () => {
           rounded="lg"
           bgColor="amber.100"
         >
-          <Image size="26px" source={require('./icon-light.png')} alt="light" />
+          <Image
+            size="26px"
+            source={require('./images/icon-light.png')}
+            alt="light"
+          />
           <Text ml={2} fontSize="md">
             <Text fontWeight="bold">{startDate}</Text>에 시작됩니다!
           </Text>
         </Flex>
         {DUMMY_DATA.map((v) => (
           <Flex
+            key={v.userName}
             direction="row"
             align="center"
             p="4"

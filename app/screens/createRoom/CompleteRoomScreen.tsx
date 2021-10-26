@@ -15,7 +15,7 @@ const CompleteRoomScreen: React.FC<CompleteRoomScreenProp> = ({
       <Flex align="center" mt="20">
         <Image
           size="80px"
-          source={require('./img-partypopper.png')}
+          source={require('./images/img-partypopper.png')}
           alt="party popper icon"
         />
         <Text mt={4} textAlign="center" fontSize="md">
