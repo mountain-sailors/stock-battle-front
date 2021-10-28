@@ -41,7 +41,7 @@ const MainScreen: React.FC<MainSceenProp> = () => {
       <Box pb="20px">
         <VStack space="3">
           {/* BOX 1 */}
-          <Box h="140" w="100%" bg="#fff" rounded="md" px="4" pt="3" pb="4">
+          <Box h="140" w="100%" bg="#fff" rounded="md" p="4">
             <Box h="55%" mt="0">
               <Box w="63px" h="24px" bg="#000" rounded="3">
                 <Flex
@@ -89,7 +89,7 @@ const MainScreen: React.FC<MainSceenProp> = () => {
               </Flex>
             </Box>
             <Spacer />
-            <HStack mt="3">
+            <HStack mt="2">
               <Flex direction="row" justify="space-between">
                 <Box w="50%">
                   <Text fontSize="xl" fontWeight="bold">
@@ -118,9 +118,7 @@ const MainScreen: React.FC<MainSceenProp> = () => {
             w="100%"
             bg="#fff"
             rounded="md"
-            px="4"
-            pt="3"
-            pb="4"
+            p="4"
             borderWidth="2"
             borderColor="#6CE99E"
           >
@@ -171,7 +169,7 @@ const MainScreen: React.FC<MainSceenProp> = () => {
               </Flex>
             </Box>
             <Spacer />
-            <HStack mt="3">
+            <HStack mt="2">
               <Flex direction="row" justify="space-between">
                 <Box w="50%">
                   <Text fontSize="xl" fontWeight="bold">
@@ -195,7 +193,7 @@ const MainScreen: React.FC<MainSceenProp> = () => {
             <Spacer />
           </Box>
           {/* BOX 3 */}
-          <Box h="140" w="100%" bg="#fff" rounded="md" px="4" pt="3" pb="4">
+          <Box h="140" w="100%" bg="#fff" rounded="md" p="4">
             <Box h="55%">
               <Box ml="80%" w="63px" h="24px" bg="#000" rounded="3">
                 <Flex
@@ -243,7 +241,7 @@ const MainScreen: React.FC<MainSceenProp> = () => {
               </Flex>
             </Box>
             <Spacer />
-            <HStack mt="3">
+            <HStack mt="2">
               <Flex direction="row" justify="space-between">
                 <Box w="50%">
                   <Text fontSize="xl" fontWeight="bold">
