@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, StatusBar, Text, View } from 'react-native';
-import Button from '../../components/Button';
-import Layout from '../../components/Layout';
+import { Button } from 'native-base';
+import { Layout } from '../../components';
 
 const styles = StyleSheet.create({
   loginContainer: {
@@ -34,9 +34,8 @@ const InitScreen: React.FC = () => {
           <Text style={styles.title}>내가 산 주식을 응원하세요</Text>
         </View>
         <StatusBar barStyle="dark-content" />
-        <Button title="로그인" variant="filled" onClick={() => null} />
-        <View style={styles.appleBox} />
-        <Button title="회원가입" variant="outlined" onClick={() => null} />
+        <Button variant="solid">로그인</Button>
+        <Button variant="outline">회원가입</Button>
       </View>
     </Layout>
   );
