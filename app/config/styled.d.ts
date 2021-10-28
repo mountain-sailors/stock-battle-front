@@ -20,7 +20,6 @@ declare module 'styled-components/native' {
       };
     };
     fontSize: {
-      xxl: string;
       xl: string;
       lg: string;
       md: string;

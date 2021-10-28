@@ -19,7 +19,6 @@ const theme: DefaultTheme = {
     },
   },
   fontSize: {
-    xxl: '24px',
     xl: '20px',
     lg: '18px',
     md: '16px',

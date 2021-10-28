@@ -63,7 +63,7 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({
     <Layout>
       <VStack space="4">
         <Box>
-          <Text fontSize="md" fontWeight="bold">
+          <Text fontSize="xl" fontWeight="bold">
             우승 조건
           </Text>
           <Flex direction="row" justify="space-between" mt="4">
