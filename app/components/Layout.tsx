@@ -8,7 +8,7 @@ const Layout: React.FC<LayoutProps> = ({ children, color }) => {
   return (
     <ScrollView
       _contentContainerStyle={{
-        flex: 1,
+        flexGrow: 1,
         position: 'relative',
         p: 6,
         pb: 10,
