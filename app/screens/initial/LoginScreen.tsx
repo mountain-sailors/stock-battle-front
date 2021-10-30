@@ -1,65 +1,55 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Button, Input } from 'native-base';
+import { StackScreenProps } from '@react-navigation/stack';
+import { Button, Input, Box, Text, Spacer } from 'native-base';
 import { Layout } from '../../components';
+import { RootStackParams } from '../../navigators/RootStackParams';
 
-const styles = StyleSheet.create({
-  loginContainer: {
-    flex: 1,
-    backgroundColor: '#fff',
-    display: 'flex',
-    justifyContent: 'center',
-    alignContent: 'center',
-  },
-  titleContainer: {
-    marginBottom: 40,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: '700',
-    textAlignVertical: 'center',
-    textAlign: 'center',
-  },
-  appleBoxXL: {
-    height: 34,
-  },
-  appleBoxL: {
-    height: 13,
-  },
-  titleSmall: {
-    fontSize: 14,
-    fontWeight: '700',
-  },
-});
+type LoginScreenProp = StackScreenProps<RootStackParams>;
+const LoginScreen: React.FC<LoginScreenProp> = ({ navigation }) => {
+  const [userInfo, setUserInfo] = React.useState({
+    userId: '',
+    userPw: '',
+  });
 
-const LoginScreen: React.FC = () => {
-  const [value, setValue] = React.useState('');
+  const handleId = (event: any) =>
+    setUserInfo({ ...userInfo, userId: event.target.value });
+
+  const handlePw = (event: any) =>
+    setUserInfo({ ...userInfo, userPw: event.target.value });
+
   return (
     <Layout>
-      <View style={styles.loginContainer}>
-        <Text style={styles.titleSmall}>아이디</Text>
-        <View style={styles.appleBoxL} />
+      <Box mb="5" mt="32">
+        <Text fontSize="xs" fontWeight="bold" mb="4">
+          아이디
+        </Text>
         <Input
-          value={value}
+          value={userInfo.userId}
           variant="filled"
           placeholder="이메일을 입력해주세요"
-          onChangeText={setValue}
+          onChange={handleId}
         />
-        <View style={styles.appleBoxXL} />
-        <Text style={styles.titleSmall}>비밀번호</Text>
-        <View style={styles.appleBoxL} />
+      </Box>
+      <Box mb="5">
+        <Text fontSize="xs" fontWeight="bold" mb="4">
+          비밀번호
+        </Text>
         <Input
-          value={value}
+          value={userInfo.userPw}
           variant="filled"
           placeholder="비밀번호를 입력해주세요"
-          onChangeText={setValue}
+          onChange={handlePw}
+          type="password"
         />
-      </View>
-      <View>
-        <Button variant="disabled" disabled>
-          로그인
-        </Button>
-      </View>
+      </Box>
+      <Spacer />
+      <Button
+        variant={userInfo.userId !== '' ? 'solid' : 'disabled'}
+        isDisabled={userInfo.userId !== '' ? false : true}
+        onPress={() => navigation.navigate('Main')}
+      >
+        로그인
+      </Button>
     </Layout>
   );
 };
