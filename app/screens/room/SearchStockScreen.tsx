@@ -19,7 +19,7 @@ const DUMMY_DATA = [
     ratePer: 0.6,
   },
   {
-    name: 'ARPPU',
+    name: 'QQQ',
     value: 790.2,
     rate: 500,
     ratePer: 0.6,
@@ -47,6 +47,7 @@ const SearchStockScreen: React.FC<SearchStockScreenProp> = ({ navigation }) => {
       <VStack mt={4} space={4}>
         {DUMMY_DATA.map((v) => (
           <Pressable
+            key={v.name}
             onPress={() =>
               // TODO: 주식 등록에 필요한 값 확인 후 object 형태로 params로 전달하기
               navigation.navigate('RegisterStock', { stockName: v.name })
