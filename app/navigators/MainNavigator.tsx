@@ -16,7 +16,7 @@ interface RouteInfo {
 const routes: RouteInfo[] = [
   { name: 'Home', component: MainScreen, title: '홈', icon: 'home' },
   {
-    name: 'CrateRoom',
+    name: 'CreateRoom',
     component: AddRoomTitleScreen,
     title: '방 등록',
     icon: 'plussquareo',
