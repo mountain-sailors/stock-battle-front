@@ -6,6 +6,9 @@ import {
   AddRoomTitleScreen,
   AddRoomInfoScreen,
   CompleteCreateRoom,
+  InitScreen,
+  LoginScreen,
+  SignupScreen,
 } from '../screens';
 import { RootStackParams } from './RootStackParams';
 import MainNavigator from './MainNavigator';
@@ -18,6 +21,9 @@ const AppNavigator = () => {
       <AppStack.Navigator initialRouteName="Main">
         <AppStack.Screen name="Main" component={MainNavigator} />
         <AppStack.Screen name="Sample" component={MainScreen} />
+        <AppStack.Screen name="Init" component={InitScreen} />
+        <AppStack.Screen name="Login" component={LoginScreen} />
+        <AppStack.Screen name="SignUp" component={SignupScreen} />
         <AppStack.Screen
           name="AddRoomTitle"
           component={AddRoomTitleScreen}

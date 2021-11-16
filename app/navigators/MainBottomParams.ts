@@ -1,5 +1,5 @@
 export type MainBottomParams = {
   Home: undefined;
-  CrateRoom: undefined;
+  CreateRoom: undefined;
   Mypage: undefined;
 };
