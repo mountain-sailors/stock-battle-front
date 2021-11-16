@@ -9,6 +9,11 @@ import {
   InitScreen,
   LoginScreen,
   SignupScreen,
+  ResultRoomScreen,
+  WaitingRoomScreen,
+  RegisterStockScreen,
+  RunningRoomScreen,
+  SearchStockScreen,
 } from '../screens';
 import { RootStackParams } from './RootStackParams';
 import MainNavigator from './MainNavigator';
@@ -38,6 +43,36 @@ const AppNavigator = () => {
           name="CompleteRoom"
           component={CompleteCreateRoom}
           options={{ headerTitle: '생성 완료' }}
+        />
+        <AppStack.Screen
+          name="WaitingRoom"
+          component={WaitingRoomScreen}
+          options={{ headerTitle: '대기중' }}
+        />
+        <AppStack.Screen
+          name="RunningRoom"
+          component={RunningRoomScreen}
+          options={{ headerTitle: '경기중' }}
+        />
+        <AppStack.Screen
+          name="ResultRoom"
+          component={ResultRoomScreen}
+          options={{ headerTitle: '경기 결과' }}
+        />
+        <AppStack.Screen
+          name="RegisterStock"
+          component={RegisterStockScreen}
+          options={{
+            headerTitle: '주식 등록하기',
+          }}
+        />
+        <AppStack.Screen
+          name="SearchStock"
+          component={SearchStockScreen}
+          options={{
+            headerTitle: '주식 검색하기',
+            animation: 'slide_from_bottom',
+          }}
         />
       </AppStack.Navigator>
     </NavigationContainer>

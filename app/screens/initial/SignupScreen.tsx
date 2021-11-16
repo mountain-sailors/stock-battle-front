@@ -59,23 +59,23 @@ const SignupScreen: React.FC = () => {
               <ZStack alignItems="center" justifyContent="center">
                 <Circle size="52px" bg="#fff"></Circle>
                 <Box>
-                  <Image source={require('./avatar_1.png')} size={8} />
+                  <Image source={require('./images/avatar_1.png')} size={8} />
                 </Box>
               </ZStack>
             </Circle>
             <Circle size="56px" bg="#fff" mr="5">
               <Box>
-                <Image source={require('./avatar_2.png')} size={8} />
+                <Image source={require('./images/avatar_2.png')} size={8} />
               </Box>
             </Circle>
             <Circle size="56px" bg="#fff" mr="5">
               <Box>
-                <Image source={require('./avatar_3.png')} size={8} />
+                <Image source={require('./images/avatar_3.png')} size={8} />
               </Box>
             </Circle>
             <Circle size="56px" bg="#fff" mr="5">
               <Box>
-                <Image source={require('./avatar_4.png')} size={8} />
+                <Image source={require('./images/avatar_4.png')} size={8} />
               </Box>
             </Circle>
           </Flex>
