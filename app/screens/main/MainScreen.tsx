@@ -24,7 +24,7 @@ const MainScreen: React.FC<MainSceenProp> = () => {
                 mt="7"
                 ml="2"
                 size="40px"
-                source={require('./horse.png')}
+                source={require('./images/horse.png')}
                 alt="icon"
               />
             </Flex>
@@ -74,7 +74,7 @@ const MainScreen: React.FC<MainSceenProp> = () => {
               <Image
                 ml="0%"
                 size="27px"
-                source={require('./horse.png')}
+                source={require('./images/horse.png')}
                 alt="icon"
               />
               <Flex direction="column" justify="flex-end" align="flex-end">
@@ -151,7 +151,7 @@ const MainScreen: React.FC<MainSceenProp> = () => {
               <Image
                 ml="45%"
                 size="27px"
-                source={require('./horse.png')}
+                source={require('./images/horse.png')}
                 alt="icon"
               />
               <Flex direction="column" justify="flex-end" align="flex-end">
@@ -221,7 +221,7 @@ const MainScreen: React.FC<MainSceenProp> = () => {
               <Image
                 ml="90%"
                 size="27px"
-                source={require('./horse.png')}
+                source={require('./images/horse.png')}
                 alt="icon"
               />
               <Flex direction="column" justify="flex-end" align="flex-end">

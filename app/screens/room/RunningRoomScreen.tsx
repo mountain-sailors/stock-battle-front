@@ -50,7 +50,7 @@ const RunningRoomScreen: React.FC<RunningRoomScreenProp> = () => {
           <Image
             mt={2}
             size="40px"
-            source={require('../main/horse.png')}
+            source={require('../main/images/horse.png')}
             alt="trophy"
           />
         </Flex>
