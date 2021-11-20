@@ -14,6 +14,8 @@ import {
   RegisterStockScreen,
   RunningRoomScreen,
   SearchStockScreen,
+  RecordScreen,
+  SearchProfileScreen,
 } from '../screens';
 import { RootStackParams } from './RootStackParams';
 import MainNavigator from './MainNavigator';
@@ -26,6 +28,8 @@ const AppNavigator = () => {
       <AppStack.Navigator initialRouteName="Init">
         <AppStack.Screen name="Main" component={MainNavigator} />
         <AppStack.Screen name="Sample" component={MainScreen} />
+        <AppStack.Screen name="Record" component={RecordScreen} />
+        <AppStack.Screen name="SearchProfile" component={SearchProfileScreen} />
         <AppStack.Screen
           name="Init"
           component={InitScreen}
