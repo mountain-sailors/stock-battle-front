@@ -9,7 +9,7 @@ const AddRoomTitleScreen: React.FC<AddRoomTitleScreenProp> = ({
   navigation,
 }) => {
   const [value, setValue] = React.useState('');
-  const handleChange = (event: any) => setValue(event.target.value);
+  const handleChange = (text: any) => setValue(text);
   return (
     <Layout>
       <Box mt="32">
@@ -21,7 +21,7 @@ const AddRoomTitleScreen: React.FC<AddRoomTitleScreenProp> = ({
           variant="filled"
           value={value}
           placeholder="방 제목을 입력해주세요"
-          onChange={handleChange}
+          onChangeText={handleChange}
         />
         <Text fontSize="xs" color="gray.500" mt="2">
           예시) 다음주 회식 내기 주식으로 정하자!, 주식으로 고기 사먹자
