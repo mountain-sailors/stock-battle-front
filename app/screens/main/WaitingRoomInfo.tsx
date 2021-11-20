@@ -35,7 +35,12 @@ const WaitingRoomInfo: React.FC<WaitingRoomInfoProp> = ({ room }) => {
             transform: [{ rotate: '180deg' }],
           }}
         ></Box>
-        <Image ml="0%" size="27px" source={require('./horse.png')} alt="icon" />
+        <Image
+          ml="0%"
+          size="27px"
+          source={require('./images/horse.png')}
+          alt="icon"
+        />
         <Flex direction="column" justify="flex-end" align="flex-end">
           <Box w="100%" mt="1">
             <Progress
