@@ -23,10 +23,14 @@ const AppStack = createNativeStackNavigator<RootStackParams>();
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <AppStack.Navigator initialRouteName="Main">
+      <AppStack.Navigator initialRouteName="Init">
         <AppStack.Screen name="Main" component={MainNavigator} />
         <AppStack.Screen name="Sample" component={MainScreen} />
-        <AppStack.Screen name="Init" component={InitScreen} />
+        <AppStack.Screen
+          name="Init"
+          component={InitScreen}
+          options={{ headerShown: false }}
+        />
         <AppStack.Screen name="Login" component={LoginScreen} />
         <AppStack.Screen name="SignUp" component={SignupScreen} />
         <AppStack.Screen
