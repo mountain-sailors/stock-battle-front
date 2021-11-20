@@ -16,10 +16,14 @@ import {
 } from 'native-base';
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
+import { callAPI } from '../../config/api';
+
+const WIN_TYPE = ['MAX_PROFIT_RATE', 'MAX_FLUCTUATION', 'MAX_PROFIT'];
 
 const WIN_CONDITIONS = [
   {
     typeNumber: 0,
+    typeString: WIN_TYPE[0],
     iconName: require('./images/icon-rate.png'),
     title: '주당 수익률',
     description:
@@ -27,12 +31,14 @@ const WIN_CONDITIONS = [
   },
   {
     typeNumber: 1,
+    typeString: WIN_TYPE[1],
     iconName: require('./images/icon-wave.png'),
     title: '변동률',
     description: '제일 변동이 큰 사람이 우승합니다.',
   },
   {
     typeNumber: 2,
+    typeString: WIN_TYPE[2],
     iconName: require('./images/icon-moneybag.png'),
     title: '최다 수익',
     description: '제일 수익률이 큰 사람이 우승합니다.',
@@ -40,10 +46,11 @@ const WIN_CONDITIONS = [
 ];
 
 type RoomField = {
-  roomName: string;
-  winCondition: number;
+  title: string;
+  winCondition: string;
   maxCapacity: number;
   startDate: string;
+  endDate: string;
 };
 type AddRoomInfoScreenProp = StackScreenProps<RootStackParams, 'AddRoomInfo'>;
 const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({
@@ -55,11 +62,24 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({
     format(date, 'yyyy. MM. dd (EEE)', { locale: ko });
   const today = new Date();
   const [formField, setFormField] = React.useState<RoomField>({
-    roomName,
-    winCondition: 0,
+    title: roomName,
+    winCondition: 'MAX_PROFIT_RATE',
     maxCapacity: 2,
     startDate: format(today, 'yyyy-MM-dd'),
+    endDate: format(addDays(today, 6), 'yyyy-MM-dd'),
   });
+  const createRoom = () => {
+    callAPI('/room', 'POST', formField)
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        navigation.navigate('CompleteRoom', { roomCode: res.invitationCode });
+      })
+      .catch((err) => {
+        console.error('Error: ', err);
+      });
+  };
+  console.log(formField);
   return (
     <Layout>
       <VStack space="4">
@@ -72,20 +92,20 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({
               <Pressable
                 key={v.title}
                 onPress={() =>
-                  setFormField({ ...formField, winCondition: v.typeNumber })
+                  setFormField({ ...formField, winCondition: v.typeString })
                 }
                 flex="1"
               >
                 <Center>
                   <Image
                     size="30px"
-                    opacity={formField.winCondition === v.typeNumber ? 1 : 0.3}
+                    opacity={formField.winCondition === v.typeString ? 1 : 0.3}
                     source={v.iconName}
                     alt={v.title}
                   />
                   <Text
                     color={
-                      formField.winCondition === v.typeNumber
+                      formField.winCondition === v.typeString
                         ? 'black'
                         : 'gray.400'
                     }
@@ -99,7 +119,10 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({
             ))}
           </Flex>
           <Text mt="4" textAlign="center" color="gray.500" fontSize="xs">
-            {WIN_CONDITIONS[formField.winCondition].description}
+            {
+              WIN_CONDITIONS[WIN_TYPE.indexOf(formField.winCondition)]
+                .description
+            }
           </Text>
         </Box>
         <Flex direction="row" justify="space-between" align="center">
@@ -142,6 +165,7 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({
                   setFormField({
                     ...formField,
                     startDate: value,
+                    endDate: format(addDays(new Date(value), 6), 'yyyy-MM-dd'),
                   })
                 }
               >
@@ -178,18 +202,13 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({
           <Text>~</Text>
           <Center p="3" bgColor="gray.100" rounded="lg">
             <Text px={2} fontSize="sm" color="gray.400">
-              {formattedDate(addDays(new Date(formField.startDate), 6))}
+              {formattedDate(new Date(formField.endDate))}
             </Text>
           </Center>
         </Flex>
       </VStack>
       <Spacer />
-      <Button
-        variant="solid"
-        onPress={() =>
-          navigation.navigate('CompleteRoom', { roomCode: '123456' })
-        }
-      >
+      <Button variant="solid" onPress={() => createRoom()}>
         다음
       </Button>
     </Layout>
