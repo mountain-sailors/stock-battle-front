@@ -10,5 +10,8 @@ npm-debug.*
 web-build/
 yarn-error.log
 
+# log
+yarn-error.log
+
 # macOS
 .DS_Store

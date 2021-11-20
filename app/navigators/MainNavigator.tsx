@@ -8,6 +8,7 @@ import {
   AddRoomTitleScreen,
   RecordScreen,
 } from '../screens';
+
 import { MainBottomParams } from './MainBottomParams';
 
 const Tab = createBottomTabNavigator<MainBottomParams>();
