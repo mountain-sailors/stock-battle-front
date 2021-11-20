@@ -1,6 +1,15 @@
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
-import { Box, Flex, VStack, Image, Text, Badge } from 'native-base';
+import {
+  Button,
+  Box,
+  Flex,
+  VStack,
+  Image,
+  Text,
+  Badge,
+  Spacer,
+} from 'native-base';
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 
@@ -22,8 +31,8 @@ const DUMMY_DATA = [
   },
 ];
 
-type WaitingRoomScreenProp = StackScreenProps<RootStackParams, 'CompleteRoom'>;
-const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = () => {
+type WaitingRoomScreenProp = StackScreenProps<RootStackParams, 'WaitingRoom'>;
+const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({ navigation }) => {
   const startDate = '10월 3일 오후 10시 30분';
   return (
     <Layout color="gray.50">
@@ -105,6 +114,13 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = () => {
           </Flex>
         ))}
       </VStack>
+      <Spacer />
+      <Button
+        variant="solid"
+        onPress={() => navigation.navigate('RegisterStock', { stockName: '' })}
+      >
+        주식 등록하기
+      </Button>
     </Layout>
   );
 };
