@@ -1,6 +1,6 @@
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
-import { Box, Button, Input, Spacer, Text } from 'native-base';
+import { Box, Button, Input, Spacer, Text, useToast } from 'native-base';
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 
@@ -8,6 +8,7 @@ type AddRoomTitleScreenProp = StackScreenProps<RootStackParams>;
 const AddRoomTitleScreen: React.FC<AddRoomTitleScreenProp> = ({
   navigation,
 }) => {
+  const toast = useToast();
   const [value, setValue] = React.useState('');
   const handleChange = (text: any) => setValue(text);
   return (
@@ -30,7 +31,17 @@ const AddRoomTitleScreen: React.FC<AddRoomTitleScreenProp> = ({
       <Spacer />
       <Button
         variant="solid"
-        onPress={() => navigation.navigate('AddRoomInfo', { roomName: value })}
+        onPress={() => {
+          if (value === '') {
+            toast.show({
+              status: 'error',
+              title: '방 제목',
+              description: '방 제목을 입력해주세요.',
+            });
+          } else {
+            navigation.navigate('AddRoomInfo', { roomName: value });
+          }
+        }}
       >
         다음
       </Button>
