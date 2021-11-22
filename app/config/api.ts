@@ -5,7 +5,7 @@ export const API_ENDPOINT = 'http://3.38.84.94:3000/api';
 
 type Method = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 export async function callAPI(url: string, method: Method, body: any) {
-  const token = await SecureStore.getItemAsync('token');
+  const token = (await SecureStore.getItemAsync('token')) ?? '';
   const res = await fetch(`${API_ENDPOINT}${url}`, {
     method,
     headers: {
