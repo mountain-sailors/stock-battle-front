@@ -12,28 +12,43 @@ import {
 } from 'native-base';
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
+import { useGetRequest } from '../../config/api';
 
-const DUMMY_DATA = [
-  {
-    userName: '봄감자',
-    ticker: 'ARPPU',
-    amount: 12,
-  },
-  {
-    userName: '여름감자',
-    ticker: '',
-    amount: 0,
-  },
-  {
-    userName: '가을감자',
-    ticker: 'ARPPU',
-    amount: 12,
-  },
-];
+// const DUMMY_DATA = [
+//   {
+//     userName: '봄감자',
+//     ticker: 'ARPPU',
+//     amount: 12,
+//   },
+//   {
+//     userName: '여름감자',
+//     ticker: '',
+//     amount: 0,
+//   },
+//   {
+//     userName: '가을감자',
+//     ticker: 'ARPPU',
+//     amount: 12,
+//   },
+// ];
+type UserStock = {
+  id: number;
+  username: string;
+  ticker: string;
+  amount: number;
+};
 
 type WaitingRoomScreenProp = StackScreenProps<RootStackParams, 'WaitingRoom'>;
-const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({ navigation }) => {
+const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
+  navigation,
+  route,
+}) => {
   const startDate = '10월 3일 오후 10시 30분';
+  const { roomId, username } = route.params;
+  const userStockList = useGetRequest(`/user-stock/${roomId}`).data;
+  if (!userStockList || userStockList.message === 'Internal Server Error')
+    return null;
+
   return (
     <Layout color="gray.50">
       <VStack space="2">
@@ -54,9 +69,9 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({ navigation }) => {
             <Text fontWeight="bold">{startDate}</Text>에 시작됩니다!
           </Text>
         </Flex>
-        {DUMMY_DATA.map((v) => (
+        {userStockList.map((v: UserStock) => (
           <Flex
-            key={v.userName}
+            key={v.username}
             direction="row"
             align="center"
             p="4"
@@ -66,7 +81,7 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({ navigation }) => {
             borderWidth={v.ticker !== '' ? 2 : undefined}
             borderColor={v.ticker !== '' ? '#54E58E' : undefined}
           >
-            {v.ticker !== '' && (
+            {v.ticker !== null && (
               <Badge
                 position="absolute"
                 right={2}
@@ -90,9 +105,9 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({ navigation }) => {
             <Box ml="2">
               <Flex direction="row">
                 <Text fontSize="md" fontWeight="bold" lineHeight="xs">
-                  {v.userName}
+                  {v.username}
                 </Text>
-                {v.userName === '봄감자' && (
+                {v.username === username && (
                   <Badge
                     p="0"
                     px="1"
@@ -106,7 +121,7 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({ navigation }) => {
                 )}
               </Flex>
               <Text mt="1" fontSize="sm">
-                {v.ticker !== ''
+                {v.ticker !== null
                   ? `${v.ticker} ${v.amount}주`
                   : '아직 등록한 주식이 없어요!'}
               </Text>
@@ -117,7 +132,12 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({ navigation }) => {
       <Spacer />
       <Button
         variant="solid"
-        onPress={() => navigation.navigate('RegisterStock', { stockName: '' })}
+        onPress={() =>
+          navigation.navigate('RegisterStock', {
+            stockName: '',
+            roomId: roomId,
+          })
+        }
       >
         주식 등록하기
       </Button>

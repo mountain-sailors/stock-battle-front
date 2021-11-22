@@ -69,7 +69,12 @@ const MainScreen: React.FC<MainSceenProp> = ({ navigation }) => {
                 NOT_STARTED: (
                   <TouchableHighlight
                     key={index}
-                    onPress={() => navigation.navigate('WaitingRoom')}
+                    onPress={() =>
+                      navigation.navigate('WaitingRoom', {
+                        roomId: room.id,
+                        username: userInfo.username,
+                      })
+                    }
                   >
                     <WaitingRoomInfo key={index} room={room} />
                   </TouchableHighlight>
