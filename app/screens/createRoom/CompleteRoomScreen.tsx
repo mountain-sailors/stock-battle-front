@@ -32,7 +32,10 @@ const CompleteRoomScreen: React.FC<CompleteRoomScreenProp> = ({
         <Button variant="outline" onPress={() => navigation.navigate('Main')}>
           초대코드 복사
         </Button>
-        <Button variant="solid" onPress={() => navigation.navigate('Main')}>
+        <Button
+          variant="solid"
+          onPress={() => navigation.reset({ routes: [{ name: 'Main' }] })}
+        >
           메인으로 이동
         </Button>
       </VStack>
