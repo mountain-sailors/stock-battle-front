@@ -58,7 +58,7 @@ const LoginScreen: React.FC<LoginScreenProp> = ({ navigation }) => {
         // 응답 body에 토큰이 있다면 로그인에 성공했다는 뜻이므로 secureStore에 토큰 집어넣고 메인 페이지 이동
         if (res.token) {
           await SecureStore.setItemAsync('token', res.token);
-          navigation.replace('Main');
+          await navigation.reset({ routes: [{ name: 'Main' }] });
         } else if (!res.token) {
           // 없다면 로그인에 실패했으므로 에러 메시지만 출력
           toast.show({
