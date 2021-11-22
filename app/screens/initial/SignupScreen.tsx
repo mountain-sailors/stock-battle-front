@@ -19,10 +19,9 @@ import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 
 const IMAGE_URL = [
-  require('./images/avatar_1.png'),
-  require('./images/avatar_2.png'),
-  require('./images/avatar_3.png'),
-  require('./images/avatar_4.png'),
+  require('../../../assets/images/character1.png'),
+  require('../../../assets/images/character2.png'),
+  require('../../../assets/images/character3.png'),
 ];
 
 type FormData = {
@@ -98,7 +97,7 @@ const SignupScreen: React.FC<SignupScreenProp> = ({ navigation }) => {
           title: '회원가입 성공',
           description: '회원가입이 성공적으로 완료되었습니다.',
         });
-        navigation.navigate('Login');
+        navigation.goBack();
       })
       .catch((err) => {
         console.error(err);
@@ -223,7 +222,7 @@ const SignupScreen: React.FC<SignupScreenProp> = ({ navigation }) => {
               <Avatar
                 key={v}
                 size={formData.avatarId === i + 1 ? '66px' : '58px'}
-                padding={2}
+                padding={1}
                 margin={formData.avatarId === i + 1 ? undefined : '4px'}
                 bg="white"
                 borderWidth={formData.avatarId === i + 1 ? '4px' : undefined}
