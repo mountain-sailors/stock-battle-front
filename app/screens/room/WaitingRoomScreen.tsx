@@ -67,8 +67,11 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
             source={require('./images/icon-light.png')}
             alt="light"
           />
-          <Text ml={2} fontSize="md">
-            <Text fontWeight="bold">{startDate}</Text>에 시작됩니다!
+          <Text ml={2} fontSize="sm">
+            <Text fontSize="sm" fontWeight="bold">
+              {startDate}
+            </Text>
+            에 시작됩니다!
           </Text>
         </Flex>
         {userStockList.map((v: UserStock) => (
@@ -81,7 +84,7 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
             rounded="lg"
             bgColor="white"
             borderWidth={v.ticker !== '' ? 2 : undefined}
-            borderColor={v.ticker !== '' ? '#54E58E' : undefined}
+            borderColor={v.ticker !== '' ? 'primary.400' : undefined}
           >
             {v.ticker !== null && (
               <Badge
@@ -92,7 +95,7 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
                 px="1"
                 ml="1"
                 rounded="sm"
-                bgColor="#54E58E"
+                bgColor="primary.400"
                 _text={{
                   fontSize: 'xs',
                   fontWeight: 'black',
@@ -134,7 +137,7 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
                     px="1"
                     ml="1"
                     rounded="sm"
-                    bgColor="purple.500"
+                    bgColor="secondary.300"
                     _text={{ fontSize: 'xs', color: 'white', lineHeight: 'xs' }}
                   >
                     me

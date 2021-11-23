@@ -171,7 +171,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
               </Box>
               <Text
                 mr={2}
-                fontSize="2xl"
+                fontSize="xl"
                 fontWeight="bold"
                 color="black"
                 alignSelf="flex-start"
@@ -230,7 +230,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
               </Box>
               <Text
                 mr={2}
-                fontSize="2xl"
+                fontSize="xl"
                 fontWeight="bold"
                 color="black"
                 alignSelf="flex-start"
@@ -290,7 +290,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
               </Box>
               <Text
                 mr={2}
-                fontSize="2xl"
+                fontSize="xl"
                 fontWeight="bold"
                 color="black"
                 alignSelf="flex-start"
