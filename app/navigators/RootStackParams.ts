@@ -6,6 +6,8 @@ export type RootStackParams = {
   SignUp: undefined;
   Record: undefined;
   SearchProfile: undefined;
+  AddRoomCode: undefined;
+  EnterRoom: undefined;
   AddRoomTitle: undefined;
   AddRoomInfo: { roomName: string };
   CompleteRoom: { roomCode: string };

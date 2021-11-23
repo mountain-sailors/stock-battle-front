@@ -17,6 +17,8 @@ import {
   RecordScreen,
   SearchProfileScreen,
   MypageScreen,
+  AddRoomCodeScreen,
+  EnterRoomScreen,
 } from '../screens';
 import { RootStackParams } from './RootStackParams';
 import MainNavigator from './MainNavigator';
@@ -34,6 +36,12 @@ const AppNavigator = () => {
         />
         <AppStack.Screen name="Home" component={MainScreen} />
         <AppStack.Screen name="Record" component={RecordScreen} />
+        <AppStack.Screen name="EnterRoom" component={EnterRoomScreen} />
+        <AppStack.Screen
+          name="AddRoomCode"
+          component={AddRoomCodeScreen}
+          options={{ headerTitle: '초대코드 입력', headerTintColor: 'black' }}
+        />
         <AppStack.Screen
           name="SearchProfile"
           component={SearchProfileScreen}
