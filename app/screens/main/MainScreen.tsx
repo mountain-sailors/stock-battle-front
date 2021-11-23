@@ -1,11 +1,11 @@
 import React from 'react';
+import { TouchableHighlight } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
-import { Box, Flex, Text, VStack, Image, Spacer } from 'native-base';
+import { Box, Center, Flex, Text, VStack, Image, Spinner } from 'native-base';
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 // import { Progress } from 'native-base';
 import { useGetRequest } from '../../config/api';
-import { TouchableHighlight } from 'react-native';
 import WaitingRoomInfo from './WaitingRoomInfo';
 import RunningRoomInfo from './RunningRoomInfo';
 import ResultRoomInfo from './ResultRoomInfo';
@@ -20,46 +20,76 @@ type MainSceenProp = StackScreenProps<RootStackParams, 'Main'>;
 const MainScreen: React.FC<MainSceenProp> = ({ navigation }) => {
   const roomList = useGetRequest('/room').data;
   const userInfo = useGetRequest('/me').data;
-  if (!roomList || !userInfo) return null;
 
-  if (roomList.length > 0) {
-    const rankList = roomList
-      .filter((room: any) => room.gameStatus !== 0)
-      .map((room: any) => room.rank);
-
-    const average =
-      rankList.length === 0
-        ? 0
-        : rankList.reduce((acc: number, cur: number) => acc + cur, 0) /
-          rankList.length;
-
+  if (roomList === undefined || userInfo === undefined) {
     return (
       <Layout color="gray.100">
-        <VStack mb="19px">
-          <Box mx={-6} mt={-6} px={6} pb={6} bgColor="white">
-            <Flex direction="column" justify="space-between" mt={10} mb={6}>
-              <Flex direction="row">
-                <Text fontSize="3xl" fontWeight="bold">
-                  {`${userInfo.username}님의\n배틀 현황입니다`}
-                </Text>
-                <Image
-                  mt="7"
-                  ml="2"
-                  size="40px"
-                  source={require('./images/horse.png')}
-                  alt="icon"
-                />
-              </Flex>
-              <Text mt={2} fontSize="xl">
-                평균 등수
-                <Text fontSize="xl" fontWeight="bold" color="secondary.400">
-                  &nbsp; {average}위
-                </Text>
+        <Center flex={1}>
+          <Spinner size="lg" />
+        </Center>
+      </Layout>
+    );
+  }
+
+  const rankList =
+    roomList
+      ?.filter((room: any) => room.gameStatus !== 0)
+      ?.map((room: any) => room.rank) ?? [];
+
+  const average =
+    rankList.length === 0
+      ? 0
+      : rankList.reduce((acc: number, cur: number) => acc + cur, 0) /
+        rankList.length;
+
+  return (
+    <Layout color="gray.100">
+      <VStack mb="19px">
+        <Box mx={-6} mt={-6} px={6} pb={6} bgColor="white">
+          <Flex direction="column" justify="space-between" mt={10} mb={6}>
+            <Flex direction="row" alignItems="baseline">
+              <Text fontSize="3xl" fontWeight="bold">
+                {`${userInfo.username}님의\n배틀 현황입니다`}
               </Text>
+              <Image
+                mt="7"
+                ml="2"
+                size="40px"
+                source={require('./images/horse.png')}
+                alt="icon"
+              />
             </Flex>
-          </Box>
-        </VStack>
-        <Spacer />
+            <Text mt={2} fontSize="lg">
+              {rankList.length === 0 ? (
+                <Text fontSize="lg" fontWeight="bold" color="secondary.400">
+                  첫번째 게임을 시작해 보세요!
+                </Text>
+              ) : (
+                <>
+                  평균 등수
+                  <Text fontSize="lg" fontWeight="bold" color="secondary.400">
+                    &nbsp; {average}위
+                  </Text>
+                </>
+              )}
+            </Text>
+          </Flex>
+        </Box>
+      </VStack>
+      {rankList.length === 0 && (
+        <Center flex={1}>
+          <Image
+            source={require('../../../assets/images/character4.png')}
+            alt="character"
+            width={250}
+            height={100}
+          />
+          <Text mt={2} fontSize="md">
+            하단 방 등록 탭을 눌러보세요!
+          </Text>
+        </Center>
+      )}
+      {rankList.length !== 0 && (
         <Box pb="20px">
           <VStack space="3">
             {roomList.map((room: any, index: number) => {
@@ -99,36 +129,7 @@ const MainScreen: React.FC<MainSceenProp> = ({ navigation }) => {
             })}
           </VStack>
         </Box>
-      </Layout>
-    );
-  }
-
-  return (
-    <Layout color="gray.100">
-      <VStack mb="19px">
-        <Box mx={-6} mt={-6} px={6} pb={6} bgColor="white">
-          <Flex direction="column" justify="space-between" mt={10} mb={6}>
-            <Flex direction="row">
-              <Text fontSize="3xl" fontWeight="bold">
-                {`${userInfo.username}님의\n배틀 현황입니다`}
-              </Text>
-              <Image
-                mt="7"
-                ml="2"
-                size="40px"
-                source={require('./images/horse.png')}
-                alt="icon"
-              />
-            </Flex>
-            <Text mt={2} fontSize="xl">
-              <Text fontSize="xl" fontWeight="bold" color="secondary.400">
-                첫번째 게임을 시작해 보세요!
-              </Text>
-            </Text>
-          </Flex>
-        </Box>
-      </VStack>
-      <Spacer />
+      )}
     </Layout>
   );
 };

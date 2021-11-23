@@ -1,6 +1,6 @@
 export type RootStackParams = {
   Main: undefined;
-  Sample: undefined;
+  Home: undefined;
   Init: undefined;
   Login: undefined;
   SignUp: undefined;
@@ -14,4 +14,5 @@ export type RootStackParams = {
   RunningRoom: undefined;
   RegisterStock: { stockName: string; roomId: number };
   SearchStock: { roomId: number };
+  Mypage: undefined;
 };
