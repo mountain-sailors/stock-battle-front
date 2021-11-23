@@ -86,7 +86,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                     <Circle size="55px" bg="#fff"></Circle>
                     <Box>
                       <Image
-                        source={require('./images/avatar.png')}
+                        source={require('../../../assets/images/character1.png')}
                         size={10}
                         alt="avatar"
                       />
@@ -108,7 +108,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                 <Box w="33.3%">
                   <Flex direction="column" justify="center" align="center">
                     <Text fontSize="2xl" color="white" fontWeight="bold">
-                      12
+                      3
                     </Text>
                     <Text fontSize="sm" color="white">
                       참여 게임수
@@ -118,7 +118,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                 <Box w="33.3%">
                   <Flex direction="column" justify="center" align="center">
                     <Text fontSize="2xl" color="white" fontWeight="bold">
-                      4.5
+                      2
                     </Text>
                     <Text fontSize="sm" color="white">
                       평균 등수
@@ -128,7 +128,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                 <Box w="33.3%">
                   <Flex direction="column" justify="center" align="center">
                     <Text fontSize="2xl" color="white" fontWeight="bold">
-                      3
+                      1
                     </Text>
                     <Text fontSize="sm" color="white">
                       1등 횟수
@@ -171,16 +171,16 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
               </Box>
               <Text
                 mr={2}
-                fontSize="2xl"
+                fontSize="xl"
                 fontWeight="bold"
                 color="black"
                 alignSelf="flex-start"
                 mt="-2px"
               >
-                1위 치킨빵 🐤
+                1위 치킨빵🍗 
               </Text>
               <Text fontSize="xs" color="#828282">
-                2021.10.03 ~ 2021.10.16
+                2021.10.03 ~ 2021.10.10
               </Text>
             </Flex>
             <Spacer />
@@ -199,7 +199,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
               <Spacer />
               <Box w="50%">
                 <Flex direction="column" justify="flex-end" align="flex-end">
-                  <Text fontSize="md">24.2%</Text>
+                  <Text fontSize="md">6.61%</Text>
                   <Text fontSize="md">APPL</Text>
                   <Text fontSize="md">박주마, 김주주, 정감자</Text>
                 </Flex>
@@ -230,7 +230,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
               </Box>
               <Text
                 mr={2}
-                fontSize="2xl"
+                fontSize="xl"
                 fontWeight="bold"
                 color="black"
                 alignSelf="flex-start"
@@ -239,14 +239,14 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                 담주 회식내기
               </Text>
               <Text fontSize="xs" color="#828282">
-                2021.10.03 ~ 2021.10.16
+                2021.10.06 ~ 2021.10.13
               </Text>
             </Flex>
             <Spacer />
             <Flex direction="row" justify="space-between" mt={5}>
               <Box w="50%">
                 <Text fontSize="md" color="#828282">
-                  수익률
+                  수익
                 </Text>
                 <Text fontSize="md" color="#828282">
                   참여종목
@@ -258,9 +258,9 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
               <Spacer />
               <Box w="50%">
                 <Flex direction="column" justify="flex-end" align="flex-end">
-                  <Text fontSize="md">24.2%</Text>
-                  <Text fontSize="md">APPL</Text>
-                  <Text fontSize="md">박주마, 김주주, 정감자</Text>
+                  <Text fontSize="md">+$77.88</Text>
+                  <Text fontSize="md">META</Text>
+                  <Text fontSize="md">박주마, 임코코, 정감자</Text>
                 </Flex>
               </Box>
             </Flex>
@@ -290,23 +290,23 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
               </Box>
               <Text
                 mr={2}
-                fontSize="2xl"
+                fontSize="xl"
                 fontWeight="bold"
                 color="black"
                 alignSelf="flex-start"
                 mt="-2px"
               >
-                주식 스터디방
+                주식 스터디팟
               </Text>
               <Text fontSize="xs" color="#828282">
-                2021.10.03 ~ 2021.10.16
+                2021.10.10 ~ 2021.10.17
               </Text>
             </Flex>
             <Spacer />
             <Flex direction="row" justify="space-between" mt={5}>
               <Box w="50%">
                 <Text fontSize="md" color="#828282">
-                  수익률
+                  변동폭
                 </Text>
                 <Text fontSize="md" color="#828282">
                   참여종목
@@ -318,9 +318,9 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
               <Spacer />
               <Box w="50%">
                 <Flex direction="column" justify="flex-end" align="flex-end">
-                  <Text fontSize="md">24.2%</Text>
-                  <Text fontSize="md">APPL</Text>
-                  <Text fontSize="md">박주마, 김주주, 정감자</Text>
+                  <Text fontSize="md">$10.25</Text>
+                  <Text fontSize="md">BYND</Text>
+                  <Text fontSize="md">박주마, 강치치</Text>
                 </Flex>
               </Box>
             </Flex>

@@ -112,7 +112,9 @@ const MainScreen: React.FC<MainSceenProp> = ({ navigation }) => {
                 IN_PROGRESS: (
                   <TouchableHighlight
                     key={index}
-                    onPress={() => navigation.navigate('RunningRoom')}
+                    onPress={() =>
+                      navigation.navigate('RunningRoom', { roomId: room.id })
+                    }
                   >
                     <RunningRoomInfo key={index} room={room} />
                   </TouchableHighlight>
