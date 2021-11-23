@@ -76,7 +76,7 @@ const MainScreen: React.FC<MainSceenProp> = ({ navigation }) => {
           </Flex>
         </Box>
       </VStack>
-      {rankList.length === 0 && (
+      {roomList.length === 0 && (
         <Center flex={1}>
           <Image
             source={require('../../../assets/images/character4.png')}
@@ -89,7 +89,7 @@ const MainScreen: React.FC<MainSceenProp> = ({ navigation }) => {
           </Text>
         </Center>
       )}
-      {rankList.length !== 0 && (
+      {roomList.length !== 0 && (
         <Box pb="20px">
           <VStack space="3">
             {roomList.map((room: any, index: number) => {
