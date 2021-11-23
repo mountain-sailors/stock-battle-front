@@ -13,7 +13,6 @@ import {
   Progress,
   VStack,
   Heading,
-  Button,
   Spinner,
   Avatar,
 } from 'native-base';
@@ -27,9 +26,6 @@ import {
   getRemainingDay,
 } from '../../config/utils';
 import { IMAGE_URL } from '../../config/consts';
-
-const PERIOD_DOMAIN = ['today', 'total'] as const;
-type Period = typeof PERIOD_DOMAIN[number];
 
 const WEBVIEW_ENDPOINT = 'https://jumajuma.netlify.app';
 const DASHBOARD_ENDPOINT = 'https://stock-battle.p-e.kr/api/room/dashboard';
@@ -47,7 +43,6 @@ type RunningRoomScreenProp = StackScreenProps<RootStackParams, 'RunningRoom'>;
 const RunningRoomScreen: React.FC<RunningRoomScreenProp> = ({ route }) => {
   const { roomId } = route.params;
   const [data, setData] = React.useState<DashboardData[]>();
-  const [period, setPeriod] = React.useState<Period>('today');
   const [token, setToken] = React.useState('');
   const meData = useGetRequest(`/me`).data;
   const userStockData = useGetRequest(`/user-stock/${roomId}`).data;
@@ -55,14 +50,6 @@ const RunningRoomScreen: React.FC<RunningRoomScreenProp> = ({ route }) => {
   const playerData = useGetRequest(`/player/${roomId}`).data;
   const currentRoomInfo = roomData.find((v: any) => v.id === roomId);
   const myData = data?.find((v) => v.userId === meData.userId);
-
-  if (!roomData || !playerData || !userStockData) {
-    return (
-      <Center flex={1}>
-        <Spinner size="lg" />
-      </Center>
-    );
-  }
   const remainingDay = getRemainingDay(
     currentRoomInfo.startDate,
     currentRoomInfo.endDate,
@@ -82,7 +69,6 @@ const RunningRoomScreen: React.FC<RunningRoomScreenProp> = ({ route }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-
       const listener: EventSourceListener = (event) => {
         if (event.type === 'message') {
           const res = JSON.parse(event.data ?? '');
@@ -119,6 +105,14 @@ const RunningRoomScreen: React.FC<RunningRoomScreenProp> = ({ route }) => {
       };
     }
   }, [token]);
+
+  if (!roomData || !playerData || !userStockData || !meData) {
+    return (
+      <Center flex={1}>
+        <Spinner size="lg" />
+      </Center>
+    );
+  }
 
   return (
     <Layout>
@@ -197,21 +191,7 @@ const RunningRoomScreen: React.FC<RunningRoomScreenProp> = ({ route }) => {
               source={{ uri: `${WEBVIEW_ENDPOINT}/?roomid=${roomId}` }}
             />
           </Box>
-          <HStack space={2}>
-            {PERIOD_DOMAIN.map((v) => (
-              <Button
-                key={v}
-                variant={period === v ? 'solid' : 'ghost'}
-                flex={1}
-                size="md"
-                p={1}
-                onPress={() => setPeriod(v)}
-              >
-                {v === 'today' ? '오늘 구간' : '전체 구간'}
-              </Button>
-            ))}
-          </HStack>
-          <VStack mt={8} space={4}>
+          <VStack mt={4} space={4}>
             {data?.map((user, idx: number) => (
               <HStack key={user.userId} space={3} alignItems="center">
                 <Heading fontSize="md" color={user.color}>
