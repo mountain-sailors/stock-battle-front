@@ -1,7 +1,16 @@
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 import { Clipboard } from 'react-native';
-import { Button, Center, Flex, Text, VStack, Image, Spacer } from 'native-base';
+import {
+  Button,
+  Center,
+  Flex,
+  Text,
+  VStack,
+  Image,
+  Spacer,
+  useToast,
+} from 'native-base';
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 
@@ -11,14 +20,24 @@ const CompleteRoomScreen: React.FC<CompleteRoomScreenProp> = ({
   route,
 }) => {
   const { roomCode } = route.params;
-  const [copyText, setCopyText] = React.useState('초대코드 복사');
+  const toast = useToast();
 
   const copyToClipBoard = async (code: string) => {
     Clipboard.setString(code);
     try {
       await Clipboard.getString();
-      setCopyText('초대코드가 복사되었습니다.');
-    } catch (err) {}
+      toast.show({
+        status: 'success',
+        title: '복사 성공',
+        description: '초대코드가 복사되었습니다.',
+      });
+    } catch {
+      toast.show({
+        status: 'error',
+        title: '에러',
+        description: '초대코드 복사 중 문제가 발생했습니다.',
+      });
+    }
   };
 
   return (
@@ -41,7 +60,7 @@ const CompleteRoomScreen: React.FC<CompleteRoomScreenProp> = ({
       <Spacer />
       <VStack space="2">
         <Button variant="outline" onPress={() => copyToClipBoard(roomCode)}>
-          {copyText}
+          초대코드 복사
         </Button>
         <Button
           variant="solid"
