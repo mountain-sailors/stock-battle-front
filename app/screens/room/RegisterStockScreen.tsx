@@ -14,6 +14,7 @@ import {
 
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
+import { callAPI } from '../../config/api';
 
 type RegisterStockScreenProp = StackScreenProps<
   RootStackParams,
@@ -23,9 +24,25 @@ const RegisterStockScreen: React.FC<RegisterStockScreenProp> = ({
   route,
   navigation,
 }) => {
-  const { stockName } = route.params;
+  const { stockName, roomId } = route.params;
+
   const [amount, setAmount] = React.useState('');
-  const handleChange = (event: any) => setAmount(event.target.amount);
+  const handleChange = (text: string) => setAmount(text);
+
+  const registerStock = (id: number, ticker: string, stockAmount: number) => {
+    callAPI(`/user-stock`, 'POST', {
+      roomId: id,
+      ticker,
+      amount: stockAmount,
+    })
+      .then((res) => {
+        if (res.status !== 200) throw new Error(res.status.toString());
+        navigation.goBack();
+      })
+      .catch((err) => {
+        console.error('Error: ', err);
+      });
+  };
   return (
     <Layout>
       <VStack space="4">
@@ -33,7 +50,7 @@ const RegisterStockScreen: React.FC<RegisterStockScreenProp> = ({
           <Text fontSize="md" fontWeight="bold">
             주식 종류
           </Text>
-          <Pressable onPress={() => navigation.push('SearchStock')}>
+          <Pressable onPress={() => navigation.push('SearchStock', { roomId })}>
             <Flex
               mt={2}
               flexDirection="row"
@@ -61,12 +78,11 @@ const RegisterStockScreen: React.FC<RegisterStockScreenProp> = ({
             <Spacer />
             <Box rounded="lg" bgColor="gray.100">
               <Input
-                type="number"
                 w={32}
                 variant="filled"
                 value={amount}
                 placeholder="구매할 수량"
-                onChange={handleChange}
+                onChangeText={handleChange}
                 textAlign="right"
                 keyboardType="number-pad"
               />
@@ -81,7 +97,12 @@ const RegisterStockScreen: React.FC<RegisterStockScreenProp> = ({
         </Box>
       </VStack>
       <Spacer />
-      <Button variant="solid" onPress={() => navigation.goBack()}>
+      <Button
+        variant="solid"
+        onPress={() => {
+          registerStock(roomId, stockName, +amount);
+        }}
+      >
         등록하기
       </Button>
     </Layout>
