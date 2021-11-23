@@ -1,6 +1,9 @@
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
+import { format, parse } from 'date-fns';
+import ko from 'date-fns/locale/ko';
 import {
+  Avatar,
   Button,
   Box,
   Flex,
@@ -10,11 +13,11 @@ import {
   Badge,
   Spacer,
 } from 'native-base';
+
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 import { useGetRequest } from '../../config/api';
-import { format, parse } from 'date-fns';
-import ko from 'date-fns/locale/ko';
+import { IMAGE_URL } from '../../config/consts';
 
 type UserStock = {
   id: number;
@@ -31,11 +34,14 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
   const { roomId, username } = route.params;
   const userStockList = useGetRequest(`/user-stock/${roomId}`).data;
   const roomData = useGetRequest('/room').data;
+  const playerData = useGetRequest(`/player/${roomId}`).data;
   if (
     !userStockList ||
     userStockList.message === 'Internal Server Error' ||
     !roomData ||
-    roomData.message === 'Internal Server Error'
+    roomData.message === 'Internal Server Error' ||
+    !playerData ||
+    playerData.message === 'Internal Server Error'
   )
     return null;
   const currentRoomInfo = roomData.find((v: any) => v.id === roomId);
@@ -97,7 +103,26 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
                 ready!
               </Badge>
             )}
-            <Box w="12" h="12" rounded="lg" bgColor="gray.100" />
+            <Avatar
+              size="50px"
+              bg="gray.50"
+              padding={1}
+              source={
+                IMAGE_URL[
+                  Number(
+                    playerData.find((k: { id: number }) => k.id === v.id)
+                      .avatar,
+                  ) > 0
+                    ? Number(
+                        playerData.find((k: { id: number }) => k.id === v.id)
+                          .avatar,
+                      ) - 1
+                    : 0
+                ]
+              }
+            >
+              avatar
+            </Avatar>
             <Box ml="2">
               <Flex direction="row">
                 <Text fontSize="md" fontWeight="bold" lineHeight="xs">
