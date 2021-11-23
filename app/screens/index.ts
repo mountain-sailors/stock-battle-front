@@ -13,3 +13,5 @@ export { default as ResultRoomScreen } from './room/ResultRoomScreen';
 export { default as RunningRoomScreen } from './room/RunningRoomScreen';
 export { default as RegisterStockScreen } from './room/RegisterStockScreen';
 export { default as SearchStockScreen } from './room/SearchStockScreen';
+export { default as AddRoomCodeScreen } from './enterRoom/AddRoomCodeScreen';
+export { default as EnterRoomScreen } from './enterRoom/EnterRoomScreen';

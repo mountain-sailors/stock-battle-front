@@ -5,8 +5,8 @@ import theme from '../config/theme';
 import {
   MypageScreen,
   MainScreen,
-  AddRoomTitleScreen,
   RecordScreen,
+  EnterRoomScreen,
 } from '../screens';
 
 import { MainBottomParams } from './MainBottomParams';
@@ -22,8 +22,8 @@ interface RouteInfo {
 const routes: RouteInfo[] = [
   { name: 'Home', component: MainScreen, title: '홈', icon: 'home' },
   {
-    name: 'CreateRoom',
-    component: AddRoomTitleScreen,
+    name: 'EnterRoom',
+    component: EnterRoomScreen,
     title: '방 등록',
     icon: 'plussquareo',
   },
