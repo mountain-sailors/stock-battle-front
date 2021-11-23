@@ -50,7 +50,7 @@ const MainNavigator = () => {
             />
           );
         },
-        tabBarActiveTintColor: theme.colors.gray[200],
+        tabBarActiveTintColor: theme.colors.gray[800],
         tabBarInactiveTintColor: theme.colors.gray[400],
       })}
     >
