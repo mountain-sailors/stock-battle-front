@@ -11,7 +11,6 @@ const Layout: React.FC<LayoutProps> = ({ children, color }) => {
         flexGrow: 1,
         position: 'relative',
         p: 6,
-        pb: 10,
         bgColor: color ?? 'white',
       }}
     >

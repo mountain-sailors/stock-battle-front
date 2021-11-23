@@ -14,7 +14,7 @@ const AddRoomTitleScreen: React.FC<AddRoomTitleScreenProp> = ({
   return (
     <Layout>
       <Box mt="32">
-        <Text fontSize="xl" fontWeight="bold">
+        <Text fontSize="2xl" fontWeight="bold">
           {`7일 동안\n친구들과 함께\n내가 산 주식을 응원해 보세요!`}
         </Text>
         <Input

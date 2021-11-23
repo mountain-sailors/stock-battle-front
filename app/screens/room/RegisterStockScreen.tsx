@@ -81,12 +81,7 @@ const RegisterStockScreen: React.FC<RegisterStockScreenProp> = ({
         </Box>
       </VStack>
       <Spacer />
-      <Button
-        variant="solid"
-        onPress={() =>
-          navigation.navigate('CompleteRoom', { roomCode: '123456' })
-        }
-      >
+      <Button variant="solid" onPress={() => navigation.goBack()}>
         등록하기
       </Button>
     </Layout>

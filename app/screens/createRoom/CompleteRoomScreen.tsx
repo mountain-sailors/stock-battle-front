@@ -43,7 +43,10 @@ const CompleteRoomScreen: React.FC<CompleteRoomScreenProp> = ({
         <Button variant="outline" onPress={() => copyToClipBoard(roomCode)}>
           {copyText}
         </Button>
-        <Button variant="solid" onPress={() => navigation.navigate('Main')}>
+        <Button
+          variant="solid"
+          onPress={() => navigation.reset({ routes: [{ name: 'Main' }] })}
+        >
           메인으로 이동
         </Button>
       </VStack>
