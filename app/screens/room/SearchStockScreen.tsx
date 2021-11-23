@@ -6,27 +6,6 @@ import { Layout, SearchInput } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 import { useGetRequest } from '../../config/api';
 
-// const DUMMY_DATA = [
-//   {
-//     name: 'ARPPU',
-//     value: 790.2,
-//     rate: 500,
-//     ratePer: 0.6,
-//   },
-//   {
-//     name: 'APPLE',
-//     value: 1300,
-//     rate: -500,
-//     ratePer: 0.6,
-//   },
-//   {
-//     name: 'QQQ',
-//     value: 790.2,
-//     rate: 500,
-//     ratePer: 0.6,
-//   },
-// ];
-
 type Stock = {
   id: number;
   price: number;
@@ -78,16 +57,6 @@ const SearchStockScreen: React.FC<SearchStockScreenProp> = ({
                 <Heading flex={1} fontSize="md" textAlign="right" color="black">
                   {`$${v.price}`}
                 </Heading>
-                {/* <Text
-                  fontSize="xs"
-                  fontWeight="bold"
-                  textAlign="right"
-                  color={getColorBySign(v.rate)}
-                >
-                  {Math.sign(v.rate) === 1 ? `+${v.rate}` : v.rate}
-                  &nbsp;
-                  {`(${v.ratePer}%)`}
-                </Text> */}
               </Box>
             </HStack>
           </Pressable>

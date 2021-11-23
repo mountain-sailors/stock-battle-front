@@ -78,7 +78,6 @@ const RegisterStockScreen: React.FC<RegisterStockScreenProp> = ({
             <Spacer />
             <Box rounded="lg" bgColor="gray.100">
               <Input
-                // type="number"
                 w={32}
                 variant="filled"
                 value={amount}

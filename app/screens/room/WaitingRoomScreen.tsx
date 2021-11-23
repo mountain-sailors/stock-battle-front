@@ -13,24 +13,9 @@ import {
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 import { useGetRequest } from '../../config/api';
+import { format, parse } from 'date-fns';
+import ko from 'date-fns/locale/ko';
 
-// const DUMMY_DATA = [
-//   {
-//     userName: '봄감자',
-//     ticker: 'ARPPU',
-//     amount: 12,
-//   },
-//   {
-//     userName: '여름감자',
-//     ticker: '',
-//     amount: 0,
-//   },
-//   {
-//     userName: '가을감자',
-//     ticker: 'ARPPU',
-//     amount: 12,
-//   },
-// ];
 type UserStock = {
   id: number;
   username: string;
@@ -43,11 +28,22 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
   navigation,
   route,
 }) => {
-  const startDate = '10월 3일 오후 10시 30분';
   const { roomId, username } = route.params;
   const userStockList = useGetRequest(`/user-stock/${roomId}`).data;
-  if (!userStockList || userStockList.message === 'Internal Server Error')
+  const roomData = useGetRequest('/room').data;
+  if (
+    !userStockList ||
+    userStockList.message === 'Internal Server Error' ||
+    !roomData ||
+    roomData.message === 'Internal Server Error'
+  )
     return null;
+  const currentRoomInfo = roomData.find((v: any) => v.id === roomId);
+  const startDate = format(
+    parse(currentRoomInfo.startDate.split('T')[0], 'yyyy-MM-dd', new Date()),
+    'yyyy년 MM월 dd일 EEE요일',
+    { locale: ko },
+  );
 
   return (
     <Layout color="gray.50">
