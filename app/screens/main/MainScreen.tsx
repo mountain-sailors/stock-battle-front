@@ -68,7 +68,7 @@ const MainScreen: React.FC<MainSceenProp> = ({ navigation }) => {
                 <>
                   평균 등수
                   <Text fontSize="lg" fontWeight="bold" color="secondary.400">
-                    &nbsp; {average}위
+                    &nbsp; {Number.isNaN(average) ? 0 : average}위
                   </Text>
                 </>
               )}
