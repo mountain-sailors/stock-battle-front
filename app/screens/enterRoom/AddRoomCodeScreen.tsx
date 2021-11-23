@@ -8,18 +8,39 @@ import { callAPI } from '../../config/api';
 type AddRoomCodeScreenProp = StackScreenProps<RootStackParams>;
 const AddRoomCodeScreen: React.FC<AddRoomCodeScreenProp> = ({ navigation }) => {
   const toast = useToast();
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = React.useState();
   const handleChange = (text: any) => setValue(text);
 
   const enterRoomCode = (code: any) => {
-    callAPI('/room', 'POST', code)
+    callAPI('/room/invitation', 'POST', {
+      invitationCode: code,
+    })
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        navigation.navigate('Main');
+        navigation.navigate('Home');
+        if (res === 'Success') {
+          toast.show({
+            status: 'success',
+            title: '방 등록 성공',
+            description: '방 등록이 완료되었습니다.',
+          });
+          navigation.navigate('Home');
+        } else {
+          toast.show({
+            status: 'error',
+            title: '에러 발생',
+            description: res,
+          });
+        }
       })
       .catch((err) => {
-        console.error('Error: ', err);
+        toast.show({
+          status: 'error',
+          title: '에러 발생',
+          description: err,
+        });
+        navigation.navigate('Home');
       });
   };
 
