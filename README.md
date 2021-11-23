@@ -1,4 +1,5 @@
 ## Stock battle front
+주마주마 앱의 프론트 저장소입니다
 
 ### how to run
 ```bash
