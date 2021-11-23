@@ -11,7 +11,7 @@ export type RootStackParams = {
   CompleteRoom: { roomCode: string };
   WaitingRoom: { roomId: number; username: string };
   ResultRoom: undefined;
-  RunningRoom: undefined;
+  RunningRoom: { roomId: number };
   RegisterStock: { stockName: string; roomId: number };
   SearchStock: { roomId: number };
   Mypage: undefined;
