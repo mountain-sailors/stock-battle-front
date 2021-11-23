@@ -37,10 +37,6 @@ const RegisterStockScreen: React.FC<RegisterStockScreenProp> = ({
     })
       .then((res) => {
         if (res.status !== 200) throw new Error(res.status.toString());
-        return res.json();
-      })
-      .then((res) => {
-        console.log(res);
         navigation.goBack();
       })
       .catch((err) => {

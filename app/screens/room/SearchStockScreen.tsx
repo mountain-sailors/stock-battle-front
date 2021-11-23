@@ -49,7 +49,7 @@ const SearchStockScreen: React.FC<SearchStockScreenProp> = ({
   // };
   const stockList = useGetRequest('/stock').data;
   if (!stockList) return null;
-  console.log(stockList);
+
   return (
     <Layout>
       <SearchInput
