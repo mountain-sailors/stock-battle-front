@@ -17,15 +17,14 @@ const AddRoomCodeScreen: React.FC<AddRoomCodeScreenProp> = ({ navigation }) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
-        navigation.navigate('Home');
+        navigation.reset({ routes: [{ name: 'Main' }] });
         if (res === 'Success') {
           toast.show({
             status: 'success',
             title: '방 등록 성공',
             description: '방 등록이 완료되었습니다.',
           });
-          navigation.navigate('Home');
+          navigation.reset({ routes: [{ name: 'Main' }] });
         } else {
           toast.show({
             status: 'error',
@@ -40,7 +39,7 @@ const AddRoomCodeScreen: React.FC<AddRoomCodeScreenProp> = ({ navigation }) => {
           title: '에러 발생',
           description: err,
         });
-        navigation.navigate('Home');
+        navigation.reset({ routes: [{ name: 'Main' }] });
       });
   };
 
