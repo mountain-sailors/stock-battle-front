@@ -13,32 +13,46 @@ import {
 } from 'native-base';
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
+import { callAPI } from '../../config/api';
+import { IMAGE_URL } from '../../config/consts';
 
 const DUMMY_DATA = [
   {
-    userName: '아무개',
-    ticker: 'ARPPU',
+    userName: 'admin',
+    ticker: 'APPL',
     value: 12,
+    avatar: IMAGE_URL[0],
   },
   {
-    userName: '아무개',
-    ticker: 'QQQ',
-    value: -12.5,
+    userName: '김주주',
+    ticker: 'BYND',
+    value: 5.5,
+    avatar: IMAGE_URL[1],
   },
   {
-    userName: '아무개',
-    ticker: 'ARPPU',
-    value: 12,
-  },
-  {
-    userName: '아무개',
-    ticker: 'ARPPU',
-    value: 12,
+    userName: '정감자',
+    ticker: 'TSLA',
+    value: -1.3,
+    avatar: IMAGE_URL[2],
   },
 ];
 
 type ResultRoomScreenProp = StackScreenProps<RootStackParams, 'CompleteRoom'>;
-const ResultRoomScreen: React.FC<ResultRoomScreenProp> = () => {
+const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
+  const { roomId } = route.params;
+
+  React.useEffect(() => {
+    callAPI(`/game-history/room/${roomId}`, 'GET', undefined)
+      .then((res) => res.json())
+      .then((res) => {
+        // WHAT TO DO with res
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error('Error: ', err);
+      });
+  });
+
   return (
     <Layout>
       <Flex align="center" mt={2}>
@@ -63,7 +77,7 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = () => {
         <Spacer />
         <Flex align="center">
           <Text fontSize="lg" fontWeight="bold" color="white">
-            4.5%
+            12%
           </Text>
           <Text fontSize="sm" color="gray.100">
             최종 수익률
@@ -72,7 +86,7 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = () => {
         <Spacer />
         <Flex align="center">
           <Text fontSize="lg" fontWeight="bold" color="white">
-            ARPPU
+            APPL
           </Text>
           <Text fontSize="sm" color="gray.100">
             종목
@@ -93,7 +107,7 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = () => {
             <Box _text={{ fontSize: 'md', fontWeight: 'bold' }}>
               {index + 1}
             </Box>
-            <Avatar bg="gray.100" rounded="lg" />
+            <Avatar bg="gray.100" rounded="lg" source={item.avatar} p={2} />
             <Box flex={1} _text={{ fontSize: 'md', fontWeight: 'bold' }}>
               {item.userName}
             </Box>
