@@ -122,7 +122,9 @@ const MainScreen: React.FC<MainSceenProp> = ({ navigation }) => {
                 COMPLETED: (
                   <TouchableHighlight
                     key={index}
-                    onPress={() => navigation.navigate('ResultRoom')}
+                    onPress={() =>
+                      navigation.navigate('ResultRoom', { roomId: room.id })
+                    }
                   >
                     <ResultRoomInfo key={index} room={room} />
                   </TouchableHighlight>
