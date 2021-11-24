@@ -13,9 +13,13 @@ import {
 } from 'native-base';
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
+import { useGetRequest } from '../../config/api';
+import { IMAGE_URL } from '../../config/consts';
 
 type RecordScreenProp = StackScreenProps<RootStackParams, 'Record'>;
 const RecordScreen: React.FC<RecordScreenProp> = () => {
+  const meData = useGetRequest(`/me`).data;
+  if (meData === undefined) return null;
   return (
     <Layout>
       <VStack m={0} mt={5}>
@@ -86,7 +90,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                     <Circle size="55px" bg="#fff"></Circle>
                     <Box>
                       <Image
-                        source={require('../../../assets/images/character1.png')}
+                        source={IMAGE_URL[meData.avatar - 1]}
                         size={10}
                         alt="avatar"
                       />
@@ -99,9 +103,9 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                     <Text color="#54E68E">50%</Text>
                   </Flex>
                   <Text fontSize="2xl" color="white" fontWeight="bold">
-                    박주마
+                    {meData.username}
                   </Text>
-                  <Text color="#828282">juma12345</Text>
+                  <Text color="#828282">{meData.userEmail}</Text>
                 </Flex>
               </Flex>
               <Flex direction="row" justify="space-between" mt={5}>
@@ -201,7 +205,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                 <Flex direction="column" justify="flex-end" align="flex-end">
                   <Text fontSize="md">6.61%</Text>
                   <Text fontSize="md">APPL</Text>
-                  <Text fontSize="md">박주마, 김주주, 정감자</Text>
+                  <Text fontSize="md">admin, 김주주, 정감자</Text>
                 </Flex>
               </Box>
             </Flex>
@@ -260,7 +264,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                 <Flex direction="column" justify="flex-end" align="flex-end">
                   <Text fontSize="md">+$77.88</Text>
                   <Text fontSize="md">META</Text>
-                  <Text fontSize="md">박주마, 임코코, 정감자</Text>
+                  <Text fontSize="md">admin, 임코코, 정감자</Text>
                 </Flex>
               </Box>
             </Flex>
@@ -320,7 +324,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                 <Flex direction="column" justify="flex-end" align="flex-end">
                   <Text fontSize="md">$10.25</Text>
                   <Text fontSize="md">BYND</Text>
-                  <Text fontSize="md">박주마, 강치치</Text>
+                  <Text fontSize="md">admin, 강치치</Text>
                 </Flex>
               </Box>
             </Flex>
