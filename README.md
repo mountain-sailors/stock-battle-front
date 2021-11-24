@@ -3,8 +3,8 @@
 
 ### how to run
 ```bash
-$ npm i # install dependency
-$ npm run start
+$ yarn install # install dependency
+$ yarn start
 ```
 
 ### convention

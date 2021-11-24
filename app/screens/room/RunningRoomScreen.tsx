@@ -104,7 +104,7 @@ const RunningRoomScreen: React.FC<RunningRoomScreenProp> = ({ route }) => {
         eventSource.close();
       };
     }
-  }, [token]);
+  }, [token, playerData, userStockData]);
 
   if (!roomData || !playerData || !userStockData || !meData) {
     return (

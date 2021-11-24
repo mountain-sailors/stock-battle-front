@@ -11,16 +11,9 @@ const ResultRoomInfo: React.FC<ResultRoomInfoProp> = ({ room }) => {
   const dateDiff = moment(room.endDate).fromNow();
   const profitType = room.winCondition === 0 ? '수익률' : '총 수익';
   return (
-    <Box
-      w="100%"
-      bg="#fff"
-      rounded="lg"
-      p="4"
-      borderWidth="2"
-      borderColor="primary.400"
-    >
+    <Box w="100%" bg="#fff" rounded="lg" p="4">
       <Box>
-        <Box ml="40%" w="63px" h="24px" bg="#000" rounded="3">
+        <Box ml="80%" w="63px" h="24px" bg="#000" rounded="3">
           <Flex h="100%" direction="column" align="center" justify="center">
             <Text fontSize="xs" fontWeight="bold" color="#fff">
               최종 {room.rank}위
@@ -28,7 +21,7 @@ const ResultRoomInfo: React.FC<ResultRoomInfoProp> = ({ room }) => {
           </Flex>
         </Box>
         <Box
-          ml="48%"
+          ml="95%"
           style={{
             width: 0,
             height: 0,
@@ -44,7 +37,7 @@ const ResultRoomInfo: React.FC<ResultRoomInfoProp> = ({ room }) => {
           }}
         ></Box>
         <Image
-          ml="45%"
+          ml="90%"
           size="27px"
           source={require('./images/horse.png')}
           alt="icon"
@@ -53,7 +46,7 @@ const ResultRoomInfo: React.FC<ResultRoomInfoProp> = ({ room }) => {
           <Box w="100%" mt="1">
             <Progress
               h={1}
-              value={55}
+              value={100}
               bgColor="gray.100"
               _filledTrack={{ bgColor: 'primary.400', rounded: 'lg' }}
             />
