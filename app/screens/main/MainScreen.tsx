@@ -33,14 +33,16 @@ const MainScreen: React.FC<MainSceenProp> = ({ navigation }) => {
 
   const rankList =
     roomList
-      ?.filter((room: any) => room.gameStatus !== 0)
+      ?.filter((room: any) => room.gameStatus !== 0 && room.gameStatus !== 3)
       ?.map((room: any) => room.rank) ?? [];
 
   const average =
     rankList.length === 0
       ? 0
-      : rankList.reduce((acc: number, cur: number) => acc + cur, 0) /
-        rankList.length;
+      : Math.round(
+          rankList.reduce((acc: number, cur: number) => acc + cur, 0) /
+            rankList.length,
+        );
 
   return (
     <Layout color="gray.100">
