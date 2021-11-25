@@ -33,7 +33,7 @@ const WIN_CONDITIONS = [
     typeNumber: 1,
     typeString: WIN_TYPE[1],
     iconName: require('./images/icon-wave.png'),
-    title: '변동률',
+    title: '변동폭',
     description: '제일 변동이 큰 사람이 우승합니다.',
   },
   {
@@ -41,7 +41,7 @@ const WIN_CONDITIONS = [
     typeString: WIN_TYPE[2],
     iconName: require('./images/icon-moneybag.png'),
     title: '최다 수익',
-    description: '제일 수익률이 큰 사람이 우승합니다.',
+    description: '제일 수익을 많이 올린 사람이 우승합니다.',
   },
 ];
 
