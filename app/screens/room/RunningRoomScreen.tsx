@@ -188,7 +188,9 @@ const RunningRoomScreen: React.FC<RunningRoomScreenProp> = ({ route }) => {
           {/* Web view */}
           <Box h="350px" overflow="hidden">
             <WebView
-              source={{ uri: `${WEBVIEW_ENDPOINT}/?roomid=${roomId}` }}
+              source={{
+                uri: `${WEBVIEW_ENDPOINT}/?roomid=${roomId}&token=${token}`,
+              }}
             />
           </Box>
           <VStack mt={4} space={4}>
