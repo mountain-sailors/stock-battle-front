@@ -72,14 +72,12 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({
     callAPI('/room', 'POST', formField)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         navigation.navigate('CompleteRoom', { roomCode: res.invitationCode });
       })
       .catch((err) => {
         console.error('Error: ', err);
       });
   };
-  console.log(formField);
   return (
     <Layout>
       <VStack space="4">
