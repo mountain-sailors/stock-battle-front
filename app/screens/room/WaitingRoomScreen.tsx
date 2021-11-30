@@ -25,6 +25,12 @@ type UserStock = {
   ticker: string;
   amount: number;
 };
+type Player = {
+  avatar: string;
+  color: string;
+  id: number;
+  username: string;
+};
 
 type WaitingRoomScreenProp = StackScreenProps<RootStackParams, 'WaitingRoom'>;
 const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
@@ -50,6 +56,10 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
     'yyyy년 MM월 dd일 EEE요일',
     { locale: ko },
   );
+  const getAvatarIdx = (player: Player[], targetId: number) => {
+    const targetAvatar = player.find((k) => k.id === targetId)?.avatar;
+    return targetAvatar === undefined ? 0 : Number(targetAvatar) - 1;
+  };
 
   return (
     <Layout color="gray.50">
@@ -110,19 +120,7 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
               size="50px"
               bg="gray.50"
               padding={1}
-              source={
-                IMAGE_URL[
-                  Number(
-                    playerData.find((k: { id: number }) => k.id === v.id)
-                      .avatar,
-                  ) > 0
-                    ? Number(
-                        playerData.find((k: { id: number }) => k.id === v.id)
-                          .avatar,
-                      ) - 1
-                    : 0
-                ]
-              }
+              source={IMAGE_URL[getAvatarIdx(playerData, v.id)]}
             >
               avatar
             </Avatar>
