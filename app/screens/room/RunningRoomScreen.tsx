@@ -5,6 +5,7 @@ import EventSource, { EventSourceListener } from 'react-native-sse';
 import * as SecureStore from 'expo-secure-store';
 import {
   Box,
+  Button,
   Center,
   Flex,
   HStack,
@@ -30,6 +31,9 @@ import { IMAGE_URL } from '../../config/consts';
 const WEBVIEW_ENDPOINT = 'https://jumajuma.netlify.app';
 const DASHBOARD_ENDPOINT = 'https://stock-battle.p-e.kr/api/room/dashboard';
 
+const TRACK_DOMAIN = ['now', 'total'] as const;
+type Track = typeof TRACK_DOMAIN[number];
+
 type DashboardData = {
   profit: number;
   rank: number;
@@ -44,6 +48,7 @@ const RunningRoomScreen: React.FC<RunningRoomScreenProp> = ({ route }) => {
   const { roomId } = route.params;
   const [data, setData] = React.useState<DashboardData[]>();
   const [token, setToken] = React.useState('');
+  const [track, setTrack] = React.useState<Track>('now');
   const meData = useGetRequest(`/me`).data;
   const userStockData = useGetRequest(`/user-stock/${roomId}`).data;
   const roomData = useGetRequest('/room').data;
@@ -185,15 +190,44 @@ const RunningRoomScreen: React.FC<RunningRoomScreenProp> = ({ route }) => {
               </Text>
             </HStack>
           </VStack>
-          {/* Web view */}
-          <Box h="350px" overflow="hidden">
+          {/* Web view. show screen by track */}
+          <Box
+            h="350px"
+            overflow="hidden"
+            display={track === 'now' ? 'flex' : 'none'}
+          >
+            <WebView
+              source={{
+                uri: `${WEBVIEW_ENDPOINT}/?roomid=${roomId}&count=10&token=${token}`,
+              }}
+            />
+          </Box>
+          <Box
+            h="350px"
+            overflow="hidden"
+            display={track === 'total' ? 'flex' : 'none'}
+          >
             <WebView
               source={{
                 uri: `${WEBVIEW_ENDPOINT}/?roomid=${roomId}&token=${token}`,
               }}
             />
           </Box>
-          <VStack mt={4} space={4}>
+          <HStack space={2}>
+            {TRACK_DOMAIN.map((v) => (
+              <Button
+                key={v}
+                variant={track === v ? 'solid' : 'outline'}
+                flex={1}
+                size="md"
+                p={1}
+                onPress={() => setTrack(v)}
+              >
+                {v === 'now' ? '현재 트랙' : '전체 트랙'}
+              </Button>
+            ))}
+          </HStack>
+          <VStack mt={8} space={4}>
             {data?.map((user, idx: number) => (
               <HStack key={user.userId} space={3} alignItems="center">
                 <Heading fontSize="md" color={user.color}>
