@@ -26,8 +26,6 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
   if (meData === undefined) return null;
 
   const gameHistory = useGetRequest(`/game-history/${meData.userId}`).data;
-
-  console.log(gameHistory);
   const rankList =
     gameHistory && gameHistory !== []
       ? gameHistory.map((game: any) => game.rank)
