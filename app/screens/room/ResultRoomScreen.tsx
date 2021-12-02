@@ -39,7 +39,6 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
   const { roomId } = route.params;
   const [resultData, setResultData] = React.useState<Result[]>([]);
   const [playerData, setPlayerData] = React.useState<Player[]>([]);
-  // const [imgData, setImgData] = React.useState<number[]>([]);
   const [myData, setMyData] = React.useState({
     userId: 0,
     userName: '',
@@ -54,8 +53,6 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
       .then((res) => {
         // WHAT TO DO with res
         setMyData(res);
-        console.log(`MyData:: ${myData}`);
-        console.log('================================');
       })
       .catch((err) => {
         console.error('Error: ', err);
@@ -67,9 +64,6 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
         // WHAT TO DO with res
         res.sort((a: any, b: any) => a.rank - b.rank);
         setResultData(res);
-        console.log(`resultData:: ${resultData}`);
-        console.log(typeof resultData);
-        console.log('================================');
       })
       .catch((err) => {
         console.error('Error: ', err);
@@ -80,8 +74,6 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
       .then((res) => {
         // WHAT TO DO with res
         setPlayerData(res);
-        console.log(`playerData:: ${playerData}`);
-        console.log('================================');
       })
       .catch((err) => {
         console.error('Error: ', err);
@@ -97,7 +89,6 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
         }
       });
     });
-    console.log(imgIndex);
   }
 
   return (
