@@ -20,14 +20,17 @@ import { AnimatedCircularProgress } from 'react-native-circular-progress';
 type RecordScreenProp = StackScreenProps<RootStackParams, 'Record'>;
 const RecordScreen: React.FC<RecordScreenProp> = () => {
   const meData = useGetRequest(`/me`).data;
+
   if (meData === undefined) return null;
 
-  const gameHistory = useGetRequest(
-    `/game-history/${meData.userId.toString()}`,
-  ).data;
-  console.log(gameHistory);
+  const gameHistory = useGetRequest(`/game-history/${meData.userId}`).data;
 
-  const rankList = gameHistory?.map((game: any) => game.rank) ?? [];
+  console.log(gameHistory);
+  const rankList =
+    gameHistory && gameHistory !== []
+      ? gameHistory.map((game: any) => game.rank)
+      : [];
+
   const average =
     rankList.length === 0
       ? 0
@@ -104,7 +107,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                 <Flex direction="column" w="70%">
                   <Flex direction="row">
                     <Text color="white">승률</Text>
-                    <Text color="#54E68E">&nbsp;{winRate && winRate}%</Text>
+                    <Text color="primary.400">&nbsp;{winRate && winRate}%</Text>
                   </Flex>
                   <Text fontSize="2xl" color="white" fontWeight="bold">
                     {meData.username}
@@ -156,6 +159,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
             히스토리
           </Text>
           {gameHistory &&
+            gameHistory.length !== 0 &&
             gameHistory.map((game: any) => {
               return (
                 <Box
@@ -167,8 +171,8 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                   borderTopWidth={1}
                   borderTopColor="#E0E0E0"
                 >
-                  <Flex direction="row" w="100%" h="24px" align="flex-end">
-                    <Box mr={2} w="40px" bg="#7B61FF" rounded="3">
+                  <Flex direction="row" w="100%" h={5} align="center">
+                    <Box mr={2} w="40px" bg="secondary.400" rounded="3">
                       <Flex
                         h="100%"
                         direction="column"
@@ -185,12 +189,11 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                       fontSize="xl"
                       fontWeight="bold"
                       color="black"
-                      alignSelf="flex-start"
                       mt="-2px"
                     >
                       {game.title}
                     </Text>
-                    <Text fontSize="xs" color="#828282">
+                    <Text fontSize="xs" color="#828282" mt="1px">
                       {game.startDate.slice(0, 10)} ~{' '}
                       {game.endDate.slice(0, 10)}
                     </Text>
@@ -230,7 +233,6 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                       </Flex>
                     </Box>
                   </Flex>
-                  <Spacer />
                 </Box>
               );
             })}
