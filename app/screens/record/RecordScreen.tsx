@@ -10,6 +10,8 @@ import {
   Spacer,
   ZStack,
   Circle,
+  HStack,
+  Heading,
 } from 'native-base';
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
@@ -65,14 +67,14 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
               mb={1}
               w="100%"
             >
-              <Flex direction="row" justify="space-between" w="100%">
+              <Flex
+                direction="row"
+                justify="space-between"
+                align="center"
+                w="100%"
+              >
                 <Box w="30%">
-                  <ZStack
-                    alignItems="center"
-                    justifyContent="center"
-                    mr={5}
-                    mt={8}
-                  >
+                  <ZStack alignItems="center" justifyContent="center" mr={5}>
                     <View
                       style={{
                         width: 75,
@@ -105,14 +107,14 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                   </ZStack>
                 </Box>
                 <Flex direction="column" w="70%">
-                  <Flex direction="row">
-                    <Text color="white">승률</Text>
+                  <Text color="white">
+                    승률
                     <Text color="primary.400">&nbsp;{winRate && winRate}%</Text>
-                  </Flex>
+                  </Text>
                   <Text fontSize="2xl" color="white" fontWeight="bold">
                     {meData.username}
                   </Text>
-                  <Text color="#828282">{meData.userEmail}</Text>
+                  <Text color="gray.500">{meData.userEmail}</Text>
                 </Flex>
               </Flex>
               <Flex direction="row" justify="space-between" mt={5}>
@@ -155,9 +157,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
 
       <Box pb={3} pt={3}>
         <VStack space="3">
-          <Text fontSize="xl" fontWeight="bold">
-            히스토리
-          </Text>
+          <Heading size="sm">히스토리</Heading>
           {gameHistory &&
             gameHistory.length !== 0 &&
             gameHistory.map((game: any) => {
@@ -171,67 +171,51 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                   borderTopWidth={1}
                   borderTopColor="#E0E0E0"
                 >
-                  <Flex direction="row" w="100%" h={5} align="center">
-                    <Box mr={2} w="40px" bg="secondary.400" rounded="3">
-                      <Flex
-                        h="100%"
-                        direction="column"
-                        align="center"
-                        justify="center"
-                      >
+                  <HStack space={2} alignItems="center">
+                    <Box px={3} py={0.5} bg="secondary.400" rounded="3">
+                      <Flex direction="column" align="center" justify="center">
                         <Text fontSize="xs" fontWeight="bold" color="#fff">
                           {game.rank}위
                         </Text>
                       </Flex>
                     </Box>
-                    <Text
-                      mr={2}
-                      fontSize="xl"
-                      fontWeight="bold"
-                      color="black"
-                      mt="-2px"
-                    >
-                      {game.title}
-                    </Text>
-                    <Text fontSize="xs" color="#828282" mt="1px">
-                      {game.startDate.slice(0, 10)} ~{' '}
-                      {game.endDate.slice(0, 10)}
-                    </Text>
-                  </Flex>
+                    <Box>
+                      <Heading size="md" color="black">
+                        {game.title}
+                      </Heading>
+                    </Box>
+                  </HStack>
+                  <Text fontSize="sm" color="gray.500">
+                    {game.startDate.slice(0, 10)} ~ {game.endDate.slice(0, 10)}
+                  </Text>
                   <Spacer />
                   <Flex direction="row" justify="space-between" mt={5}>
-                    <Box w="30%">
-                      <Text fontSize="md" color="#828282">
+                    <VStack w="30%" space={2}>
+                      <Text fontSize="md" color="gray.500">
                         수익률
                       </Text>
-                      <Text fontSize="md" color="#828282">
+                      <Text fontSize="md" color="gray.500">
                         참여종목
                       </Text>
-                      <Text fontSize="md" color="#828282">
+                      <Text fontSize="md" color="gray.500">
                         참여인원
                       </Text>
-                    </Box>
+                    </VStack>
                     <Spacer />
-                    <Box w="70%">
-                      <Flex
-                        direction="column"
-                        justify="flex-end"
-                        align="flex-end"
-                      >
-                        <Text fontSize="md">{game.profit}</Text>
-                        <Text fontSize="md">{game.ticker}</Text>
-                        <Text fontSize="md">
-                          {game.players.map((player: any) => {
-                            if (
-                              game.players.indexOf(player) ===
-                              game.players.length - 1
-                            )
-                              return `${player}`;
-                            return `${player}, `;
-                          })}
-                        </Text>
-                      </Flex>
-                    </Box>
+                    <VStack w="70%" space={2} alignItems="flex-end">
+                      <Text fontSize="md">{game.profit}</Text>
+                      <Text fontSize="md">{game.ticker}</Text>
+                      <Text fontSize="md" textAlign="right">
+                        {game.players.map((player: any) => {
+                          if (
+                            game.players.indexOf(player) ===
+                            game.players.length - 1
+                          )
+                            return `${player}`;
+                          return `${player}, `;
+                        })}
+                      </Text>
+                    </VStack>
                   </Flex>
                 </Box>
               );
