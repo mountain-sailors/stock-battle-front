@@ -32,6 +32,8 @@ type Player = {
   color: string;
 };
 
+let imgIndex: number[] = [];
+
 type ResultRoomScreenProp = StackScreenProps<RootStackParams, 'ResultRoom'>;
 const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
   const { roomId } = route.params;
@@ -51,8 +53,6 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
       .then((res) => {
         // WHAT TO DO with res
         setMyData(res);
-        console.log(`MyData:: ${myData}`);
-        console.log('================================');
       })
       .catch((err) => {
         console.error('Error: ', err);
@@ -62,10 +62,8 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
       .then((res) => res.json())
       .then((res) => {
         // WHAT TO DO with res
+        res.sort((a: any, b: any) => a.rank - b.rank);
         setResultData(res);
-        console.log(`resultData:: ${resultData}`);
-        console.log(typeof resultData);
-        console.log('================================');
       })
       .catch((err) => {
         console.error('Error: ', err);
@@ -76,13 +74,22 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
       .then((res) => {
         // WHAT TO DO with res
         setPlayerData(res);
-        console.log(`playerData:: ${playerData}`);
-        console.log('================================');
       })
       .catch((err) => {
         console.error('Error: ', err);
       });
   }, []);
+
+  if (playerData && resultData) {
+    imgIndex = [];
+    resultData.forEach((res) => {
+      playerData.forEach((player) => {
+        if (res.userId === player.id) {
+          imgIndex.push(Number(player.avatar));
+        }
+      });
+    });
+  }
 
   return (
     <Layout>
@@ -154,7 +161,7 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
             <Avatar
               bg="gray.100"
               rounded="lg"
-              source={IMAGE_URL[index]}
+              source={IMAGE_URL[imgIndex[index] - 1]}
               p={2}
             />
             <Box flex={1} _text={{ fontSize: 'md', fontWeight: 'bold' }}>
