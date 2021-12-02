@@ -100,6 +100,7 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
         <Flex align="center">
           <Text fontSize="lg" fontWeight="bold" color="white">
             {resultData
+              .sort((a, b) => a.rank - b.rank)
               .filter((el) => {
                 if (el.userId === myData.userId) return el;
               })
@@ -113,6 +114,7 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
         <Flex align="center">
           <Text fontSize="lg" fontWeight="bold" color="white">
             {resultData
+              .sort((a, b) => a.rank - b.rank)
               .filter((el) => {
                 if (el.userId === myData.userId) return el;
               })
@@ -127,6 +129,7 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
         <Flex align="center">
           <Text fontSize="lg" fontWeight="bold" color="white">
             {resultData
+              .sort((a, b) => a.rank - b.rank)
               .filter((el) => {
                 if (el.userId === myData.userId) return el;
               })
