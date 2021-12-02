@@ -3,6 +3,8 @@ import { Box, Flex, Text, Image, Spacer, Progress } from 'native-base';
 import moment from 'moment';
 import 'moment/locale/ko';
 
+import { getColorBySign } from '../../config/utils';
+
 type RunningRoomInfoProp = {
   room: any;
 };
@@ -74,8 +76,13 @@ const RunningRoomInfo: React.FC<RunningRoomInfoProp> = ({ room }) => {
         <Box w="50%">
           <Flex direction="column" justify="flex-end" align="flex-end">
             <Text fontSize="sm">{profitType}</Text>
-            <Text fontSize="xl" color="red.400" fontWeight="bold">
-              {(room.profit > 0 ? '+' : '') + room.profit.toFixed(2)}
+            <Text
+              fontSize="xl"
+              color={getColorBySign(room.profit)}
+              fontWeight="bold"
+            >
+              {room.profit > 0 ? '+' : ''}
+              {room.profit.toFixed(3)}
               {room.winCondition === 0 ? '%' : '$'}
             </Text>
           </Flex>
