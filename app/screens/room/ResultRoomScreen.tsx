@@ -32,11 +32,14 @@ type Player = {
   color: string;
 };
 
+let imgIndex: number[] = [];
+
 type ResultRoomScreenProp = StackScreenProps<RootStackParams, 'ResultRoom'>;
 const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
   const { roomId } = route.params;
   const [resultData, setResultData] = React.useState<Result[]>([]);
   const [playerData, setPlayerData] = React.useState<Player[]>([]);
+  // const [imgData, setImgData] = React.useState<number[]>([]);
   const [myData, setMyData] = React.useState({
     userId: 0,
     userName: '',
@@ -62,6 +65,7 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
       .then((res) => res.json())
       .then((res) => {
         // WHAT TO DO with res
+        res.sort((a: any, b: any) => a.rank - b.rank);
         setResultData(res);
         console.log(`resultData:: ${resultData}`);
         console.log(typeof resultData);
@@ -84,6 +88,18 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
       });
   }, []);
 
+  if (playerData && resultData) {
+    imgIndex = [];
+    resultData.forEach((res) => {
+      playerData.forEach((player) => {
+        if (res.userId === player.id) {
+          imgIndex.push(Number(player.avatar));
+        }
+      });
+    });
+    console.log(imgIndex);
+  }
+
   return (
     <Layout>
       <Flex align="center" mt={2}>
@@ -100,7 +116,6 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
         <Flex align="center">
           <Text fontSize="lg" fontWeight="bold" color="white">
             {resultData
-              .sort((a, b) => a.rank - b.rank)
               .filter((el) => {
                 if (el.userId === myData.userId) return el;
               })
@@ -114,7 +129,6 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
         <Flex align="center">
           <Text fontSize="lg" fontWeight="bold" color="white">
             {resultData
-              .sort((a, b) => a.rank - b.rank)
               .filter((el) => {
                 if (el.userId === myData.userId) return el;
               })
@@ -129,7 +143,6 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
         <Flex align="center">
           <Text fontSize="lg" fontWeight="bold" color="white">
             {resultData
-              .sort((a, b) => a.rank - b.rank)
               .filter((el) => {
                 if (el.userId === myData.userId) return el;
               })
@@ -157,7 +170,7 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
             <Avatar
               bg="gray.100"
               rounded="lg"
-              source={IMAGE_URL[index]}
+              source={IMAGE_URL[imgIndex[index] - 1]}
               p={2}
             />
             <Box flex={1} _text={{ fontSize: 'md', fontWeight: 'bold' }}>
