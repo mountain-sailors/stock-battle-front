@@ -43,7 +43,10 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
         >
           로그인
         </Button>
-        <Button variant="outline" onPress={() => navigation.navigate('SignUp')}>
+        <Button
+          variant="outline"
+          onPress={() => navigation.navigate('Agreement')}
+        >
           회원가입
         </Button>
       </Flex>

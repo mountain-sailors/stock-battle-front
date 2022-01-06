@@ -2,6 +2,7 @@ export { default as MypageScreen } from './mypage/MypageScreen';
 export { default as InitScreen } from './initial/InitScreen';
 export { default as LoginScreen } from './initial/LoginScreen';
 export { default as SignupScreen } from './initial/SignupScreen';
+export { default as AgreementScreen } from './initial/AgreementScreen';
 export { default as MainScreen } from './main/MainScreen';
 export { default as RecordScreen } from './record/RecordScreen';
 export { default as SearchProfileScreen } from './record/SearchProfileScreen';

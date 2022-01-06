@@ -9,6 +9,7 @@ import {
   InitScreen,
   LoginScreen,
   SignupScreen,
+  AgreementScreen,
   ResultRoomScreen,
   WaitingRoomScreen,
   RegisterStockScreen,
@@ -61,6 +62,11 @@ const AppNavigator = () => {
           name="SignUp"
           component={SignupScreen}
           options={{ headerTitle: '회원가입', headerTintColor: 'black' }}
+        />
+        <AppStack.Screen
+          name="Agreement"
+          component={AgreementScreen}
+          options={{ headerTitle: '약관 동의', headerTintColor: 'black' }}
         />
         <AppStack.Screen
           name="AddRoomTitle"

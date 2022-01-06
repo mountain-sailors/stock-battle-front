@@ -4,6 +4,7 @@ export type RootStackParams = {
   Init: undefined;
   Login: undefined;
   SignUp: undefined;
+  Agreement: undefined;
   Record: undefined;
   SearchProfile: undefined;
   AddRoomCode: undefined;
