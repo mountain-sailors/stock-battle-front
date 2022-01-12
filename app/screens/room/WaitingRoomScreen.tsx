@@ -12,12 +12,14 @@ import {
   Text,
   Badge,
   Spacer,
+  useToast,
 } from 'native-base';
 
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 import { useGetRequest } from '../../config/api';
 import { IMAGE_URL } from '../../config/consts';
+import { Clipboard } from 'react-native';
 
 type UserStock = {
   id: number;
@@ -39,18 +41,18 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
 }) => {
   const { roomId, username } = route.params;
   const userStockList = useGetRequest(`/user-stock/${roomId}`).data;
-  const roomData = useGetRequest('/room').data;
+  const currentRoomInfo = useGetRequest(`/room/${roomId}`).data;
   const playerData = useGetRequest(`/player/${roomId}`).data;
+  const toast = useToast();
   if (
     !userStockList ||
     userStockList.message === 'Internal Server Error' ||
-    !roomData ||
-    roomData.message === 'Internal Server Error' ||
+    !currentRoomInfo ||
+    currentRoomInfo.message === 'Internal Server Error' ||
     !playerData ||
     playerData.message === 'Internal Server Error'
   )
     return null;
-  const currentRoomInfo = roomData.find((v: any) => v.id === roomId);
   const startDate = format(
     parse(currentRoomInfo.startDate.split('T')[0], 'yyyy-MM-dd', new Date()),
     'yyyy년 MM월 dd일 EEE요일',
@@ -152,17 +154,32 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
         ))}
       </VStack>
       <Spacer />
-      <Button
-        variant="solid"
-        onPress={() =>
-          navigation.navigate('RegisterStock', {
-            stockName: '',
-            roomId: roomId,
-          })
-        }
-      >
-        주식 등록하기
-      </Button>
+      <VStack space="2">
+        <Button
+          variant="outline"
+          onPress={() => {
+            Clipboard.setString(currentRoomInfo.invitationCode);
+            toast.show({
+              status: 'success',
+              title: '초대 코드 복사',
+              description: '클립보드에 복사되었습니다.',
+            });
+          }}
+        >
+          초대코드 공유하기
+        </Button>
+        <Button
+          variant="solid"
+          onPress={() =>
+            navigation.navigate('RegisterStock', {
+              stockName: '',
+              roomId: roomId,
+            })
+          }
+        >
+          주식 등록하기
+        </Button>
+      </VStack>
     </Layout>
   );
 };
