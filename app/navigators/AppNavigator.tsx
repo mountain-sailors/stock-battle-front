@@ -20,6 +20,8 @@ import {
   MypageScreen,
   AddRoomCodeScreen,
   EnterRoomScreen,
+  FindPasswordScreen,
+  SendTempPwdScreen,
 } from '../screens';
 import { RootStackParams } from './RootStackParams';
 import MainNavigator from './MainNavigator';
@@ -67,6 +69,16 @@ const AppNavigator = () => {
           name="Agreement"
           component={AgreementScreen}
           options={{ headerTitle: '약관 동의', headerTintColor: 'black' }}
+        />
+        <AppStack.Screen
+          name="FindPassword"
+          component={FindPasswordScreen}
+          options={{ headerTitle: '비밀번호 찾기', headerTintColor: 'black' }}
+        />
+        <AppStack.Screen
+          name="SendTempPwd"
+          component={SendTempPwdScreen}
+          options={{ headerTitle: '발송 완료', headerTintColor: 'black' }}
         />
         <AppStack.Screen
           name="AddRoomTitle"

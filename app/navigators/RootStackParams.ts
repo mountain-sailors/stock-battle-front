@@ -18,4 +18,6 @@ export type RootStackParams = {
   RegisterStock: { stockName: string; roomId: number };
   SearchStock: { roomId: number };
   Mypage: undefined;
+  FindPassword: undefined;
+  SendTempPwd: { email: string };
 };
