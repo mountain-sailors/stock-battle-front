@@ -23,7 +23,7 @@ const AGREEMENT_CONTENTS: AgreementContent[] = [
   },
 ];
 
-type AgreementScreenProp = StackScreenProps<RootStackParams, 'Init'>;
+type AgreementScreenProp = StackScreenProps<RootStackParams, 'Agreement'>;
 const AgreementScreen: React.FC<AgreementScreenProp> = ({ navigation }) => {
   const [showModal, setShowModal] = React.useState(false);
   const [isChecked, setIsChecked] = React.useState({
@@ -40,7 +40,12 @@ const AgreementScreen: React.FC<AgreementScreenProp> = ({ navigation }) => {
     <Layout>
       <VStack space={4}>
         {AGREEMENT_CONTENTS.map((v) => (
-          <Flex direction="row" justify="space-between" alignItems="center">
+          <Flex
+            key={v.title}
+            direction="row"
+            justify="space-between"
+            alignItems="center"
+          >
             <Checkbox
               isChecked={isChecked[v.type]}
               onChange={(isSelected) =>
