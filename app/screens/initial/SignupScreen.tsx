@@ -89,7 +89,7 @@ const SignupScreen: React.FC<SignupScreenProp> = ({ navigation, route }) => {
           title: '회원가입 성공',
           description: '회원가입이 성공적으로 완료되었습니다.',
         });
-        navigation.navigate('Login');
+        navigation.reset({ routes: [{ name: 'Login' }] });
       })
       .catch((err) => {
         console.error(err);
