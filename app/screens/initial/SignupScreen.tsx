@@ -25,18 +25,17 @@ const IMAGE_URL = [
 ];
 
 type FormData = {
-  email: string;
   password: string;
   nickname: string;
   avatarId: number;
 };
 type Error = Partial<FormData>;
 
-type SignupScreenProp = StackScreenProps<RootStackParams>;
-const SignupScreen: React.FC<SignupScreenProp> = ({ navigation }) => {
+type SignupScreenProp = StackScreenProps<RootStackParams, 'SignUp'>;
+const SignupScreen: React.FC<SignupScreenProp> = ({ navigation, route }) => {
+  const { email } = route.params;
   const toast = useToast();
   const [formData, setFormData] = React.useState<FormData>({
-    email: '',
     password: '',
     nickname: '',
     avatarId: 1,
@@ -44,15 +43,6 @@ const SignupScreen: React.FC<SignupScreenProp> = ({ navigation }) => {
   const [errors, setErrors] = React.useState<Error>({});
 
   const validate = () => {
-    if (formData.email === '') {
-      setErrors({
-        ...errors,
-        email: '이메일을 작성해주세요',
-      });
-      return false;
-    } else {
-      delete errors.email;
-    }
     if (formData.password === '') {
       setErrors({
         ...errors,
@@ -84,8 +74,10 @@ const SignupScreen: React.FC<SignupScreenProp> = ({ navigation }) => {
   };
 
   const registerUser = () => {
+    const isValidate = validate();
+    if (isValidate === false) return;
     callAPI('/user', 'POST', {
-      email: formData.email,
+      email: email,
       password: formData.password,
       username: formData.nickname,
       avatar: formData.avatarId.toString(),
@@ -97,42 +89,14 @@ const SignupScreen: React.FC<SignupScreenProp> = ({ navigation }) => {
           title: '회원가입 성공',
           description: '회원가입이 성공적으로 완료되었습니다.',
         });
-        navigation.goBack();
+        navigation.navigate('Login');
       })
       .catch((err) => {
         console.error(err);
         toast.show({
           status: 'error',
-          title: '로그인 실패',
-          description: '이메일 또는 비밀번호가 올바르지 않습니다.',
-        });
-      });
-  };
-
-  const handlePress = () => {
-    const isValidate = validate();
-    if (isValidate === false) return;
-    callAPI('/user/validation', 'POST', {
-      email: formData.email,
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.isEmailExist) {
-          toast.show({
-            status: 'error',
-            title: '이메일 중복',
-            description: '이미 존재하는 이메일 주소입니다.',
-          });
-          return false;
-        }
-        registerUser();
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.show({
-          status: 'error',
-          title: '로그인 실패',
-          description: '가입 중 문제가 발생했습니다.',
+          title: '회원가입 실패',
+          description: '회원가입 도중 문제가 발생했습니다.',
         });
       });
   };
@@ -140,31 +104,6 @@ const SignupScreen: React.FC<SignupScreenProp> = ({ navigation }) => {
   return (
     <Layout>
       <VStack space={5}>
-        <FormControl isRequired isInvalid={'email' in errors}>
-          <FormControl.Label
-            mb="4"
-            _text={{ fontSize: 'md', fontWeight: 'bold' }}
-          >
-            이메일
-          </FormControl.Label>
-          <Input
-            value={formData.email}
-            variant="filled"
-            type="email"
-            keyboardType="email-address"
-            placeholder="이메일을 입력해주세요"
-            onChangeText={(value: string) =>
-              setFormData({ ...formData, email: value })
-            }
-          />
-          {'email' in errors && (
-            <FormControl.ErrorMessage
-              _text={{ fontSize: 'xs', color: 'error.500', fontWeight: 500 }}
-            >
-              {errors['email']}
-            </FormControl.ErrorMessage>
-          )}
-        </FormControl>
         <FormControl isRequired isInvalid={'password' in errors}>
           <FormControl.Label
             mb="4"
@@ -240,7 +179,7 @@ const SignupScreen: React.FC<SignupScreenProp> = ({ navigation }) => {
       </VStack>
       <Spacer />
       <Box>
-        <Button variant="solid" onPress={handlePress}>
+        <Button variant="solid" onPress={registerUser}>
           회원가입
         </Button>
       </Box>

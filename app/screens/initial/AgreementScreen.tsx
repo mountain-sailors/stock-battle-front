@@ -77,7 +77,7 @@ const AgreementScreen: React.FC<AgreementScreenProp> = ({ navigation }) => {
         mb="2"
         variant={isAllChecked ? 'solid' : 'disabled'}
         disabled={!isAllChecked}
-        onPress={() => navigation.navigate('SignUp')}
+        onPress={() => navigation.navigate('ValidateEmail')}
       >
         다음
       </Button>

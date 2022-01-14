@@ -7,7 +7,8 @@ export type RootStackParams = {
   // initial
   Init: undefined;
   Login: undefined;
-  SignUp: undefined;
+  SignUp: { email: string };
+  ValidateEmail: undefined;
   Agreement: undefined;
   FindPassword: undefined;
   SendTempPwd: { email: string };

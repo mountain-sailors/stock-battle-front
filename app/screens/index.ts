@@ -3,6 +3,7 @@ export { default as ChangePasswordScreen } from './mypage/ChangePasswordScreen';
 export { default as InitScreen } from './initial/InitScreen';
 export { default as LoginScreen } from './initial/LoginScreen';
 export { default as SignupScreen } from './initial/SignupScreen';
+export { default as ValidateEmailScreen } from './initial/ValidateEmailScreen';
 export { default as AgreementScreen } from './initial/AgreementScreen';
 export { default as FindPasswordScreen } from './initial/FindPasswordScreen';
 export { default as SendTempPwdScreen } from './initial/SendTempPwdScreen';
