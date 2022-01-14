@@ -37,7 +37,6 @@ const ValidateEmailScreen: React.FC<ValidateEmailScreenProp> = ({
   });
 
   const checkVerifyCode = (code?: string) => {
-    console.log('verifyCode', verifyCode);
     if (code === '') return;
     if (code === verifyCode) {
       toast.show({

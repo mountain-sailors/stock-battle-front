@@ -21,7 +21,6 @@ const FindPasswordScreen: React.FC<FindPasswordScreenProp> = ({
     })
       .then((res) => res.json())
       .then(async (res) => {
-        console.log(res);
         if (res.isEmailExist) {
           navigation.navigate('SendTempPwd', { email: value });
         } else {
