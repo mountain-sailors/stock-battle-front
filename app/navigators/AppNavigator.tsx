@@ -22,6 +22,7 @@ import {
   EnterRoomScreen,
   FindPasswordScreen,
   SendTempPwdScreen,
+  ChangePasswordScreen,
 } from '../screens';
 import { RootStackParams } from './RootStackParams';
 import MainNavigator from './MainNavigator';
@@ -132,6 +133,14 @@ const AppNavigator = () => {
           component={MypageScreen}
           options={{
             headerTitle: '마이페이지',
+          }}
+        />
+        <AppStack.Screen
+          name="ChangePassword"
+          component={ChangePasswordScreen}
+          options={{
+            headerTitle: '비밀번호 변경하기',
+            headerTintColor: 'black',
           }}
         />
       </AppStack.Navigator>
