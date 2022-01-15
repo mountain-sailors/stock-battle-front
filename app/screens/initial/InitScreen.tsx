@@ -2,7 +2,7 @@ import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '../../navigators/RootStackParams';
 
-import { Image, Flex, Text, Center } from 'native-base';
+import { Image, Flex, Text, Center, VStack } from 'native-base';
 import { Button } from 'native-base';
 import { Layout } from '../../components';
 // import { useGetRequest } from '../../config/api';
@@ -36,19 +36,23 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
             alt="character"
           />
         </Center>
-        <Button
-          mb="2"
-          variant="solid"
-          onPress={() => navigation.navigate('Login')}
-        >
-          로그인
-        </Button>
-        <Button
-          variant="outline"
-          onPress={() => navigation.navigate('Agreement')}
-        >
-          회원가입
-        </Button>
+        <VStack space={2}>
+          <Button variant="solid" onPress={() => navigation.navigate('Login')}>
+            로그인
+          </Button>
+          <Button
+            variant="outline"
+            onPress={() => navigation.navigate('Agreement')}
+          >
+            회원가입
+          </Button>
+          <Button
+            variant="ghost"
+            onPress={() => navigation.navigate('FindPassword')}
+          >
+            비밀번호 찾기
+          </Button>
+        </VStack>
       </Flex>
     </Layout>
   );

@@ -9,6 +9,7 @@ import {
   InitScreen,
   LoginScreen,
   SignupScreen,
+  ValidateEmailScreen,
   AgreementScreen,
   ResultRoomScreen,
   WaitingRoomScreen,
@@ -20,6 +21,9 @@ import {
   MypageScreen,
   AddRoomCodeScreen,
   EnterRoomScreen,
+  FindPasswordScreen,
+  SendTempPwdScreen,
+  ChangePasswordScreen,
 } from '../screens';
 import { RootStackParams } from './RootStackParams';
 import MainNavigator from './MainNavigator';
@@ -64,9 +68,24 @@ const AppNavigator = () => {
           options={{ headerTitle: '회원가입', headerTintColor: 'black' }}
         />
         <AppStack.Screen
+          name="ValidateEmail"
+          component={ValidateEmailScreen}
+          options={{ headerTitle: '이메일 인증', headerTintColor: 'black' }}
+        />
+        <AppStack.Screen
           name="Agreement"
           component={AgreementScreen}
           options={{ headerTitle: '약관 동의', headerTintColor: 'black' }}
+        />
+        <AppStack.Screen
+          name="FindPassword"
+          component={FindPasswordScreen}
+          options={{ headerTitle: '비밀번호 찾기', headerTintColor: 'black' }}
+        />
+        <AppStack.Screen
+          name="SendTempPwd"
+          component={SendTempPwdScreen}
+          options={{ headerTitle: '발송 완료', headerTintColor: 'black' }}
         />
         <AppStack.Screen
           name="AddRoomTitle"
@@ -120,6 +139,14 @@ const AppNavigator = () => {
           component={MypageScreen}
           options={{
             headerTitle: '마이페이지',
+          }}
+        />
+        <AppStack.Screen
+          name="ChangePassword"
+          component={ChangePasswordScreen}
+          options={{
+            headerTitle: '비밀번호 변경하기',
+            headerTintColor: 'black',
           }}
         />
       </AppStack.Navigator>
