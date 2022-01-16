@@ -76,20 +76,42 @@ const SignupScreen: React.FC<SignupScreenProp> = ({ navigation, route }) => {
   const registerUser = () => {
     const isValidate = validate();
     if (isValidate === false) return;
-    callAPI('/user', 'POST', {
-      email: email,
-      password: formData.password,
+    callAPI('/user/username', 'POST', {
       username: formData.nickname,
-      avatar: formData.avatarId.toString(),
     })
-      .then()
-      .then(() => {
-        toast.show({
-          status: 'success',
-          title: '회원가입 성공',
-          description: '회원가입이 성공적으로 완료되었습니다.',
-        });
-        navigation.reset({ routes: [{ name: 'Login' }] });
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.isNameExist) {
+          toast.show({
+            status: 'error',
+            title: '닉네임 중복',
+            description: '중복된 닉네임이 존재합니다.',
+          });
+          return;
+        } else {
+          callAPI('/user', 'POST', {
+            email: email,
+            password: formData.password,
+            username: formData.nickname,
+            avatar: formData.avatarId.toString(),
+          })
+            .then(() => {
+              toast.show({
+                status: 'success',
+                title: '회원가입 성공',
+                description: '회원가입이 성공적으로 완료되었습니다.',
+              });
+              navigation.reset({ routes: [{ name: 'Init' }] });
+            })
+            .catch((err) => {
+              console.error(err);
+              toast.show({
+                status: 'error',
+                title: '회원가입 실패',
+                description: '회원가입 도중 문제가 발생했습니다.',
+              });
+            });
+        }
       })
       .catch((err) => {
         console.error(err);
