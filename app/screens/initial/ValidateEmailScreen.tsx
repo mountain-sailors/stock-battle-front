@@ -7,6 +7,7 @@ import {
   Box,
   Spacer,
   FormControl,
+  Text,
   VStack,
 } from 'native-base';
 
@@ -144,6 +145,9 @@ const ValidateEmailScreen: React.FC<ValidateEmailScreenProp> = ({
               setFormData({ ...formData, verifyCode: value })
             }
           />
+          <Text mt={1} fontSize="sm" color="gray.500">
+            메일이 보이지 않는 경우 스팸함을 확인해 주세요.
+          </Text>
           <Button
             variant={formData.verifyCode === '' ? 'ghost' : 'outline'}
             size="md"
