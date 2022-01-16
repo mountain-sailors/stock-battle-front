@@ -169,8 +169,8 @@ const RunningRoomScreen: React.FC<RunningRoomScreenProp> = ({ route }) => {
           </Box>
           <VStack mt={6}>
             <Heading size="xl" color="black">
-              {`현재 `}
-              <Text fontSize="3xl" fontWeight="bold" color="secondary.300">
+              현재&nbsp;
+              <Text fontSize="3xl" fontWeight="bold" color={myData?.color}>
                 {myData?.rank}
               </Text>
               위
