@@ -1,6 +1,6 @@
 export type MainBottomParams = {
   Home: undefined;
   EnterRoom: undefined;
-  Record: undefined;
+  Record: { user: number };
   Mypage: undefined;
 };

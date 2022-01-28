@@ -1,5 +1,6 @@
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
+import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import { View } from 'react-native';
 import {
   Box,
@@ -12,6 +13,7 @@ import {
   Circle,
   HStack,
   Heading,
+  Button,
 } from 'native-base';
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
@@ -20,12 +22,19 @@ import { IMAGE_URL } from '../../config/consts';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 type RecordScreenProp = StackScreenProps<RootStackParams, 'Record'>;
-const RecordScreen: React.FC<RecordScreenProp> = () => {
+const RecordScreen: React.FC<RecordScreenProp> = ({ navigation, route }) => {
   const meData = useGetRequest(`/me`).data;
 
-  if (meData === undefined) return null;
+  if (route.params) console.log(route.params);
 
-  const gameHistory = useGetRequest(`/game-history/${meData.userId}`).data;
+  const gameHistory = route.params
+    ? useGetRequest(`/game-history/${route.params.user.id}`).data
+    : useGetRequest(`/game-history/${meData.userId}`).data;
+
+  const paramData = route.params
+    ? route.params.user
+    : useGetRequest(`/me`).data;
+
   const rankList =
     gameHistory && gameHistory !== []
       ? gameHistory.map((game: any) => game.rank)
@@ -57,6 +66,38 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
     <Layout>
       <VStack m={0} mt={5}>
         <Box mx={-6} mt={-6} px={4} pb={5} bgColor="white">
+          {!route.params && (
+            <Box w="100%" bg="#fff" p="2">
+              <Flex
+                direction="row"
+                justify="space-between"
+                mt={1}
+                mb={1}
+                w="100%"
+              >
+                <Text
+                  fontSize="lg"
+                  fontWeight="bold"
+                  w="100%"
+                  textAlign="center"
+                >
+                  전적
+                </Text>
+                <Button
+                  position="absolute"
+                  right="0"
+                  variant="ghost"
+                  p="0"
+                  onPress={() => {
+                    navigation.navigate('SearchProfile');
+                  }}
+                >
+                  <AntDesignIcon name="search1" size={18} color="gray" />
+                </Button>
+              </Flex>
+            </Box>
+          )}
+
           <Box w="100%" bg="#1A1B22" rounded="lg" p="8">
             <Flex
               direction="column"
@@ -97,7 +138,7 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                     <Circle size="55px" bg="#fff"></Circle>
                     <Box>
                       <Image
-                        source={IMAGE_URL[meData.avatar - 1]}
+                        source={IMAGE_URL[paramData.avatar - 1]}
                         size={10}
                         alt="avatar"
                       />
@@ -110,9 +151,9 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                     <Text color="primary.400">&nbsp;{winRate && winRate}%</Text>
                   </Text>
                   <Text fontSize="2xl" color="white" fontWeight="bold">
-                    {meData.username}
+                    {paramData.username}
                   </Text>
-                  <Text color="gray.500">{meData.userEmail}</Text>
+                  <Text color="gray.500">{paramData.userEmail}</Text>
                 </Flex>
               </Flex>
               <Flex direction="row" justify="space-between" mt={5}>

@@ -14,7 +14,7 @@ export type RootStackParams = {
   SendTempPwd: { email: string };
 
   // record
-  Record: undefined;
+  Record: { user: object };
   SearchProfile: undefined;
 
   // createRoom
