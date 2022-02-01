@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import * as SecureStore from 'expo-secure-store';
 
-export const API_ENDPOINT = 'http://3.38.84.94:3000/api';
+export const API_ENDPOINT = 'https://zumazuma.o-r.kr/api';
 
 type Method = 'GET' | 'POST' | 'PATCH' | 'DELETE' | 'PUT';
 export async function callAPI(url: string, method: Method, body: any) {

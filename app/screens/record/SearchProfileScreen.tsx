@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 import { Heading, Pressable, VStack } from 'native-base';
 
@@ -15,10 +15,12 @@ const SearchProfileScreen: React.FC<SearchProfileScreenProp> = ({
   navigation,
 }) => {
   const [searchKeyword, setSearchKeyword] = React.useState('');
-  const handleChange = (event: any) => setSearchKeyword(event.nativeEvent.text);
-  const userList = useGetRequest(`/user/search?username=${searchKeyword}`).data;
 
-  useEffect(() => {}, [userList, searchKeyword]);
+  const handleChange = (event: any) => {
+    setSearchKeyword(event.nativeEvent.text);
+  };
+
+  const userList = useGetRequest(`/user/search?username=${searchKeyword}`).data;
 
   return (
     <Layout>
@@ -29,12 +31,9 @@ const SearchProfileScreen: React.FC<SearchProfileScreenProp> = ({
         handleChange={handleChange}
       />
       <VStack mt={4} space={4}>
-        {userList &&
-          userList
-            .filter((v: { username: string }) =>
-              v.username.toLowerCase().includes(searchKeyword.toLowerCase()),
-            )
-            .map((v) => (
+        {searchKeyword == '' || typeof userList == 'undefined'
+          ? null
+          : userList.map((v) => (
               <Pressable
                 key={v.username}
                 onPress={() =>

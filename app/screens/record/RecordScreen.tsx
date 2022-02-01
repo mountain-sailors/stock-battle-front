@@ -25,8 +25,6 @@ type RecordScreenProp = StackScreenProps<RootStackParams, 'Record'>;
 const RecordScreen: React.FC<RecordScreenProp> = ({ navigation, route }) => {
   const meData = useGetRequest(`/me`).data;
 
-  if (route.params) console.log(route.params);
-
   const gameHistory = route.params
     ? useGetRequest(`/game-history/${route.params.user.id}`).data
     : useGetRequest(`/game-history/${meData.userId}`).data;

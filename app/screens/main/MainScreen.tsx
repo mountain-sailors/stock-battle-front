@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { TouchableHighlight } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { Box, Center, Flex, Text, VStack, Image, Spinner } from 'native-base';
