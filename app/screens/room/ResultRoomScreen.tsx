@@ -90,60 +90,71 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
       });
     });
   }
+  const myResultData = resultData.filter(
+    (el) => el.userId === myData.userId,
+  )[0];
 
   return (
     <Layout>
-      <Flex align="center" mt={2}>
-        <Image
-          size="65px"
-          source={require('./images/icon-trophy.png')}
-          alt="trophy"
-        />
-        <Heading size="md" mt={3}>
-          축하합니다!
-        </Heading>
-      </Flex>
-      <HStack mt={6} p={6} rounded="lg" bgColor="secondary.400">
-        <Flex align="center">
-          <Text fontSize="lg" fontWeight="bold" color="white">
-            {resultData
-              .filter((el) => {
-                if (el.userId === myData.userId) return el;
-              })
-              .map((item) => item.rank)}
-          </Text>
-          <Text fontSize="sm" color="gray.100">
-            최종 순위
-          </Text>
-        </Flex>
-        <Spacer />
-        <Flex align="center">
-          <Text fontSize="lg" fontWeight="bold" color="white">
-            {resultData
-              .filter((el) => {
-                if (el.userId === myData.userId) return el;
-              })
-              .map((item) => item.profit)}
-            %
-          </Text>
-          <Text fontSize="sm" color="gray.100">
-            최종 수익률
-          </Text>
-        </Flex>
-        <Spacer />
-        <Flex align="center">
-          <Text fontSize="lg" fontWeight="bold" color="white">
-            {resultData
-              .filter((el) => {
-                if (el.userId === myData.userId) return el;
-              })
-              .map((item) => item.ticker)}
-          </Text>
-          <Text fontSize="sm" color="gray.100">
-            종목
-          </Text>
-        </Flex>
-      </HStack>
+      {myResultData && (
+        <>
+          {myResultData.rank <= 1 ? (
+            <>
+              <Flex align="center" mt={2}>
+                <Image
+                  size="65px"
+                  source={require('./images/icon-trophy.png')}
+                  alt="trophy"
+                />
+                <Heading size="md" mt={3}>
+                  축하합니다!
+                </Heading>
+              </Flex>
+            </>
+          ) : (
+            <>
+              <Flex align="center" mt={2}>
+                <Image
+                  size="65px"
+                  source={require('./images/icon-crycat.png')}
+                  alt="crycat"
+                />
+                <Heading size="md" mt={3}>
+                  아쉬워요..
+                </Heading>
+              </Flex>
+            </>
+          )}
+          <HStack mt={6} p={6} rounded="lg" bgColor="secondary.400">
+            <Flex align="center">
+              <Text fontSize="lg" fontWeight="bold" color="white">
+                {myResultData.rank}
+              </Text>
+              <Text fontSize="sm" color="gray.100">
+                최종 순위
+              </Text>
+            </Flex>
+            <Spacer />
+            <Flex align="center">
+              <Text fontSize="lg" fontWeight="bold" color="white">
+                {myResultData.profit}%
+              </Text>
+              <Text fontSize="sm" color="gray.100">
+                최종 수익률
+              </Text>
+            </Flex>
+            <Spacer />
+            <Flex align="center">
+              <Text fontSize="lg" fontWeight="bold" color="white">
+                {myResultData.ticker}
+              </Text>
+              <Text fontSize="sm" color="gray.100">
+                종목
+              </Text>
+            </Flex>
+          </HStack>
+        </>
+      )}
       <FlatList
         mt={6}
         data={resultData}
