@@ -1,5 +1,6 @@
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
+import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import { View } from 'react-native';
 import {
   Box,
@@ -12,20 +13,25 @@ import {
   Circle,
   HStack,
   Heading,
+  Button,
 } from 'native-base';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 import { useGetRequest } from '../../config/api';
 import { IMAGE_URL } from '../../config/consts';
-import { AnimatedCircularProgress } from 'react-native-circular-progress';
+import { GetMeRes, SearchUser } from '../../config/types';
 
 type RecordScreenProp = StackScreenProps<RootStackParams, 'Record'>;
-const RecordScreen: React.FC<RecordScreenProp> = () => {
-  const meData = useGetRequest(`/me`).data;
+const RecordScreen: React.FC<RecordScreenProp> = ({ navigation }) => {
+  const meData: GetMeRes = useGetRequest(`/me`).data;
+  const [user, setUser] = React.useState<SearchUser>({
+    ...meData,
+    id: meData.userId,
+    email: meData.userEmail,
+  });
+  const gameHistory = useGetRequest(`/game-history/${user.id}`).data;
 
-  if (meData === undefined) return null;
-
-  const gameHistory = useGetRequest(`/game-history/${meData.userId}`).data;
   const rankList =
     gameHistory && gameHistory !== []
       ? gameHistory.map((game: any) => game.rank)
@@ -53,10 +59,41 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
   if (rankList.length === 0 || winCountLen === 0) winRate = 0;
   else winRate = Math.round((winCountLen / rankList.length) * 100);
 
+  const handleUserChange = (newUser: SearchUser) => {
+    setUser(newUser);
+  };
+
   return (
     <Layout>
       <VStack m={0} mt={5}>
         <Box mx={-6} mt={-6} px={4} pb={5} bgColor="white">
+          <Box w="100%" bg="#fff" p="2">
+            <Flex
+              direction="row"
+              justify="space-between"
+              mt={1}
+              mb={1}
+              w="100%"
+            >
+              <Text fontSize="lg" fontWeight="bold" w="100%" textAlign="center">
+                전적
+              </Text>
+              <Button
+                position="absolute"
+                right="0"
+                variant="ghost"
+                p={1}
+                onPress={() => {
+                  navigation.navigate('SearchProfile', {
+                    handleUserChange,
+                  });
+                }}
+              >
+                <AntDesignIcon name="search1" size={20} />
+              </Button>
+            </Flex>
+          </Box>
+
           <Box w="100%" bg="#1A1B22" rounded="lg" p="8">
             <Flex
               direction="column"
@@ -96,11 +133,12 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                     <Circle size="60px" bg="#1A1B22"></Circle>
                     <Circle size="55px" bg="#fff"></Circle>
                     <Box>
-                      <Image
-                        source={IMAGE_URL[meData.avatar - 1]}
-                        size={10}
-                        alt="avatar"
-                      />
+                      {/* NOTE: Some trick to show image dynamically */}
+                      {IMAGE_URL.filter(
+                        (_, i) => i == Number(user.avatar) - 1,
+                      ).map((v) => (
+                        <Image key={v} source={v} size={10} alt="avatar" />
+                      ))}
                     </Box>
                   </ZStack>
                 </Box>
@@ -110,9 +148,9 @@ const RecordScreen: React.FC<RecordScreenProp> = () => {
                     <Text color="primary.400">&nbsp;{winRate && winRate}%</Text>
                   </Text>
                   <Text fontSize="2xl" color="white" fontWeight="bold">
-                    {meData.username}
+                    {user.username}
                   </Text>
-                  <Text color="gray.500">{meData.userEmail}</Text>
+                  <Text color="gray.500">{user.email}</Text>
                 </Flex>
               </Flex>
               <Flex direction="row" justify="space-between" mt={5}>

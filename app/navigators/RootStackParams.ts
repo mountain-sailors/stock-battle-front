@@ -1,3 +1,5 @@
+import { SearchUser } from '../config/types';
+
 export type RootStackParams = {
   Main: undefined;
   Home: undefined;
@@ -14,8 +16,8 @@ export type RootStackParams = {
   SendTempPwd: { email: string };
 
   // record
-  Record: undefined;
-  SearchProfile: undefined;
+  Record: { user: object };
+  SearchProfile: { handleUserChange: (newUser: SearchUser) => void };
 
   // createRoom
   AddRoomTitle: undefined;

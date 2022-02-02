@@ -5,26 +5,29 @@ import { Heading, Pressable, VStack } from 'native-base';
 import { Layout, SearchInput } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 
-const DUMMY_DATA = [
-  {
-    name: '감자돌이',
-  },
-  {
-    name: '감자돌이2',
-  },
-  {
-    name: '감자돌이3',
-  },
-];
+import { useGetRequest } from '../../config/api';
+import { GetUserSearchRes, SearchUser } from '../../config/types';
 
 type SearchProfileScreenProp = StackScreenProps<
   RootStackParams,
   'SearchProfile'
 >;
-const SearchProfileScreen: React.FC<SearchProfileScreenProp> = () => {
+const SearchProfileScreen: React.FC<SearchProfileScreenProp> = ({
+  navigation,
+  route,
+}) => {
   const [searchKeyword, setSearchKeyword] = React.useState('');
-  const handleChange = (event: any) => setSearchKeyword(event.target.amount);
+  const userList: GetUserSearchRes = useGetRequest(
+    `/user/search?username=${searchKeyword}`,
+  ).data;
 
+  const handleChange = (event: any) => {
+    setSearchKeyword(event.nativeEvent.text);
+  };
+  const handlePress = (user: SearchUser) => {
+    navigation.goBack();
+    route.params.handleUserChange(user);
+  };
   return (
     <Layout>
       <SearchInput
@@ -34,13 +37,15 @@ const SearchProfileScreen: React.FC<SearchProfileScreenProp> = () => {
         handleChange={handleChange}
       />
       <VStack mt={4} space={4}>
-        {DUMMY_DATA.map((v) => (
-          <Pressable key={v.name}>
-            <Heading flex={1} fontSize="md" color="black">
-              {v.name}
-            </Heading>
-          </Pressable>
-        ))}
+        {searchKeyword == '' || typeof userList == 'undefined'
+          ? null
+          : userList.map((v) => (
+              <Pressable key={v.username} onPress={() => handlePress(v)}>
+                <Heading flex={1} fontSize="md" color="black">
+                  {v.username}
+                </Heading>
+              </Pressable>
+            ))}
       </VStack>
     </Layout>
   );
