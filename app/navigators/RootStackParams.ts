@@ -1,3 +1,5 @@
+import { SearchUser } from '../config/types';
+
 export type RootStackParams = {
   Main: undefined;
   Home: undefined;
@@ -15,7 +17,7 @@ export type RootStackParams = {
 
   // record
   Record: { user: object };
-  SearchProfile: undefined;
+  SearchProfile: { handleUserChange: (newUser: SearchUser) => void };
 
   // createRoom
   AddRoomTitle: undefined;

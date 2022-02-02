@@ -6,6 +6,7 @@ import { Layout, SearchInput } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 
 import { useGetRequest } from '../../config/api';
+import { GetUserSearchRes, SearchUser } from '../../config/types';
 
 type SearchProfileScreenProp = StackScreenProps<
   RootStackParams,
@@ -13,15 +14,20 @@ type SearchProfileScreenProp = StackScreenProps<
 >;
 const SearchProfileScreen: React.FC<SearchProfileScreenProp> = ({
   navigation,
+  route,
 }) => {
   const [searchKeyword, setSearchKeyword] = React.useState('');
+  const userList: GetUserSearchRes = useGetRequest(
+    `/user/search?username=${searchKeyword}`,
+  ).data;
 
   const handleChange = (event: any) => {
     setSearchKeyword(event.nativeEvent.text);
   };
-
-  const userList = useGetRequest(`/user/search?username=${searchKeyword}`).data;
-
+  const handlePress = (user: SearchUser) => {
+    navigation.goBack();
+    route.params.handleUserChange(user);
+  };
   return (
     <Layout>
       <SearchInput
@@ -34,14 +40,7 @@ const SearchProfileScreen: React.FC<SearchProfileScreenProp> = ({
         {searchKeyword == '' || typeof userList == 'undefined'
           ? null
           : userList.map((v) => (
-              <Pressable
-                key={v.username}
-                onPress={() =>
-                  navigation.navigate('Record', {
-                    user: v,
-                  })
-                }
-              >
+              <Pressable key={v.username} onPress={() => handlePress(v)}>
                 <Heading flex={1} fontSize="md" color="black">
                   {v.username}
                 </Heading>
