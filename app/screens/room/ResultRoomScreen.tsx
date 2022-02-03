@@ -23,6 +23,7 @@ type Result = {
   profit: number;
   ticker: string;
   amount: number;
+  stockName: string;
 };
 
 type Player = {
@@ -146,7 +147,7 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
             <Spacer />
             <Flex align="center">
               <Text fontSize="lg" fontWeight="bold" color="white">
-                {myResultData.ticker}
+                {myResultData.stockName}
               </Text>
               <Text fontSize="sm" color="gray.100">
                 종목
@@ -166,7 +167,13 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
           index: number;
         }) => (
           <HStack alignItems="center" space={4} py={2}>
-            <Box _text={{ fontSize: 'md', fontWeight: 'bold' }}>
+            <Box
+              _text={{
+                fontSize: 'md',
+                fontWeight: 'bold',
+                color: index === 0 ? 'secondary.400' : 'black',
+              }}
+            >
               {index + 1}
             </Box>
             <Avatar
@@ -183,7 +190,10 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
                 .map((pl) => pl.username)}
             </Box>
             <Box flex={1} _text={{ textAlign: 'right', fontSize: 'md' }}>
-              {item.ticker}
+              {item.stockName}
+              <Text fontSize="sm" textAlign="right" color="gray.400">
+                {item.ticker}
+              </Text>
             </Box>
             <Box
               flex={1}

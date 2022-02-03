@@ -240,7 +240,7 @@ const RecordScreen: React.FC<RecordScreenProp> = ({ navigation }) => {
                     <Spacer />
                     <VStack w="70%" space={2} alignItems="flex-end">
                       <Text fontSize="md">{game.profit}</Text>
-                      <Text fontSize="md">{game.ticker}</Text>
+                      <Text fontSize="md">{`${game.stockName} (${game.ticker})`}</Text>
                       <Text fontSize="md" textAlign="right">
                         {game.players.map((player: any) => {
                           if (

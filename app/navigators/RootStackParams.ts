@@ -32,6 +32,10 @@ export type RootStackParams = {
   WaitingRoom: { roomId: number; username: string };
   RunningRoom: { roomId: number };
   ResultRoom: { roomId: number };
-  RegisterStock: { stockName: string; roomId: number };
+  RegisterStock: {
+    stockName: string;
+    roomId: number;
+    ticker: string;
+  };
   SearchStock: { roomId: number };
 };

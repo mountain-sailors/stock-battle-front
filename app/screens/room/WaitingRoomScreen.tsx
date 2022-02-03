@@ -26,6 +26,7 @@ type UserStock = {
   username: string;
   ticker: string;
   amount: number;
+  stockName: string;
 };
 type Player = {
   avatar: string;
@@ -40,7 +41,7 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
   route,
 }) => {
   const { roomId, username } = route.params;
-  const userStockList = useGetRequest(`/user-stock/${roomId}`).data;
+  const { data: userStockList } = useGetRequest(`/user-stock/${roomId}`);
   const currentRoomInfo = useGetRequest(`/room/${roomId}`).data;
   const playerData = useGetRequest(`/player/${roomId}`).data;
   const toast = useToast();
@@ -95,8 +96,8 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
             py={5}
             rounded="lg"
             bgColor="white"
-            borderWidth={v.ticker !== '' ? 2 : undefined}
-            borderColor={v.ticker !== '' ? 'primary.400' : undefined}
+            borderWidth={v.ticker !== null ? 2 : undefined}
+            borderColor={v.ticker !== null ? 'primary.400' : undefined}
           >
             {v.ticker !== null && (
               <Badge
@@ -146,7 +147,7 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
               </Flex>
               <Text mt="1" fontSize="sm">
                 {v.ticker !== null
-                  ? `${v.ticker} ${v.amount}주`
+                  ? `${v.stockName}(${v.ticker}) ${v.amount}주`
                   : '아직 등록한 주식이 없어요!'}
               </Text>
             </Box>
@@ -173,6 +174,7 @@ const WaitingRoomScreen: React.FC<WaitingRoomScreenProp> = ({
           onPress={() =>
             navigation.navigate('RegisterStock', {
               stockName: '',
+              ticker: '',
               roomId: roomId,
             })
           }
