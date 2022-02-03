@@ -37,9 +37,10 @@ const WaitingRoomInfo: React.FC<WaitingRoomInfoProp> = ({ room }) => {
         ></Box>
         <Image
           ml="0%"
-          size="27px"
-          source={require('./images/horse.png')}
-          alt="icon"
+          width="56px"
+          height="26px"
+          source={require('./images/img-waiting.png')}
+          alt="waiting image"
         />
         <Flex direction="column" justify="flex-end" align="flex-end">
           <Box w="100%" mt="1">

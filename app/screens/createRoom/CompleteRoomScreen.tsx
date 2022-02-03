@@ -44,9 +44,11 @@ const CompleteRoomScreen: React.FC<CompleteRoomScreenProp> = ({
     <Layout>
       <Flex align="center" mt="20">
         <Image
-          size="80px"
-          source={require('./images/img-partypopper.png')}
-          alt="party popper icon"
+          width="97px"
+          height="85px"
+          resizeMethod="auto"
+          source={require('./images/img-success.png')}
+          alt="success image"
         />
         <Text mt={4} textAlign="center" fontSize="md">
           {`방 생성이 완료되었습니다!\n초대 코드를 공유해 친구들과 시작해보세요.`}

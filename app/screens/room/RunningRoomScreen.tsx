@@ -41,6 +41,7 @@ type DashboardData = {
   avatar: string;
   username: string;
   ticker: string;
+  stockName: string;
   color: string;
 };
 type RunningRoomScreenProp = StackScreenProps<RootStackParams, 'RunningRoom'>;
@@ -93,6 +94,9 @@ const RunningRoomScreen: React.FC<RunningRoomScreenProp> = ({ route }) => {
               ticker: userStockData.find(
                 (k: { id: number }) => k.id === v.userId,
               ).ticker,
+              stockName: userStockData.find(
+                (k: { id: number }) => k.id === v.userId,
+              ).stockName,
             })),
           );
         } else if (event.type === 'error') {
@@ -156,8 +160,8 @@ const RunningRoomScreen: React.FC<RunningRoomScreenProp> = ({ route }) => {
               <Image
                 mt={2}
                 size="40px"
-                source={require('../main/images/horse.png')}
-                alt="trophy"
+                source={require('../main/images/img-running.png')}
+                alt="running image"
               />
             </Flex>
             <Progress
@@ -177,7 +181,7 @@ const RunningRoomScreen: React.FC<RunningRoomScreenProp> = ({ route }) => {
             </Heading>
             <HStack space={2}>
               <Text fontSize="lg" color="black">
-                {myData?.ticker}
+                {`${myData?.stockName} (${myData?.ticker})`}
               </Text>
               <Text
                 fontSize="lg"
@@ -248,9 +252,12 @@ const RunningRoomScreen: React.FC<RunningRoomScreenProp> = ({ route }) => {
                 <Heading flex={1} fontSize="md" color="black">
                   {user.username}
                 </Heading>
-                <Text flex={1} fontSize="md" textAlign="right" color="black">
-                  {user.ticker}
-                </Text>
+                <Box flex={1} _text={{ textAlign: 'right', fontSize: 'md' }}>
+                  {user.stockName}
+                  <Text fontSize="sm" textAlign="right" color="gray.400">
+                    {user.ticker}
+                  </Text>
+                </Box>
                 <Heading
                   flex={1}
                   fontSize="md"

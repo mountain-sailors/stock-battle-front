@@ -5,12 +5,7 @@ import { Heading, HStack, Pressable, VStack, Text, Spacer } from 'native-base';
 import { Layout, SearchInput } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 import { useGetRequest } from '../../config/api';
-
-type Stock = {
-  id: number;
-  price: number;
-  ticker: string;
-};
+import { GetStockRes, Stock } from '../../config/types';
 
 type SearchStockScreenProp = StackScreenProps<RootStackParams, 'SearchStock'>;
 const SearchStockScreen: React.FC<SearchStockScreenProp> = ({
@@ -22,7 +17,7 @@ const SearchStockScreen: React.FC<SearchStockScreenProp> = ({
   const handleChange = (event: any) => {
     setSearchKeyword(event.nativeEvent.text);
   };
-  const stockList = useGetRequest('/stock').data;
+  const stockList: GetStockRes = useGetRequest('/stock').data;
   if (!stockList) return null;
 
   return (
@@ -42,9 +37,9 @@ const SearchStockScreen: React.FC<SearchStockScreenProp> = ({
             <Pressable
               key={v.ticker}
               onPress={() =>
-                // TODO: 주식 등록에 필요한 값 확인 후 object 형태로 params로 전달하기
                 navigation.navigate('RegisterStock', {
-                  stockName: v.ticker,
+                  ticker: v.ticker,
+                  stockName: v.stockName,
                   roomId,
                 })
               }
@@ -54,10 +49,13 @@ const SearchStockScreen: React.FC<SearchStockScreenProp> = ({
             >
               <HStack space={2} alignItems="center" py={2}>
                 <Heading fontSize="md" color="black">
-                  {v.ticker}
+                  {v.stockName}
                 </Heading>
+                <Text fontSize="sm" textAlign="right" color="gray.400">
+                  {v.ticker}
+                </Text>
                 <Spacer />
-                <Text fontSize="md" textAlign="right" color="gray.400">
+                <Text fontSize="md" textAlign="right" color="gray.500">
                   {`$${v.price}`}
                 </Text>
               </HStack>

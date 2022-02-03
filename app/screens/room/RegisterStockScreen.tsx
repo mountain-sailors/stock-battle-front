@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSWRConfig } from 'swr';
 import { StackScreenProps } from '@react-navigation/stack';
 import AntDesignIcon from 'react-native-vector-icons/AntDesign';
 import {
@@ -24,19 +25,27 @@ const RegisterStockScreen: React.FC<RegisterStockScreenProp> = ({
   route,
   navigation,
 }) => {
-  const { stockName, roomId } = route.params;
+  const { stockName, roomId, ticker } = route.params;
+  const { mutate } = useSWRConfig();
 
   const [amount, setAmount] = React.useState('');
   const handleChange = (text: string) => setAmount(text);
 
-  const registerStock = (id: number, ticker: string, stockAmount: number) => {
+  const registerStock = (
+    id: number,
+    stockTicker: string,
+    name: string,
+    stockAmount: number,
+  ) => {
     callAPI(`/user-stock`, 'POST', {
       roomId: id,
-      ticker,
+      ticker: stockTicker,
       amount: stockAmount,
+      stockName: name,
     })
       .then((res) => {
         if (res.status !== 200) throw new Error(res.status.toString());
+        mutate(`/user-stock/${id}`);
         navigation.goBack();
       })
       .catch((err) => {
@@ -100,7 +109,7 @@ const RegisterStockScreen: React.FC<RegisterStockScreenProp> = ({
       <Button
         variant="solid"
         onPress={() => {
-          registerStock(roomId, stockName, +amount);
+          registerStock(roomId, ticker, stockName, +amount);
         }}
       >
         등록하기

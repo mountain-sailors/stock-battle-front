@@ -56,9 +56,9 @@ const MainScreen: React.FC<MainSceenProp> = ({ navigation }) => {
               <Image
                 mt="7"
                 ml="2"
-                size="40px"
-                source={require('./images/horse.png')}
-                alt="icon"
+                size="50px"
+                source={require('./images/img-start.png')}
+                alt="start image"
               />
             </Flex>
             <Text mt={2} fontSize="lg">
