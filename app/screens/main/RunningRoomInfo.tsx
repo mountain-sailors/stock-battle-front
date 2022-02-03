@@ -47,9 +47,10 @@ const RunningRoomInfo: React.FC<RunningRoomInfoProp> = ({ room }) => {
         ></Box>
         <Image
           ml="45%"
-          size="27px"
-          source={require('./images/horse.png')}
-          alt="icon"
+          width="28px"
+          height="26px"
+          source={require('./images/img-running.png')}
+          alt="running image"
         />
         <Flex direction="column" justify="flex-end" align="flex-end">
           <Box w="100%" mt="1">

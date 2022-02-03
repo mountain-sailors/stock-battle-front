@@ -103,9 +103,10 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
             <>
               <Flex align="center" mt={2}>
                 <Image
-                  size="65px"
-                  source={require('./images/icon-trophy.png')}
-                  alt="trophy"
+                  width="85px"
+                  height="79px"
+                  source={require('./images/img-win.png')}
+                  alt="win"
                 />
                 <Heading size="md" mt={3}>
                   축하합니다!
@@ -116,9 +117,10 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
             <>
               <Flex align="center" mt={2}>
                 <Image
-                  size="65px"
-                  source={require('./images/icon-crycat.png')}
-                  alt="crycat"
+                  width="87px"
+                  height="73px"
+                  source={require('./images/img-lose.png')}
+                  alt="lose"
                 />
                 <Heading size="md" mt={3}>
                   아쉬워요..

@@ -40,9 +40,10 @@ const ResultRoomInfo: React.FC<ResultRoomInfoProp> = ({ room }) => {
         ></Box>
         <Image
           ml="90%"
-          size="27px"
-          source={require('./images/horse.png')}
-          alt="icon"
+          width="29px"
+          height="26px"
+          source={require('./images/img-result.png')}
+          alt="result image"
         />
         <Flex direction="column" justify="flex-end" align="flex-end">
           <Box w="100%" mt="1">

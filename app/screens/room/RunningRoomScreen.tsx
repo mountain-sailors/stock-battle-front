@@ -160,8 +160,8 @@ const RunningRoomScreen: React.FC<RunningRoomScreenProp> = ({ route }) => {
               <Image
                 mt={2}
                 size="40px"
-                source={require('../main/images/horse.png')}
-                alt="trophy"
+                source={require('../main/images/img-running.png')}
+                alt="running image"
               />
             </Flex>
             <Progress
