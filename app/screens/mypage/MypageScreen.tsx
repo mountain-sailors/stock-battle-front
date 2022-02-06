@@ -101,7 +101,7 @@ const MypageScreen: React.FC<MypageScreenProp> = ({ navigation }) => {
         <Flex direction="row" justifyContent="space-between">
           <Text fontSize="md">버전</Text>
           <Text fontSize="md" color="secondary.400">
-            ver 1.0.1
+            ver 1.0.2
           </Text>
         </Flex>
         <Text fontSize="md" onPress={logout}>

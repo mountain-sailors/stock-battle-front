@@ -2,7 +2,7 @@
   "expo": {
     "name": "zumazuma",
     "slug": "zumazuma",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/icons/app-icon.png",
     "splash": {
@@ -18,7 +18,7 @@
     ],
     "ios": {
       "bundleIdentifier": "com.mountainsailors.zumazuma",
-      "buildNumber": "1.0.0",
+      "buildNumber": "1.0.2",
       "supportsTablet": false
     },
     "android": {
