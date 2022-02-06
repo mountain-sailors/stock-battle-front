@@ -18,6 +18,7 @@ import {
   Avatar,
 } from 'native-base';
 
+import { API_ENDPOINT } from '../../../env.json';
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 import { useGetRequest } from '../../config/api';
@@ -29,7 +30,7 @@ import {
 import { IMAGE_URL } from '../../config/consts';
 
 const WEBVIEW_ENDPOINT = 'https://jumajuma.netlify.app';
-const DASHBOARD_ENDPOINT = `${process.env.API_ENDPOINT}/room/dashboard`;
+const DASHBOARD_ENDPOINT = `${API_ENDPOINT}/room/dashboard`;
 
 const TRACK_DOMAIN = ['now', 'total'] as const;
 type Track = typeof TRACK_DOMAIN[number];

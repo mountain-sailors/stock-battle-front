@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import * as SecureStore from 'expo-secure-store';
 
-export const API_ENDPOINT = process.env.API_ENDPOINT;
+import { API_ENDPOINT } from '../../env.json';
 
 type Method = 'GET' | 'POST' | 'PATCH' | 'DELETE' | 'PUT';
 export async function callAPI(url: string, method: Method, body: any) {
