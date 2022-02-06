@@ -19,7 +19,7 @@
     "ios": {
       "bundleIdentifier": "com.mountainsailors.zumazuma",
       "buildNumber": "1.0.0",
-      "supportsTablet": true
+      "supportsTablet": false
     },
     "android": {
       "package": "com.mountainsailors.zumazuma",
