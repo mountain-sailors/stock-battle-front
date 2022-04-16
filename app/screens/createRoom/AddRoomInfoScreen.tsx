@@ -65,8 +65,8 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({
     title: roomName,
     winCondition: 'MAX_PROFIT_RATE',
     maxCapacity: 2,
-    startDate: format(today, 'yyyy-MM-dd'),
-    endDate: format(addDays(today, 6), 'yyyy-MM-dd'),
+    startDate: format(today, "yyyy-MM-dd'T'HH:mm"),
+    endDate: format(addDays(today, 3), "yyyy-MM-dd'T'HH:mm"),
   });
   const createRoom = () => {
     callAPI('/room', 'POST', formField)

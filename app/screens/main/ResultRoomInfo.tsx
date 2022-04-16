@@ -11,7 +11,9 @@ type ResultRoomInfoProp = {
 
 const ResultRoomInfo: React.FC<ResultRoomInfoProp> = ({ room }) => {
   const dateDiff = moment(room.endDate).fromNow();
-  const profitType = room.winCondition === 0 ? '수익률' : '총 수익';
+  let profitType = '수익률';
+  if (room.winCondition === 1) profitType = '변동폭';
+  else if (room.winCondition === 2) profitType = '총 수익';
   return (
     <Box w="100%" bg="#fff" rounded="lg" p="4">
       <Box>
@@ -77,7 +79,7 @@ const ResultRoomInfo: React.FC<ResultRoomInfoProp> = ({ room }) => {
             >
               {room.profit > 0 ? '+' : ''}
               {room.profit}
-              {room.winCondition === 0 ? '%' : '$'}
+              {room.winCondition === 0 ? '%' : '₩'}
             </Text>
           </Flex>
         </Box>
