@@ -163,7 +163,7 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({
                   setFormField({
                     ...formField,
                     startDate: value,
-                    endDate: format(addDays(new Date(value), 6), 'yyyy-MM-dd'),
+                    endDate: format(addDays(new Date(value), 3), 'yyyy-MM-dd'),
                   })
                 }
               >
@@ -187,7 +187,7 @@ const AddRoomInfoScreen: React.FC<AddRoomInfoScreenProp> = ({
           </Text>
           <Center p="3" bgColor="gray.100" rounded="lg">
             <Text px={2} fontSize="sm" color="gray.400">
-              7일
+              3일
             </Text>
           </Center>
         </Flex>
