@@ -125,7 +125,10 @@ const MainScreen: React.FC<MainSceenProp> = ({ navigation }) => {
                   <TouchableHighlight
                     key={index}
                     onPress={() =>
-                      navigation.navigate('ResultRoom', { roomId: room.id })
+                      navigation.navigate('ResultRoom', {
+                        roomId: room.id,
+                        winCondition: room.winCondition,
+                      })
                     }
                   >
                     <ResultRoomInfo key={index} room={room} />

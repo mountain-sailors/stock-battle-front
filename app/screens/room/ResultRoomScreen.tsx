@@ -37,7 +37,7 @@ let imgIndex: number[] = [];
 
 type ResultRoomScreenProp = StackScreenProps<RootStackParams, 'ResultRoom'>;
 const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
-  const { roomId } = route.params;
+  const { roomId, winCondition } = route.params;
   const [resultData, setResultData] = React.useState<Result[]>([]);
   const [playerData, setPlayerData] = React.useState<Player[]>([]);
   const [myData, setMyData] = React.useState({
@@ -95,6 +95,10 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
     (el) => el.userId === myData.userId,
   )[0];
 
+  let profitType = '수익률';
+  if (winCondition === 1) profitType = '변동폭';
+  else if (winCondition === 2) profitType = '총 수익';
+
   return (
     <Layout>
       {myResultData && (
@@ -140,10 +144,12 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
             <Spacer />
             <Flex align="center">
               <Text fontSize="lg" fontWeight="bold" color="white">
-                {myResultData.profit}%
+                {winCondition === 0
+                  ? `${myResultData.profit}%`
+                  : `${myResultData.profit}₩`}
               </Text>
               <Text fontSize="sm" color="gray.100">
-                최종 수익률
+                최종 {profitType}
               </Text>
             </Flex>
             <Spacer />
@@ -206,7 +212,7 @@ const ResultRoomScreen: React.FC<ResultRoomScreenProp> = ({ route }) => {
                 color: Math.sign(item.profit) === 1 ? 'red.400' : 'blue.400',
               }}
             >
-              {`${item.profit}%`}
+              {winCondition === 0 ? `${item.profit}%` : `${item.profit}₩`}
             </Box>
           </HStack>
         )}
