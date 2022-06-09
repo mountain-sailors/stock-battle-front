@@ -2,7 +2,6 @@ import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '../../navigators/RootStackParams';
 import * as SecureStore from 'expo-secure-store';
-// import * as WebBrowser from 'expo-web-browser';
 // import * as Google from 'expo-auth-session/providers/google';
 
 import { useToast, Image, Flex, Text, Center, VStack, Icon } from 'native-base';
@@ -11,8 +10,6 @@ import { Layout } from '../../components';
 import { callAPI } from '../../config/api';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
-
-// WebBrowser.maybeCompleteAuthSession();
 
 type InitScreenProp = StackScreenProps<RootStackParams, 'Init'>;
 const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
@@ -25,12 +22,14 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
   //   }
   // }, []);
   // const [request, response, promptAsync] = Google.useAuthRequest({
-  //   // expoClientId: '',
+  //   expoClientId:
+  //     '1079949565774-c8s64p5bl7o05q3piligb56l0qlusief.apps.googleusercontent.com',
   //   iosClientId:
   //     '1079949565774-9qss4o4n6qvvb0vekaupp5rk527qa26t.apps.googleusercontent.com',
   //   androidClientId:
   //     '1079949565774-87en2anno6fc2196ph5h1uumj76t4ud7.apps.googleusercontent.com',
-  //   // webClientId: '',
+  //   webClientId:
+  //     '1079949565774-c8s64p5bl7o05q3piligb56l0qlusief.apps.googleusercontent.com',
   //   responseType: 'code',
   // });
 
@@ -86,30 +85,13 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
           />
         </Center>
         <VStack space={2}>
-          {/* <Button
-            disabled={!request}
-            variant="outline"
-            onPress={() => promptAsync()}
-            leftIcon={
-              <Icon
-                as={AntDesign}
-                name="google"
-                color="coolGray.800"
-                _dark={{
-                  color: 'warmGray.50',
-                }}
-                size="sm"
-              />
-            }
-          >
-            Google 로그인
-          </Button> */}
           <Button
-            variant="outline"
+            variant="filledGreen"
+            // onPress={() => navigation.navigate('GoogleLogin')}
             leftIcon={
               <Icon
-                as={AntDesign}
-                name="google"
+                as={Entypo}
+                name="user"
                 color="coolGray.800"
                 _dark={{
                   color: 'warmGray.50',
@@ -118,11 +100,11 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
               />
             }
           >
-            Google 로그인
+            Naver 로그인
           </Button>
           <Button
             variant="filled"
-            onPress={() => handlePress('kakao')}
+            onPress={() => navigation.navigate('KakaoLogin')}
             leftIcon={
               <Icon
                 as={Entypo}

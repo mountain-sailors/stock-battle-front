@@ -24,6 +24,7 @@ import {
   FindPasswordScreen,
   SendTempPwdScreen,
   ChangePasswordScreen,
+  KakaoLoginScreen,
 } from '../screens';
 import { RootStackParams } from './RootStackParams';
 import MainNavigator from './MainNavigator';
@@ -61,6 +62,11 @@ const AppNavigator = () => {
           name="Login"
           component={LoginScreen}
           options={{ headerTitle: '로그인', headerTintColor: 'black' }}
+        />
+        <AppStack.Screen
+          name="KakaoLogin"
+          component={KakaoLoginScreen}
+          options={{ headerTitle: '카카오 로그인', headerTintColor: 'black' }}
         />
         <AppStack.Screen
           name="SignUp"

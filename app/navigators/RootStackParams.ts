@@ -9,6 +9,7 @@ export type RootStackParams = {
   // initial
   Init: undefined;
   Login: undefined;
+  KakaoLogin: undefined;
   SignUp: { email: string };
   ValidateEmail: undefined;
   Agreement: undefined;
