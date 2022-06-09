@@ -8,6 +8,7 @@ export { default as FindPasswordScreen } from './initial/FindPasswordScreen';
 export { default as InitScreen } from './initial/InitScreen';
 export { default as KakaoLoginScreen } from './initial/KakaoLoginScreen';
 export { default as LoginScreen } from './initial/LoginScreen';
+export { default as NaverLoginScreen } from './initial/NaverLoginScreen';
 export { default as SendTempPwdScreen } from './initial/SendTempPwdScreen';
 export { default as SignupScreen } from './initial/SignupScreen';
 export { default as ValidateEmailScreen } from './initial/ValidateEmailScreen';

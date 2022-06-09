@@ -7,19 +7,20 @@ import { callAPI } from '../../config/api';
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 import WebView from 'react-native-webview';
-import { runFirst, KAKAO_CLIENT_ID, REDIRECT_URI } from '../../config/consts';
+import { runFirst, NAVER_CLIENT_ID, REDIRECT_URI } from '../../config/consts';
 
-type KakaoLoginScreenProp = StackScreenProps<RootStackParams>;
-const KakaoLoginScreen: React.FC<KakaoLoginScreenProp> = ({ navigation }) => {
+type NaverLoginScreenProp = StackScreenProps<RootStackParams>;
+const NaverLoginScreen: React.FC<NaverLoginScreenProp> = ({ navigation }) => {
   const toast = useToast();
   const LogInProgress = (data: any) => {
+    const [codeParam, stateParam] = data.split('&');
     const exp = 'code=';
-    const condition = data.indexOf(exp);
-    if (condition != -1) {
-      const code = data.substring(condition + exp.length);
+    const condition = codeParam.indexOf(exp);
+    if (condition != -1 && stateParam) {
+      const code = codeParam.substring(condition + exp.length);
       console.log('access code :: ' + code);
       // post api 호출
-      callAPI('/oauth/kakao', 'POST', { code })
+      callAPI('/oauth/naver', 'POST', { code })
         .then((res) => res.json())
         .then(async (res) => {
           // 응답 body에 토큰이 있다면 로그인에 성공했다는 뜻이므로 secureStore에 토큰 집어넣고 메인 페이지 이동
@@ -45,7 +46,7 @@ const KakaoLoginScreen: React.FC<KakaoLoginScreenProp> = ({ navigation }) => {
         scalesPageToFit={false}
         style={{ marginTop: 30 }}
         source={{
-          uri: `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${REDIRECT_URI}`,
+          uri: `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&redirect_uri=${REDIRECT_URI}`,
         }}
         injectedJavaScript={runFirst}
         javaScriptEnabled={true}
@@ -57,4 +58,4 @@ const KakaoLoginScreen: React.FC<KakaoLoginScreenProp> = ({ navigation }) => {
   );
 };
 
-export default KakaoLoginScreen;
+export default NaverLoginScreen;

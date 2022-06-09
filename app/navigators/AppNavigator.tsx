@@ -25,6 +25,7 @@ import {
   SendTempPwdScreen,
   ChangePasswordScreen,
   KakaoLoginScreen,
+  NaverLoginScreen,
 } from '../screens';
 import { RootStackParams } from './RootStackParams';
 import MainNavigator from './MainNavigator';
@@ -62,6 +63,11 @@ const AppNavigator = () => {
           name="Login"
           component={LoginScreen}
           options={{ headerTitle: '로그인', headerTintColor: 'black' }}
+        />
+        <AppStack.Screen
+          name="NaverLogin"
+          component={NaverLoginScreen}
+          options={{ headerTitle: '네이버 로그인', headerTintColor: 'black' }}
         />
         <AppStack.Screen
           name="KakaoLogin"

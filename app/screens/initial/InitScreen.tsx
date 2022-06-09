@@ -2,7 +2,7 @@ import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '../../navigators/RootStackParams';
 import * as SecureStore from 'expo-secure-store';
-// import * as Google from 'expo-auth-session/providers/google';
+// import * as AuthSession from 'expo-auth-session';
 
 import { useToast, Image, Flex, Text, Center, VStack, Icon } from 'native-base';
 import { Button } from 'native-base';
@@ -10,6 +10,7 @@ import { Layout } from '../../components';
 import { callAPI } from '../../config/api';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
+// import { NAVER_CLIENT_ID, REDIRECT_URI } from '../../config/consts';
 
 type InitScreenProp = StackScreenProps<RootStackParams, 'Init'>;
 const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
@@ -21,17 +22,16 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
   //     navigation.reset({ routes: [{ name: 'Main' }] });
   //   }
   // }, []);
-  // const [request, response, promptAsync] = Google.useAuthRequest({
-  //   expoClientId:
-  //     '1079949565774-c8s64p5bl7o05q3piligb56l0qlusief.apps.googleusercontent.com',
-  //   iosClientId:
-  //     '1079949565774-9qss4o4n6qvvb0vekaupp5rk527qa26t.apps.googleusercontent.com',
-  //   androidClientId:
-  //     '1079949565774-87en2anno6fc2196ph5h1uumj76t4ud7.apps.googleusercontent.com',
-  //   webClientId:
-  //     '1079949565774-c8s64p5bl7o05q3piligb56l0qlusief.apps.googleusercontent.com',
-  //   responseType: 'code',
-  // });
+  // const naverLogin = async () => {
+  //   const result = await AuthSession.startAsync({
+  //     authUrl: `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&redirect_uri=${REDIRECT_URI}`,
+  //   });
+  //   console.log(result);
+  //   if (result.type === 'success') {
+  //     const code = result.params.code;
+  //     console.log(code);
+  //   }
+  // };
 
   // React.useEffect(() => {
   //   if (response?.type === 'success') {
@@ -87,7 +87,7 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
         <VStack space={2}>
           <Button
             variant="filledGreen"
-            // onPress={() => navigation.navigate('GoogleLogin')}
+            onPress={() => navigation.navigate('NaverLogin')}
             leftIcon={
               <Icon
                 as={Entypo}

@@ -10,6 +10,7 @@ export type RootStackParams = {
   Init: undefined;
   Login: undefined;
   KakaoLogin: undefined;
+  NaverLogin: undefined;
   SignUp: { email: string };
   ValidateEmail: undefined;
   Agreement: undefined;
