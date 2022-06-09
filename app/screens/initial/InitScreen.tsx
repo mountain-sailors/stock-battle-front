@@ -1,11 +1,18 @@
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '../../navigators/RootStackParams';
+import * as SecureStore from 'expo-secure-store';
+// import * as WebBrowser from 'expo-web-browser';
+// import * as Google from 'expo-auth-session/providers/google';
 
-import { Image, Flex, Text, Center, VStack } from 'native-base';
+import { useToast, Image, Flex, Text, Center, VStack, Icon } from 'native-base';
 import { Button } from 'native-base';
 import { Layout } from '../../components';
-// import { useGetRequest } from '../../config/api';
+import { callAPI } from '../../config/api';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
+
+// WebBrowser.maybeCompleteAuthSession();
 
 type InitScreenProp = StackScreenProps<RootStackParams, 'Init'>;
 const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
@@ -17,6 +24,48 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
   //     navigation.reset({ routes: [{ name: 'Main' }] });
   //   }
   // }, []);
+  // const [request, response, promptAsync] = Google.useAuthRequest({
+  //   // expoClientId: '',
+  //   iosClientId:
+  //     '1079949565774-9qss4o4n6qvvb0vekaupp5rk527qa26t.apps.googleusercontent.com',
+  //   androidClientId:
+  //     '1079949565774-87en2anno6fc2196ph5h1uumj76t4ud7.apps.googleusercontent.com',
+  //   // webClientId: '',
+  //   responseType: 'code',
+  // });
+
+  // React.useEffect(() => {
+  //   if (response?.type === 'success') {
+  //     const { authentication } = response;
+  //     console.log(authentication);
+  //   }
+  // }, [response]);
+
+  const toast = useToast();
+  const handlePress = (thirdParty: string) => {
+    let endPoint;
+    if (thirdParty === 'google') endPoint = '/oauth/google';
+    else if (thirdParty === 'kakao') endPoint = '/oauth/kakao';
+    else endPoint = '/oauth/github';
+
+    // post api 호출
+    callAPI(endPoint, 'POST', {})
+      .then((res) => res.json())
+      .then(async (res) => {
+        // 응답 body에 토큰이 있다면 로그인에 성공했다는 뜻이므로 secureStore에 토큰 집어넣고 메인 페이지 이동
+        if (res.token) {
+          await SecureStore.setItemAsync('token', res.token);
+          await navigation.reset({ routes: [{ name: 'Main' }] });
+        } else if (!res.token) {
+          // 없다면 로그인에 실패했으므로 에러 메시지만 출력
+          toast.show({
+            status: 'error',
+            title: '로그인 실패',
+            description: '올바르지 않은 접근입니다.',
+          });
+        }
+      });
+  };
   return (
     <Layout>
       <Flex mt="48" direction="column" justify="center">
@@ -37,7 +86,75 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
           />
         </Center>
         <VStack space={2}>
-          <Button variant="solid" onPress={() => navigation.navigate('Login')}>
+          {/* <Button
+            disabled={!request}
+            variant="outline"
+            onPress={() => promptAsync()}
+            leftIcon={
+              <Icon
+                as={AntDesign}
+                name="google"
+                color="coolGray.800"
+                _dark={{
+                  color: 'warmGray.50',
+                }}
+                size="sm"
+              />
+            }
+          >
+            Google 로그인
+          </Button> */}
+          <Button
+            variant="outline"
+            leftIcon={
+              <Icon
+                as={AntDesign}
+                name="google"
+                color="coolGray.800"
+                _dark={{
+                  color: 'warmGray.50',
+                }}
+                size="sm"
+              />
+            }
+          >
+            Google 로그인
+          </Button>
+          <Button
+            variant="filled"
+            onPress={() => handlePress('kakao')}
+            leftIcon={
+              <Icon
+                as={Entypo}
+                name="message"
+                color="coolGray.800"
+                _dark={{
+                  color: 'warmGray.50',
+                }}
+                size="sm"
+              />
+            }
+          >
+            Kakao 로그인
+          </Button>
+          <Button
+            variant="solid"
+            onPress={() => handlePress('github')}
+            leftIcon={
+              <Icon
+                as={AntDesign}
+                name="github"
+                color="coolGray.100"
+                _dark={{
+                  color: 'warmGray.50',
+                }}
+                size="sm"
+              />
+            }
+          >
+            Github 로그인
+          </Button>
+          {/* <Button variant="solid" onPress={() => navigation.navigate('Login')}>
             로그인
           </Button>
           <Button
@@ -51,7 +168,7 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
             onPress={() => navigation.navigate('FindPassword')}
           >
             비밀번호 찾기
-          </Button>
+          </Button> */}
         </VStack>
       </Flex>
     </Layout>
