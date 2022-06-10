@@ -7,6 +7,7 @@ import { Button } from 'native-base';
 import { Layout } from '../../components';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type InitScreenProp = StackScreenProps<RootStackParams, 'Init'>;
 const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
@@ -44,7 +45,7 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
             leftIcon={
               <Icon
                 as={Entypo}
-                name="user"
+                name="link"
                 color="coolGray.800"
                 _dark={{
                   color: 'warmGray.50',
@@ -60,8 +61,8 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
             onPress={() => navigation.navigate('KakaoLogin')}
             leftIcon={
               <Icon
-                as={Entypo}
-                name="message"
+                as={MaterialCommunityIcons}
+                name="chat"
                 color="coolGray.800"
                 _dark={{
                   color: 'warmGray.50',

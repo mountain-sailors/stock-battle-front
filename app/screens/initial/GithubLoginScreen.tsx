@@ -43,7 +43,6 @@ const GithubLoginScreen: React.FC<GithubLoginScreenProp> = ({ navigation }) => {
       <WebView
         originWhitelist={['*']}
         scalesPageToFit={false}
-        style={{ marginTop: 30 }}
         source={{
           uri: `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=read:user`,
         }}

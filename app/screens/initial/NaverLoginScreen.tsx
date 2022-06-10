@@ -44,7 +44,6 @@ const NaverLoginScreen: React.FC<NaverLoginScreenProp> = ({ navigation }) => {
       <WebView
         originWhitelist={['*']}
         scalesPageToFit={false}
-        style={{ marginTop: 30 }}
         source={{
           uri: `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&redirect_uri=${REDIRECT_URI}`,
         }}

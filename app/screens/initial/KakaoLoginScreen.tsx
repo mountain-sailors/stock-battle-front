@@ -43,7 +43,6 @@ const KakaoLoginScreen: React.FC<KakaoLoginScreenProp> = ({ navigation }) => {
       <WebView
         originWhitelist={['*']}
         scalesPageToFit={false}
-        style={{ marginTop: 30 }}
         source={{
           uri: `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${REDIRECT_URI}`,
         }}
