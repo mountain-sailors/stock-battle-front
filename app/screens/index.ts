@@ -5,6 +5,7 @@ export { default as AddRoomCodeScreen } from './enterRoom/AddRoomCodeScreen';
 export { default as EnterRoomScreen } from './enterRoom/EnterRoomScreen';
 export { default as AgreementScreen } from './initial/AgreementScreen';
 export { default as FindPasswordScreen } from './initial/FindPasswordScreen';
+export { default as GithubLoginScreen } from './initial/GithubLoginScreen';
 export { default as InitScreen } from './initial/InitScreen';
 export { default as KakaoLoginScreen } from './initial/KakaoLoginScreen';
 export { default as LoginScreen } from './initial/LoginScreen';

@@ -1,16 +1,12 @@
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '../../navigators/RootStackParams';
-import * as SecureStore from 'expo-secure-store';
-// import * as AuthSession from 'expo-auth-session';
 
-import { useToast, Image, Flex, Text, Center, VStack, Icon } from 'native-base';
+import { Image, Flex, Text, Center, VStack, Icon } from 'native-base';
 import { Button } from 'native-base';
 import { Layout } from '../../components';
-import { callAPI } from '../../config/api';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
-// import { NAVER_CLIENT_ID, REDIRECT_URI } from '../../config/consts';
 
 type InitScreenProp = StackScreenProps<RootStackParams, 'Init'>;
 const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
@@ -22,49 +18,6 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
   //     navigation.reset({ routes: [{ name: 'Main' }] });
   //   }
   // }, []);
-  // const naverLogin = async () => {
-  //   const result = await AuthSession.startAsync({
-  //     authUrl: `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${NAVER_CLIENT_ID}&redirect_uri=${REDIRECT_URI}`,
-  //   });
-  //   console.log(result);
-  //   if (result.type === 'success') {
-  //     const code = result.params.code;
-  //     console.log(code);
-  //   }
-  // };
-
-  // React.useEffect(() => {
-  //   if (response?.type === 'success') {
-  //     const { authentication } = response;
-  //     console.log(authentication);
-  //   }
-  // }, [response]);
-
-  const toast = useToast();
-  const handlePress = (thirdParty: string) => {
-    let endPoint;
-    if (thirdParty === 'google') endPoint = '/oauth/google';
-    else if (thirdParty === 'kakao') endPoint = '/oauth/kakao';
-    else endPoint = '/oauth/github';
-
-    // post api 호출
-    callAPI(endPoint, 'POST', {})
-      .then((res) => res.json())
-      .then(async (res) => {
-        // 응답 body에 토큰이 있다면 로그인에 성공했다는 뜻이므로 secureStore에 토큰 집어넣고 메인 페이지 이동
-        if (res.token) {
-          await SecureStore.setItemAsync('token', res.token);
-          await navigation.reset({ routes: [{ name: 'Main' }] });
-        } else if (!res.token) {
-          // 없다면 로그인에 실패했으므로 에러 메시지만 출력
-          toast.show({
-            status: 'error',
-            title: '로그인 실패',
-            description: '올바르지 않은 접근입니다.',
-          });
-        }
-      });
-  };
   return (
     <Layout>
       <Flex mt="48" direction="column" justify="center">
@@ -121,7 +74,7 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
           </Button>
           <Button
             variant="solid"
-            onPress={() => handlePress('github')}
+            onPress={() => navigation.navigate('GithubLogin')}
             leftIcon={
               <Icon
                 as={AntDesign}

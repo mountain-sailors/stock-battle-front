@@ -11,6 +11,7 @@ export type RootStackParams = {
   Login: undefined;
   KakaoLogin: undefined;
   NaverLogin: undefined;
+  GithubLogin: undefined;
   SignUp: { email: string };
   ValidateEmail: undefined;
   Agreement: undefined;

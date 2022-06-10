@@ -26,6 +26,7 @@ import {
   ChangePasswordScreen,
   KakaoLoginScreen,
   NaverLoginScreen,
+  GithubLoginScreen,
 } from '../screens';
 import { RootStackParams } from './RootStackParams';
 import MainNavigator from './MainNavigator';
@@ -73,6 +74,11 @@ const AppNavigator = () => {
           name="KakaoLogin"
           component={KakaoLoginScreen}
           options={{ headerTitle: '카카오 로그인', headerTintColor: 'black' }}
+        />
+        <AppStack.Screen
+          name="GithubLogin"
+          component={GithubLoginScreen}
+          options={{ headerTitle: 'Github 로그인', headerTintColor: 'black' }}
         />
         <AppStack.Screen
           name="SignUp"
