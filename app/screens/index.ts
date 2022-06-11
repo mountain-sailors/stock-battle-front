@@ -15,6 +15,7 @@ export { default as SignupScreen } from './initial/SignupScreen';
 export { default as ValidateEmailScreen } from './initial/ValidateEmailScreen';
 export { default as MainScreen } from './main/MainScreen';
 export { default as ChangePasswordScreen } from './mypage/ChangePasswordScreen';
+export { default as ChangeProfileScreen } from './mypage/ChangeProfileScreen';
 export { default as MypageScreen } from './mypage/MypageScreen';
 export { default as RecordScreen } from './record/RecordScreen';
 export { default as SearchProfileScreen } from './record/SearchProfileScreen';

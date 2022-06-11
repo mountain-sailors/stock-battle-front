@@ -5,6 +5,7 @@ export type RootStackParams = {
   Home: undefined;
   Mypage: undefined;
   ChangePassword: undefined;
+  ChangeProfile: undefined;
 
   // initial
   Init: undefined;

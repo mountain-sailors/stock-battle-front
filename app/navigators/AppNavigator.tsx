@@ -27,6 +27,7 @@ import {
   KakaoLoginScreen,
   NaverLoginScreen,
   GithubLoginScreen,
+  ChangeProfileScreen,
 } from '../screens';
 import { RootStackParams } from './RootStackParams';
 import MainNavigator from './MainNavigator';
@@ -166,6 +167,11 @@ const AppNavigator = () => {
             headerTitle: '비밀번호 변경하기',
             headerTintColor: 'black',
           }}
+        />
+        <AppStack.Screen
+          name="ChangeProfile"
+          component={ChangeProfileScreen}
+          options={{ headerTitle: '프로필 변경하기', headerTintColor: 'black' }}
         />
       </AppStack.Navigator>
     </NavigationContainer>
