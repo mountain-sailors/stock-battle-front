@@ -13,7 +13,8 @@ import {
 } from 'native-base';
 import * as SecureStore from 'expo-secure-store';
 
-import { useGetRequest, callAPI } from '../../config/api';
+// import { useGetRequest, callAPI } from '../../config/api';
+import { callAPI } from '../../config/api';
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 
@@ -25,7 +26,26 @@ const IMAGE_URL = [
 
 type MypageScreenProp = StackScreenProps<RootStackParams, 'Mypage'>;
 const MypageScreen: React.FC<MypageScreenProp> = ({ navigation }) => {
-  const userInfo = useGetRequest('/me').data;
+  // const userInfo = useGetRequest('/me').data;
+  const [userInfo, setUserInfo] = React.useState({
+    userId: 0,
+    userName: '',
+    userEmail: '',
+    point: 0,
+    avatar: '',
+  });
+
+  React.useEffect(() => {
+    callAPI(`/me`, 'GET', undefined)
+      .then((res) => res.json())
+      .then((res) => {
+        setUserInfo(res);
+      })
+      .catch((err) => {
+        console.error('Error: ', err);
+      });
+  }, []);
+
   const [showModal, setShowModal] = React.useState(false);
   const toast = useToast();
   async function logout() {
@@ -63,13 +83,13 @@ const MypageScreen: React.FC<MypageScreenProp> = ({ navigation }) => {
           padding={2}
           borderWidth="2"
           borderColor="primary.400"
-          source={IMAGE_URL[Number(userInfo.avatar - 1) ?? 0]}
+          source={IMAGE_URL[Number(+userInfo.avatar - 1) ?? 0]}
         >
           avatar
         </Avatar>
         <VStack ml={4}>
           <Text fontSize="xl" fontWeight="bold">
-            {userInfo.username}
+            {userInfo.userName}
           </Text>
           <Text fontSize="md" color="gray.500">
             {userInfo.userEmail}
