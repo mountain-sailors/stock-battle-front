@@ -79,7 +79,7 @@ const ChangeProfileScreen: React.FC<ChangeProfileScreenProp> = ({
                 title: '프로필 수정 성공',
                 description: '프로필 수정이 성공적으로 완료되었습니다.',
               });
-              navigation.reset({ routes: [{ name: 'Mypage' }] });
+              navigation.goBack();
             })
             .catch((err) => {
               console.error(err);
@@ -99,7 +99,6 @@ const ChangeProfileScreen: React.FC<ChangeProfileScreenProp> = ({
           description: '프로필 수정 도중 문제가 발생했습니다.',
         });
       });
-    navigation.goBack();
   };
 
   return (
