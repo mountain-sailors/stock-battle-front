@@ -99,6 +99,7 @@ const ChangeProfileScreen: React.FC<ChangeProfileScreenProp> = ({
           description: '프로필 수정 도중 문제가 발생했습니다.',
         });
       });
+    navigation.goBack();
   };
 
   return (
