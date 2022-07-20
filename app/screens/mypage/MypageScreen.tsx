@@ -26,7 +26,6 @@ const IMAGE_URL = [
 type MypageScreenProp = StackScreenProps<RootStackParams, 'Mypage'>;
 const MypageScreen: React.FC<MypageScreenProp> = ({ navigation }) => {
   const { data: userInfo } = useGetRequest('/me');
-  console.log(userInfo);
   const [showModal, setShowModal] = React.useState(false);
   const toast = useToast();
   async function logout() {

@@ -17,7 +17,6 @@ const GithubLoginScreen: React.FC<GithubLoginScreenProp> = ({ navigation }) => {
     const condition = data.indexOf(exp);
     if (condition != -1) {
       const code = data.substring(condition + exp.length);
-      console.log('access code :: ' + code);
       // post api 호출
       callAPI('/oauth/github', 'POST', { code })
         .then((res) => res.json())

@@ -18,7 +18,6 @@ const NaverLoginScreen: React.FC<NaverLoginScreenProp> = ({ navigation }) => {
     const condition = codeParam.indexOf(exp);
     if (condition != -1 && stateParam) {
       const code = codeParam.substring(condition + exp.length);
-      console.log('access code :: ' + code);
       // post api 호출
       callAPI('/oauth/naver', 'POST', { code })
         .then((res) => res.json())
