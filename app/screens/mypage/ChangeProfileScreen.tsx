@@ -17,6 +17,7 @@ import { Button } from 'native-base';
 
 import { callAPI } from '../../config/api';
 import { Layout } from '../../components';
+import { useSWRConfig } from 'swr';
 
 const IMAGE_URL = [
   require('../../../assets/images/character1.png'),
@@ -53,6 +54,7 @@ const ChangeProfileScreen: React.FC<ChangeProfileScreenProp> = ({
     return true;
   };
 
+  const { mutate } = useSWRConfig();
   const registerUser = () => {
     const isValidate = validate();
     if (isValidate === false) return;
@@ -79,6 +81,7 @@ const ChangeProfileScreen: React.FC<ChangeProfileScreenProp> = ({
                 title: '프로필 수정 성공',
                 description: '프로필 수정이 성공적으로 완료되었습니다.',
               });
+              mutate('/me');
               navigation.goBack();
             })
             .catch((err) => {
