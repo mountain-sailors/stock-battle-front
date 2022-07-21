@@ -41,12 +41,6 @@ const theme = extendTheme({
         solid: {
           bgColor: 'black',
         },
-        filled: {
-          bgColor: '#FFEA00',
-        },
-        filledGreen: {
-          bgColor: '#2DB400',
-        },
         outline: {
           borderColor: 'black',
           _text: {

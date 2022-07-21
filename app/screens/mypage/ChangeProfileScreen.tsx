@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/dot-notation */
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '../../navigators/RootStackParams';
@@ -127,7 +126,7 @@ const ChangeProfileScreen: React.FC<ChangeProfileScreenProp> = ({
             <FormControl.ErrorMessage
               _text={{ fontSize: 'xs', color: 'error.500', fontWeight: 500 }}
             >
-              {errors['nickname']}
+              {errors.nickname}
             </FormControl.ErrorMessage>
           )}
         </FormControl>

@@ -113,12 +113,6 @@ const MypageScreen: React.FC<MypageScreenProp> = ({ navigation }) => {
         >
           프로필 변경
         </Text>
-        {/* <Text
-          fontSize="md"
-          onPress={() => navigation.navigate('ChangePassword')}
-        >
-          비밀번호 변경
-        </Text> */}
       </VStack>
       <VStack mt={10} space={6}>
         <Text fontSize="sm" fontWeight="bold">

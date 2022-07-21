@@ -40,7 +40,8 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
         </Center>
         <VStack space={2}>
           <Button
-            variant="filledGreen"
+            variant="solid"
+            bgColor="#2DB400"
             onPress={() => navigation.navigate('NaverLogin')}
             leftIcon={
               <Icon
@@ -57,7 +58,8 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
             Naver 로그인
           </Button>
           <Button
-            variant="filled"
+            variant="solid"
+            bgColor="#FFEA00"
             onPress={() => navigation.navigate('KakaoLogin')}
             leftIcon={
               <Icon

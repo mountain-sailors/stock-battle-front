@@ -7,7 +7,8 @@ import { callAPI } from '../../config/api';
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 import WebView from 'react-native-webview';
-import { runFirst, GITHUB_CLIENT_ID, REDIRECT_URI } from '../../config/consts';
+import { runFirst } from '../../config/consts';
+import { GITHUB_CLIENT_ID, REDIRECT_URI } from '../../../env.json';
 
 type GithubLoginScreenProp = StackScreenProps<RootStackParams>;
 const GithubLoginScreen: React.FC<GithubLoginScreenProp> = ({ navigation }) => {
@@ -17,11 +18,13 @@ const GithubLoginScreen: React.FC<GithubLoginScreenProp> = ({ navigation }) => {
     const condition = data.indexOf(exp);
     if (condition != -1) {
       const code = data.substring(condition + exp.length);
+      console.log(code);
       // post api 호출
       callAPI('/oauth/github', 'POST', { code })
         .then((res) => res.json())
         .then(async (res) => {
           // 응답 body에 토큰이 있다면 로그인에 성공했다는 뜻이므로 secureStore에 토큰 집어넣고 메인 페이지 이동
+          console.log(res);
           if (res.token) {
             await SecureStore.setItemAsync('token', res.token);
             await navigation.reset({ routes: [{ name: 'Main' }] });

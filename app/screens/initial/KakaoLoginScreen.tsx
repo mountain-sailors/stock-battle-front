@@ -7,7 +7,8 @@ import { callAPI } from '../../config/api';
 import { Layout } from '../../components';
 import { RootStackParams } from '../../navigators/RootStackParams';
 import WebView from 'react-native-webview';
-import { runFirst, KAKAO_CLIENT_ID, REDIRECT_URI } from '../../config/consts';
+import { runFirst } from '../../config/consts';
+import { KAKAO_CLIENT_ID, REDIRECT_URI } from '../../../env.json';
 
 type KakaoLoginScreenProp = StackScreenProps<RootStackParams>;
 const KakaoLoginScreen: React.FC<KakaoLoginScreenProp> = ({ navigation }) => {
