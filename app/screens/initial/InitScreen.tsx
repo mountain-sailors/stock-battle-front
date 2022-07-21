@@ -60,6 +60,7 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
           <Button
             variant="solid"
             bgColor="#FFEA00"
+            _text={{ color: 'black' }}
             onPress={() => navigation.navigate('KakaoLogin')}
             leftIcon={
               <Icon
@@ -92,21 +93,6 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
           >
             Github 로그인
           </Button>
-          {/* <Button variant="solid" onPress={() => navigation.navigate('Login')}>
-            로그인
-          </Button>
-          <Button
-            variant="outline"
-            onPress={() => navigation.navigate('Agreement')}
-          >
-            회원가입
-          </Button>
-          <Button
-            variant="ghost"
-            onPress={() => navigation.navigate('FindPassword')}
-          >
-            비밀번호 찾기
-          </Button> */}
         </VStack>
       </Flex>
     </Layout>
