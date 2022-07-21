@@ -7,10 +7,6 @@ import {
   AddRoomInfoScreen,
   CompleteCreateRoom,
   InitScreen,
-  LoginScreen,
-  SignupScreen,
-  ValidateEmailScreen,
-  AgreementScreen,
   ResultRoomScreen,
   WaitingRoomScreen,
   RegisterStockScreen,
@@ -21,9 +17,6 @@ import {
   MypageScreen,
   AddRoomCodeScreen,
   EnterRoomScreen,
-  FindPasswordScreen,
-  SendTempPwdScreen,
-  ChangePasswordScreen,
   KakaoLoginScreen,
   NaverLoginScreen,
   GithubLoginScreen,
@@ -62,11 +55,6 @@ const AppNavigator = () => {
           options={{ headerShown: false }}
         />
         <AppStack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{ headerTitle: '로그인', headerTintColor: 'black' }}
-        />
-        <AppStack.Screen
           name="NaverLogin"
           component={NaverLoginScreen}
           options={{ headerTitle: '네이버 로그인', headerTintColor: 'black' }}
@@ -80,31 +68,6 @@ const AppNavigator = () => {
           name="GithubLogin"
           component={GithubLoginScreen}
           options={{ headerTitle: 'Github 로그인', headerTintColor: 'black' }}
-        />
-        <AppStack.Screen
-          name="SignUp"
-          component={SignupScreen}
-          options={{ headerTitle: '회원가입', headerTintColor: 'black' }}
-        />
-        <AppStack.Screen
-          name="ValidateEmail"
-          component={ValidateEmailScreen}
-          options={{ headerTitle: '이메일 인증', headerTintColor: 'black' }}
-        />
-        <AppStack.Screen
-          name="Agreement"
-          component={AgreementScreen}
-          options={{ headerTitle: '약관 동의', headerTintColor: 'black' }}
-        />
-        <AppStack.Screen
-          name="FindPassword"
-          component={FindPasswordScreen}
-          options={{ headerTitle: '비밀번호 찾기', headerTintColor: 'black' }}
-        />
-        <AppStack.Screen
-          name="SendTempPwd"
-          component={SendTempPwdScreen}
-          options={{ headerTitle: '발송 완료', headerTintColor: 'black' }}
         />
         <AppStack.Screen
           name="AddRoomTitle"
@@ -158,14 +121,6 @@ const AppNavigator = () => {
           component={MypageScreen}
           options={{
             headerTitle: '마이페이지',
-          }}
-        />
-        <AppStack.Screen
-          name="ChangePassword"
-          component={ChangePasswordScreen}
-          options={{
-            headerTitle: '비밀번호 변경하기',
-            headerTintColor: 'black',
           }}
         />
         <AppStack.Screen
