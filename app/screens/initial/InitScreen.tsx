@@ -42,6 +42,7 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
           <Button
             variant="solid"
             bgColor="#2DB400"
+            _text={{ color: 'black' }}
             onPress={() => navigation.navigate('NaverLogin')}
             leftIcon={
               <Icon
