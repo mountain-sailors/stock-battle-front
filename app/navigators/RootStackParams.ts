@@ -4,16 +4,13 @@ export type RootStackParams = {
   Main: undefined;
   Home: undefined;
   Mypage: undefined;
-  ChangePassword: undefined;
+  ChangeProfile: undefined;
 
   // initial
   Init: undefined;
-  Login: undefined;
-  SignUp: { email: string };
-  ValidateEmail: undefined;
-  Agreement: undefined;
-  FindPassword: undefined;
-  SendTempPwd: { email: string };
+  KakaoLogin: undefined;
+  NaverLogin: undefined;
+  GithubLogin: undefined;
 
   // record
   Record: { user: object };

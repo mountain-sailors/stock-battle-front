@@ -1,22 +1,22 @@
-/* eslint-disable @typescript-eslint/dot-notation */
 import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
+import { RootStackParams } from '../../navigators/RootStackParams';
 import {
   useToast,
-  Avatar,
-  Button,
-  Input,
-  Flex,
-  Box,
-  Text,
   Spacer,
-  FormControl,
+  Input,
+  Text,
   VStack,
+  FormControl,
+  Box,
+  Flex,
+  Avatar,
 } from 'native-base';
+import { Button } from 'native-base';
 
 import { callAPI } from '../../config/api';
 import { Layout } from '../../components';
-import { RootStackParams } from '../../navigators/RootStackParams';
+import { useSWRConfig } from 'swr';
 
 const IMAGE_URL = [
   require('../../../assets/images/character1.png'),
@@ -25,42 +25,22 @@ const IMAGE_URL = [
 ];
 
 type FormData = {
-  password: string;
   nickname: string;
   avatarId: number;
 };
 type Error = Partial<FormData>;
 
-type SignupScreenProp = StackScreenProps<RootStackParams, 'SignUp'>;
-const SignupScreen: React.FC<SignupScreenProp> = ({ navigation, route }) => {
-  const { email } = route.params;
+type ChangeProfileScreenProp = StackScreenProps<RootStackParams>;
+const ChangeProfileScreen: React.FC<ChangeProfileScreenProp> = ({
+  navigation,
+}) => {
   const toast = useToast();
   const [formData, setFormData] = React.useState<FormData>({
-    password: '',
     nickname: '',
     avatarId: 1,
   });
   const [errors, setErrors] = React.useState<Error>({});
-
   const validate = () => {
-    if (formData.password === '') {
-      setErrors({
-        ...errors,
-        password: '비밀번호를 입력해주세요',
-      });
-      return false;
-    } else {
-      delete errors.password;
-    }
-    if (formData.password.length < 8) {
-      setErrors({
-        ...errors,
-        password: '비밀번호를 8자 이상 입력해주세요',
-      });
-      return false;
-    } else {
-      delete errors.password;
-    }
     if (formData.nickname === '') {
       setErrors({
         ...errors,
@@ -73,6 +53,7 @@ const SignupScreen: React.FC<SignupScreenProp> = ({ navigation, route }) => {
     return true;
   };
 
+  const { mutate } = useSWRConfig();
   const registerUser = () => {
     const isValidate = validate();
     if (isValidate === false) return;
@@ -89,26 +70,25 @@ const SignupScreen: React.FC<SignupScreenProp> = ({ navigation, route }) => {
           });
           return;
         } else {
-          callAPI('/user', 'POST', {
-            email: email,
-            password: formData.password,
+          callAPI('/user', 'PUT', {
             username: formData.nickname,
             avatar: formData.avatarId.toString(),
           })
             .then(() => {
               toast.show({
                 status: 'success',
-                title: '회원가입 성공',
-                description: '회원가입이 성공적으로 완료되었습니다.',
+                title: '프로필 수정 성공',
+                description: '프로필 수정이 성공적으로 완료되었습니다.',
               });
-              navigation.reset({ routes: [{ name: 'Init' }] });
+              mutate('/me');
+              navigation.goBack();
             })
             .catch((err) => {
               console.error(err);
               toast.show({
                 status: 'error',
-                title: '회원가입 실패',
-                description: '회원가입 도중 문제가 발생했습니다.',
+                title: '프로필 수정 실패',
+                description: '프로필 수정 도중 문제가 발생했습니다.',
               });
             });
         }
@@ -117,8 +97,8 @@ const SignupScreen: React.FC<SignupScreenProp> = ({ navigation, route }) => {
         console.error(err);
         toast.show({
           status: 'error',
-          title: '회원가입 실패',
-          description: '회원가입 도중 문제가 발생했습니다.',
+          title: '프로필 수정 실패',
+          description: '프로필 수정 도중 문제가 발생했습니다.',
         });
       });
   };
@@ -126,30 +106,6 @@ const SignupScreen: React.FC<SignupScreenProp> = ({ navigation, route }) => {
   return (
     <Layout>
       <VStack space={5}>
-        <FormControl isRequired isInvalid={'password' in errors}>
-          <FormControl.Label
-            mb="4"
-            _text={{ fontSize: 'md', fontWeight: 'bold' }}
-          >
-            비밀번호
-          </FormControl.Label>
-          <Input
-            value={formData.password}
-            variant="filled"
-            type="password"
-            placeholder="비밀번호를 8자 이상 입력해주세요"
-            onChangeText={(value: string) =>
-              setFormData({ ...formData, password: value })
-            }
-          />
-          {'password' in errors && (
-            <FormControl.ErrorMessage
-              _text={{ fontSize: 'xs', color: 'error.500', fontWeight: 500 }}
-            >
-              {errors['password']}
-            </FormControl.ErrorMessage>
-          )}
-        </FormControl>
         <FormControl isRequired isInvalid={'nickname' in errors}>
           <FormControl.Label
             mb="4"
@@ -170,7 +126,7 @@ const SignupScreen: React.FC<SignupScreenProp> = ({ navigation, route }) => {
             <FormControl.ErrorMessage
               _text={{ fontSize: 'xs', color: 'error.500', fontWeight: 500 }}
             >
-              {errors['nickname']}
+              {errors.nickname}
             </FormControl.ErrorMessage>
           )}
         </FormControl>
@@ -202,11 +158,11 @@ const SignupScreen: React.FC<SignupScreenProp> = ({ navigation, route }) => {
       <Spacer />
       <Box>
         <Button variant="solid" onPress={registerUser}>
-          회원가입
+          프로필 수정
         </Button>
       </Box>
     </Layout>
   );
 };
 
-export default SignupScreen;
+export default ChangeProfileScreen;

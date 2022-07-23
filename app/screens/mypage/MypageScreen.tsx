@@ -25,7 +25,7 @@ const IMAGE_URL = [
 
 type MypageScreenProp = StackScreenProps<RootStackParams, 'Mypage'>;
 const MypageScreen: React.FC<MypageScreenProp> = ({ navigation }) => {
-  const userInfo = useGetRequest('/me').data;
+  const { data: userInfo } = useGetRequest('/me');
   const [showModal, setShowModal] = React.useState(false);
   const toast = useToast();
   async function logout() {
@@ -57,16 +57,42 @@ const MypageScreen: React.FC<MypageScreenProp> = ({ navigation }) => {
   return (
     <Layout>
       <Flex direction="row" alignItems="center" mt={4}>
-        <Avatar
-          size="20"
-          bg="white"
-          padding={2}
-          borderWidth="2"
-          borderColor="primary.400"
-          source={IMAGE_URL[Number(userInfo.avatar - 1) ?? 0]}
-        >
-          avatar
-        </Avatar>
+        {+userInfo.avatar === 1 && (
+          <Avatar
+            size="20"
+            bg="white"
+            padding={2}
+            borderWidth="2"
+            borderColor="primary.400"
+            source={IMAGE_URL[0]}
+          >
+            avatar
+          </Avatar>
+        )}
+        {+userInfo.avatar === 2 && (
+          <Avatar
+            size="20"
+            bg="white"
+            padding={2}
+            borderWidth="2"
+            borderColor="primary.400"
+            source={IMAGE_URL[1]}
+          >
+            avatar
+          </Avatar>
+        )}
+        {+userInfo.avatar === 3 && (
+          <Avatar
+            size="20"
+            bg="white"
+            padding={2}
+            borderWidth="2"
+            borderColor="primary.400"
+            source={IMAGE_URL[2]}
+          >
+            avatar
+          </Avatar>
+        )}
         <VStack ml={4}>
           <Text fontSize="xl" fontWeight="bold">
             {userInfo.username}
@@ -83,9 +109,9 @@ const MypageScreen: React.FC<MypageScreenProp> = ({ navigation }) => {
         </Text>
         <Text
           fontSize="md"
-          onPress={() => navigation.navigate('ChangePassword')}
+          onPress={() => navigation.navigate('ChangeProfile')}
         >
-          비밀번호 변경
+          프로필 변경
         </Text>
       </VStack>
       <VStack mt={10} space={6}>

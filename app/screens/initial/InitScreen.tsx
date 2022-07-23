@@ -2,10 +2,12 @@ import React from 'react';
 import { StackScreenProps } from '@react-navigation/stack';
 import { RootStackParams } from '../../navigators/RootStackParams';
 
-import { Image, Flex, Text, Center, VStack } from 'native-base';
+import { Image, Flex, Text, Center, VStack, Icon } from 'native-base';
 import { Button } from 'native-base';
 import { Layout } from '../../components';
-// import { useGetRequest } from '../../config/api';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type InitScreenProp = StackScreenProps<RootStackParams, 'Init'>;
 const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
@@ -37,20 +39,60 @@ const InitScreen: React.FC<InitScreenProp> = ({ navigation }) => {
           />
         </Center>
         <VStack space={2}>
-          <Button variant="solid" onPress={() => navigation.navigate('Login')}>
-            로그인
+          <Button
+            variant="solid"
+            bgColor="#2DB400"
+            _text={{ color: 'black' }}
+            onPress={() => navigation.navigate('NaverLogin')}
+            leftIcon={
+              <Icon
+                as={Entypo}
+                name="link"
+                color="coolGray.800"
+                _dark={{
+                  color: 'warmGray.50',
+                }}
+                size="sm"
+              />
+            }
+          >
+            Naver 로그인
           </Button>
           <Button
-            variant="outline"
-            onPress={() => navigation.navigate('Agreement')}
+            variant="solid"
+            bgColor="#FFEA00"
+            _text={{ color: 'black' }}
+            onPress={() => navigation.navigate('KakaoLogin')}
+            leftIcon={
+              <Icon
+                as={MaterialCommunityIcons}
+                name="chat"
+                color="coolGray.800"
+                _dark={{
+                  color: 'warmGray.50',
+                }}
+                size="sm"
+              />
+            }
           >
-            회원가입
+            Kakao 로그인
           </Button>
           <Button
-            variant="ghost"
-            onPress={() => navigation.navigate('FindPassword')}
+            variant="solid"
+            onPress={() => navigation.navigate('GithubLogin')}
+            leftIcon={
+              <Icon
+                as={AntDesign}
+                name="github"
+                color="coolGray.100"
+                _dark={{
+                  color: 'warmGray.50',
+                }}
+                size="sm"
+              />
+            }
           >
-            비밀번호 찾기
+            Github 로그인
           </Button>
         </VStack>
       </Flex>
